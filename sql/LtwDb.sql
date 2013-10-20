@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS client (
 );
 
 CREATE TABLE IF NOT EXISTS product (
-    code INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY,             /* id -> product code */
     description CHAR(50) NOT NULL, 
     unit_price INTEGER CHECK (unit_price > 0),
     unit_of_measure CHAR(50) NOT NULL
@@ -50,12 +50,13 @@ CREATE TABLE IF NOT EXISTS invoice (
 );
 
 CREATE TABLE IF NOT EXISTS line (
-    product_id INTEGER,
+    product_id INTEGER REFERENCES product(id),
     line_number INTEGER,
-    invoice_id INTEGER,
+    invoice_id INTEGER REFERENCES invoice(id),
     quantity INTEGER CHECK (quantity > 0),
     unit_price REAL CHECK (unit_price >= 0),
-    tax_id INTEGER REFERENCES tax(id)
+    tax_id INTEGER REFERENCES tax(id),
+    PRIMARY KEY (product_id, line_number, invoice_id)
 );
 
 CREATE TABLE IF NOT EXISTS tax (
@@ -63,3 +64,19 @@ CREATE TABLE IF NOT EXISTS tax (
     type CHAR(50) NOT NULL,
     percentage INTEGER CHECK (percentage > 0)
 );
+
+/* QUERIES */
+
+-- lines_per_invoice
+SELECT
+    product.id AS "Product code",
+    line.line_number AS "Line",
+    invoice.billing_date AS "Date",
+    client.company_name AS "Company"
+FROM invoice
+    JOIN line ON invoice.id = line.invoice_id
+    JOIN client ON client.id = invoice.id
+    JOIN product ON line.product_id = product.id
+GROUP BY invoice.id
+ORDER BY line.line_number ASC;
+    
