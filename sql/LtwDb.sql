@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS line (
     line_number INTEGER,
     invoice_id INTEGER,
     quantity INTEGER CHECK (quantity > 0),
-    unit_price INTEGER CHECK (unit_price >= 0),
+    unit_price REAL CHECK (unit_price >= 0),
     tax_id INTEGER REFERENCES tax(id)
 );
 
