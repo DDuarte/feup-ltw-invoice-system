@@ -7,11 +7,11 @@ DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS line;
 DROP TABLE IF EXISTS tax;
 
-CREATE TABLE IF NOT EXISTS client (
+CREATE TABLE IF NOT EXISTS customer (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tax_id INTEGER UNIQUE,
-    company_name CHAR(50) NOT NULL,
-    email CHAR(50) NOT NULL,
+    company_name CHAR(100) NOT NULL,
+    email CHAR(60) NOT NULL,
     adress_id INTEGER REFERENCES address(id)
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS city (
 CREATE TABLE IF NOT EXISTS invoice (
     id INTEGER PRIMARY KEY,
     billing_date DATE NOT NULL,
-    client_id INTEGER REFERENCES client(id),
+    customer_id INTEGER REFERENCES customer(id),
     tax_cost REAL,
     net_total REAL
 );
