@@ -93,6 +93,9 @@ INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax
 INSERT INTO invoice (id, billing_date, customer_id) VALUES
 (1, '2013-09-27', 555560);
 
+INSERT INTO city (id, name) VALUES
+(1, 'Porto');
+
 INSERT INTO customer (id, tax_id, company_name, email, detail, city_id, postal_code, country_code) VALUES
 (555560, 123, 'FEUP', 'feup@feup.com', 'qqcoisa', 1, '1234-567', 'PT');
 
