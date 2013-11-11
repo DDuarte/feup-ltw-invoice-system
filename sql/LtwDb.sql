@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS invoice;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS city;
@@ -325,10 +325,10 @@ SELECT
     product.id AS "Product code",
     line.line_number AS "Line",
     invoice.billing_date AS "Date",
-    client.company_name AS "Company"
+    customer.company_name AS "Company"
 FROM invoice
     JOIN line ON invoice.id = line.invoice_id
-    JOIN client ON client.id = invoice.id
+    JOIN customer ON customer.id = invoice.id
     JOIN product ON line.product_id = product.id
 GROUP BY invoice.id
 ORDER BY line.line_number ASC;
