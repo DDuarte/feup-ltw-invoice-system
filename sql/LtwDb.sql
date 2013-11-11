@@ -7,12 +7,30 @@ DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS line;
 DROP TABLE IF EXISTS tax;
 
+CREATE TABLE IF NOT EXISTS country (
+    code CHAR(2) PRIMARY KEY, 
+    name CHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS city (
+    id INTEGER PRIMARY KEY, 
+    name CHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS address (
+    id INTEGER PRIMARY KEY,
+    detail CHAR(50),
+    city_id INTEGER REFERENCES city(id),
+    postal_code CHAR(8) NOT NULL,
+    country_code CHAR(2) REFERENCES country(code)
+);
+
 CREATE TABLE IF NOT EXISTS customer (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tax_id INTEGER UNIQUE,
     company_name CHAR(100) NOT NULL,
     email CHAR(60) NOT NULL,
-    adress_id INTEGER REFERENCES address(id)
+    address_id INTEGER REFERENCES address(id)
 );
 
 CREATE TABLE IF NOT EXISTS product (
@@ -20,25 +38,6 @@ CREATE TABLE IF NOT EXISTS product (
     description CHAR(50) NOT NULL, 
     unit_price INTEGER CHECK (unit_price > 0),
     unit_of_measure CHAR(20) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS address (
-    id INTEGER PRIMARY KEY,
-    detail CHAR(50) ,
-    city_id INTEGER REFERENCES city(id),
-    postal_code CHAR(8) NOT NULL,
-    country_id INTEGER REFERENCES country(id)
-);
-
-CREATE TABLE IF NOT EXISTS country (
-    id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    name CHAR(50) NOT NULL, 
-    code CHAR(2) UNIQUE
-);
-
-CREATE TABLE IF NOT EXISTS city (
-    id INTEGER PRIMARY KEY, 
-    name CHAR(50) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS invoice (
@@ -66,6 +65,22 @@ CREATE TABLE IF NOT EXISTS tax (
 );
 
 /* INSERTIONS */
+
+INSERT INTO tax (id, type, percentage) VALUES
+(1, 'IVA', 23);
+
+INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax_id) VALUES
+(125, 1, 1, 3, 90, 1),
+(126, 2, 1, 1, 450, 1);
+
+INSERT INTO invoice (id, billing_date, customer_id, tax_cost, net_total) VALUES
+(1, '2013-09-27', 555560, 20, 30);
+
+INSERT INTO address (id, detail, city_id, postal_code, country_code) VALUES
+(1, 'qqcoisa', 1, '1234-567', 'PT'); 
+
+INSERT INTO customer (id, tax_id, company_name, email, address_id) VALUES
+(555560, 123, 'FEUP', 'feup@feup.com', 1);
 
 INSERT INTO country (code, name) VALUES 
 ('AF', 'Afghanistan'),
