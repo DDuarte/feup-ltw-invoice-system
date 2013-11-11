@@ -8,12 +8,12 @@ DROP TABLE IF EXISTS line;
 DROP TABLE IF EXISTS tax;
 
 CREATE TABLE IF NOT EXISTS country (
-    code CHAR(2) PRIMARY KEY, 
+    code CHAR(2) PRIMARY KEY,
     name CHAR(50) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS city (
-    id INTEGER PRIMARY KEY, 
+    id INTEGER PRIMARY KEY,
     name CHAR(50) NOT NULL
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS customer (
 
 CREATE TABLE IF NOT EXISTS product (
     id INTEGER PRIMARY KEY,             /* id -> product code */
-    description CHAR(50) NOT NULL, 
+    description CHAR(50) NOT NULL,
     unit_price INTEGER CHECK (unit_price > 0),
     unit_of_measure CHAR(20) NOT NULL
 );
@@ -72,7 +72,7 @@ INSERT INTO invoice (id, billing_date, customer_id) VALUES
 INSERT INTO customer (id, tax_id, company_name, email, detail, city_id, postal_code, country_code) VALUES
 (555560, 123, 'FEUP', 'feup@feup.com', 'qqcoisa', 1, '1234-567', 'PT');
 
-INSERT INTO country (code, name) VALUES 
+INSERT INTO country (code, name) VALUES
 ('AF', 'Afghanistan'),
 ('AX', 'Åland Islands'),
 ('AL', 'Albania'),
