@@ -1,7 +1,7 @@
 <?php
     header("Content-type:application/json");
-    require 'invoice.php';
-    
+    require 'details/invoice.php';
+
     $db = new PDO('sqlite:../sql/OIS.db');
 	
 	$field = 'InvoiceNo';
