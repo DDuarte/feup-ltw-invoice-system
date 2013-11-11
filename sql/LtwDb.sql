@@ -1,3 +1,22 @@
+/* USER MANAGEMENT */
+
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE IF NOT EXISTS role (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username CHAR(50) NOT NULL UNIQUE,
+    password CHAR(256) NOT NULL,
+    role_id INTEGER NOT NULL REFERENCES role(id)
+);
+
+/* INVOICING SYSTEM */
+
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS invoice;
 DROP TABLE IF EXISTS product;
@@ -56,6 +75,11 @@ CREATE TABLE IF NOT EXISTS tax (
     type CHAR(50) NOT NULL,
     percentage INTEGER CHECK (percentage > 0)
 );
+
+INSERT INTO role (name) VALUES
+    ('Reader'),
+    ('Editor'),
+    ('Administrator');
 
 /* INSERTIONS */
 
