@@ -153,30 +153,36 @@ div._seventy input{
     width: 662px;
     display: none
 }
-
-li._invoice:hover ._invoices_all_information{
-    display:block;
+li._invoice{
+    height: 34px
+}
+li._invoice:hover{
+    height: 175px;
     
-    padding: 2px 0;
-    
-    height: 40px
-        
     border-radius: 0 0 4px 0;
     border-right: 1px solid #A1A1A1;
     border-bottom: 2px solid #c5c5c5;
 }
+li._invoice:hover ._invoices_all_information{
+    display:block;
+}
 
 li > ._invoices_gross_total{
-    text-align:right
+    text-align:right;
 }
 
 ._list_detailed ul li label{
     padding: 10px 20px;
     margin: 0;
     
-    border-right: 1px solid #A1A1A1
+   border-right: 1px solid #A1A1A1
 }
-
+._list_detailed ul li label:last-child{
+    padding: 10px 20px;
+    margin: 0;
+    
+   border-right: 0
+}
 ._list_detailed{
     width: 704px;
     height: 150px;
