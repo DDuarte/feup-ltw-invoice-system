@@ -1,22 +1,7 @@
 <?php
     header("Content-type:application/json");
     require 'details/invoice.php';
-
-    function getParameter($param, &$value)
-    {
-        if (!array_key_exists($param, $_GET))
-        {
-            return 400;
-        }
-
-        $value = $_GET[$param];
-        if (is_array($value))
-            foreach($value as &$val) $val = htmlspecialchars($val);
-        else
-            $value = htmlspecialchars($value);
-
-        return 0;
-    }
+    require 'details/utils.php';
 
     function ConvertIfNeeded($fieldInUse, $operation, $value)
     {
@@ -63,26 +48,26 @@
             "max" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MAX(billing_date) FROM invoice)"
         ),
         "CompanyName" => Array(
-            "range" => "SELECT id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name BETWEEN :min AND 'max",
-            "equal" => "SELECT id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.comapny_name = :value",
+            "range" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name BETWEEN :min AND :max",
+            "equal" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name = :value",
             "contains" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name LIKE :value",
-            "min" => "SELECT id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MIN(company_name) FROM customer)",
-            "max" => "SELECT id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MAX(company_name) FROM customer)"
+            "min" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MIN(company_name) FROM customer)",
+            "max" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MAX(company_name) FROM customer)"
         ),
         "GrossTotal" => Array(
-            "range" => "SELECT invoice.id as id
+            "range" => "SELECT invoice.id AS id
                         FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id 
                         GROUP BY invoice.id
                         HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) BETWEEN :min AND :max",
-            "equal" => "SELECT invoice.id as id
+            "equal" => "SELECT invoice.id AS id
                         FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id 
                         GROUP BY invoice.id
                         HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) = :value",  
-            "contains" => "SELECT invoice.id as id
+            "contains" => "SELECT invoice.id AS id
                         FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id 
                         GROUP BY invoice.id
                         HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) LIKE :value", 
-            "min" => "SELECT line.invoice_id as id
+            "min" => "SELECT line.invoice_id AS id
                         FROM line JOIN tax ON line.tax_id = tax.id 
                         GROUP BY line.invoice_id
                         HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN 
@@ -90,7 +75,7 @@
                                 FROM line JOIN tax ON line.tax_id = tax.id 
                                 GROUP BY line.invoice_id)
                             )",
-            "max" => "SELECT line.invoice_id as id
+            "max" => "SELECT line.invoice_id AS id
                         FROM line JOIN tax ON line.tax_id = tax.id 
                         GROUP BY line.invoice_id
                         HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN 
