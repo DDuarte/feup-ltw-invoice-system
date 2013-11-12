@@ -90,10 +90,13 @@ INSERT INTO product (id, description, unit_price) VALUES
 
 INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax_id) VALUES
 (125, 1, 1, 3, 90, 1),
-(126, 2, 1, 1, 450, 1);
+(126, 2, 1, 1, 450, 1),
+(125, 1, 2, 4, 90, 1),
+(126, 2, 2, 10, 450, 1);
 
 INSERT INTO invoice (id, billing_date, customer_id) VALUES
-(1, '2013-09-27', 555560);
+(1, '2013-09-27', 555560),
+(2, '2013-09-27', 555560);
 
 INSERT INTO city (id, name) VALUES
 (1, 'Porto');
