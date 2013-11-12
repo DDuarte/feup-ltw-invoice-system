@@ -24,4 +24,3 @@
     }
 
 	echo $invoice->encode("json");
-?>

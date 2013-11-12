@@ -66,5 +66,3 @@ class Product
     private $_numberCode;
     private $_unitPrice;
 }
-
-?>

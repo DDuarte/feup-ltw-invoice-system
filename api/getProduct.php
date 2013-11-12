@@ -24,4 +24,3 @@
     }
 
     echo $product->encode("json");
-?>

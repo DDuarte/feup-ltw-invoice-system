@@ -15,7 +15,7 @@ center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, t
     background:transparent 
 }
 body{    
-    font-family: 'Verdana', 'Calibri', 'Arial';
+    font-family: 'Verdana', 'Calibri', 'Arial',serif;
     letter-spacing: -0.02em;
     font-size: 12px;
 }
@@ -24,16 +24,14 @@ body{
     padding: 30px;
     width: 720px;
     height: 282px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 ._form >._header{
     display:block;
     padding: 15px 4px;
-    border-bottom:1px;
-    border-bottom-style:solid;
     margin-bottom: 10px;
-    border-color: red;
-    
+    border-bottom: 1px solid;
+
     font-size:20px;
 }
 label{
@@ -73,9 +71,7 @@ input{
     color:#434343;
     font-size:12px;
     padding:5px;
-	
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
+
 	border-radius: 4px;
 	border-top:1px solid #c5c5c5;
 	border-right:1px solid #dddddd;
@@ -92,21 +88,18 @@ select {
 
     text-align: left;
     
-    -webkit-border-radius: 2px;
-    border-radius: 4px;    
+    border-radius: 4px;
     border-top: 1px solid #c5c5c5;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     border-bottom-style: hidden;
-    
-    -webkit-appearance:none;
-    -moz-appearance:none;
+
     appearance:none;
     
     cursor:pointer;
 }
 
-/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+/* Targeting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     select {padding-right:18px}
 }
@@ -116,10 +109,11 @@ select {
 }
 ._my_select:after {
     content:'';
-    right:0px; top:7px;
+    right:0;
+    top:7px;
     padding:17px;
     position:absolute;
-    background: url(../images/select_box_arrow.png) no-repeat 0 0px;
+    background: url(../images/select_box_arrow.png) no-repeat 0 0;
     cursor:pointer;
     pointer-events: none;
 }

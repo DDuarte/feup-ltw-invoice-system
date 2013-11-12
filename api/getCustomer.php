@@ -24,4 +24,3 @@
     }
 
     echo $customer->encode("json");
-?>

@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username CHAR(50) NOT NULL UNIQUE,
     password CHAR(256) NOT NULL,
-    role_id INTEGER NOT NULL REFERENCES role(id)
+    role_id INTEGER NOT NULL,
+    FOREIGN KEY(role_id) REFERENCES role(id)
 );
 
 /* INVOICING SYSTEM */
@@ -21,7 +22,6 @@ DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS invoice;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS city;
-DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS line;
 DROP TABLE IF EXISTS tax;
@@ -42,9 +42,11 @@ CREATE TABLE IF NOT EXISTS customer (
     company_name CHAR(100) NOT NULL,
     email CHAR(60) NOT NULL,
     detail CHAR(50),
-    city_id INTEGER REFERENCES city(id),
+    city_id INTEGER,
     postal_code CHAR(8) NOT NULL,
-    country_code CHAR(2) REFERENCES country(code)
+    country_code CHAR(2) NOT NULL,
+    FOREIGN KEY(city_id) REFERENCES city(id),
+    FOREIGN KEY(country_code) REFERENCES country(code)
 );
 
 CREATE TABLE IF NOT EXISTS product (
@@ -55,17 +57,21 @@ CREATE TABLE IF NOT EXISTS product (
 CREATE TABLE IF NOT EXISTS invoice (
     id INTEGER PRIMARY KEY,
     billing_date DATE NOT NULL,
-    customer_id INTEGER REFERENCES customer(id)
+    customer_id INTEGER,
+    FOREIGN KEY(customer_id) REFERENCES customer(id)
 );
 
 CREATE TABLE IF NOT EXISTS line (
-    product_id INTEGER REFERENCES product(id),
+    product_id INTEGER,
     line_number INTEGER,
-    invoice_id INTEGER REFERENCES invoice(id),
+    invoice_id INTEGER,
     quantity INTEGER CHECK (quantity > 0),
     unit_price REAL CHECK (unit_price >= 0),
-    tax_id INTEGER REFERENCES tax(id),
-    PRIMARY KEY (product_id, line_number, invoice_id)
+    tax_id INTEGER,
+    PRIMARY KEY(product_id, line_number, invoice_id),
+    FOREIGN KEY(product_id) REFERENCES product(id),
+    FOREIGN KEY(invoice_id) REFERENCES invoice(id),
+    FOREIGN KEY(tax_id) REFERENCES tax(id)
 );
 
 CREATE TABLE IF NOT EXISTS tax (
@@ -75,9 +81,9 @@ CREATE TABLE IF NOT EXISTS tax (
 );
 
 INSERT INTO role (name) VALUES
-    ('Reader'),
-    ('Editor'),
-    ('Administrator');
+('Reader'),
+('Editor'),
+('Administrator');
 
 /* INSERTIONS */
 

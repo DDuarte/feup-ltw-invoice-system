@@ -134,6 +134,7 @@ class Invoice
 
         $i = 0;
         foreach ($this->_lines as $line)
+            /** @var $line InvoiceLine */
             $lines[$i++] = $line->toArray();
 
         $documentTotals = Array(
@@ -195,6 +196,3 @@ function parseInvoiceNoFromString($invoiceNoStr, &$invoiceNo)
 
     return 0;
 }
-
-?>
-
