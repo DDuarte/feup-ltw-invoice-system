@@ -48,11 +48,9 @@ CREATE TABLE IF NOT EXISTS customer (
 );
 
 CREATE TABLE IF NOT EXISTS product (
-    id INTEGER PRIMARY KEY,             /* id -> product code */
+    id INTEGER PRIMARY KEY,
     description CHAR(50) NOT NULL,
-    unit_price INTEGER CHECK (unit_price > 0),
-    unit_of_measure CHAR(20) NOT NULL
-);
+    unit_price INTEGER CHECK (unit_price > 0));
 
 CREATE TABLE IF NOT EXISTS invoice (
     id INTEGER PRIMARY KEY,
@@ -85,6 +83,10 @@ INSERT INTO role (name) VALUES
 
 INSERT INTO tax (id, type, percentage) VALUES
 (1, 'IVA', 23);
+
+INSERT INTO product (id, description, unit_price) VALUES
+(125, 'Produto 1', 90),
+(126, 'Produto 2', 450);
 
 INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax_id) VALUES
 (125, 1, 1, 3, 90, 1),
