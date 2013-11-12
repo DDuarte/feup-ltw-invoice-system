@@ -1,0 +1,219 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,a,abbr,address,cite,code,*{
+	margin:0;
+    padding:0;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{
+	display:block
+}
+
+center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { 
+    margin:0; 
+    padding:0; 
+    border:0; 
+    outline:0; 
+    font-size:100%; 
+    background:transparent 
+}
+body{    
+    font-family: 'Verdana', 'Calibri', 'Arial';
+    letter-spacing: -0.02em;
+    font-size: 12px;
+}
+
+._form{
+    padding: 30px;
+    width: 720px;
+    height: 282px;
+    margin: 0px auto;
+}
+._form >._header{
+    display:block;
+    padding: 15px 4px;
+    border-bottom:1px;
+    border-bottom-style:solid;
+    margin-bottom: 10px;
+    border-color: red;
+    
+    font-size:20px;
+}
+label{
+    padding: 4px;
+    width: 200px;
+    display:inline-block;
+    float:left;
+}
+._row{
+    display: block;
+    position: relative;
+    
+    padding: 4px;
+    width: 100%;
+    font-size: 14px; 
+     
+    float: left;
+}
+._sub_row > ._row{
+    display: block;
+    position: relative;
+    
+    margin-left:50px;
+    width:   100%;
+}
+._sub_row >._row label{
+    padding: 4px 2px;
+    width: 150px;
+}
+input{
+    /*float:left;*/
+    
+    display: inline-block;
+	background:#eaeaea;
+    width: 135px;
+    
+    color:#434343;
+    font-size:12px;
+    padding:5px;
+	
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius: 4px;
+	border-top:1px solid #c5c5c5;
+	border-right:1px solid #dddddd;
+	border-left:1px solid #dddddd;
+}
+select {
+    position: relative;
+    display: inline-block;
+    
+    background: #eaeaea;
+    
+    width: 150px;
+    padding: 6px 8px;
+
+    text-align: left;
+    
+    -webkit-border-radius: 2px;
+    border-radius: 4px;    
+    border-top: 1px solid #c5c5c5;
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-bottom-style: hidden;
+    
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    
+    cursor:pointer;
+}
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {padding-right:18px}
+}
+
+._my_select{
+    position:relative
+}
+._my_select:after {
+    content:'';
+    right:0px; top:7px;
+    padding:17px;
+    position:absolute;
+    background: url(../images/select_box_arrow.png) no-repeat 0 0px;
+    cursor:pointer;
+    pointer-events: none;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {padding-right:18px}
+}
+div._five_hundred input{
+    width: 500px;
+}
+div._hundred input{
+    width: 100px;
+}
+div._seventy input{
+    width: 70px;
+}
+
+._invoices_number{
+    width: 135px
+}
+._invoices_date{
+    width: 135px
+}
+._invoices_client_code{
+    width: 135px
+}
+._invoices_gross_total{
+    width: 134px
+}
+._invoices_all_information{
+    width: 662px;
+    display: none
+}
+
+li._invoice:hover ._invoices_all_information{
+    display:block;
+    
+    padding: 2px 0;
+    
+    height: 40px
+        
+    border-radius: 0 0 4px 0;
+    border-right: 1px solid #A1A1A1;
+    border-bottom: 2px solid #c5c5c5;
+}
+
+li > ._invoices_gross_total{
+    text-align:right
+}
+
+._list_detailed ul li label{
+    padding: 10px 20px;
+    margin: 0;
+    
+    border-right: 1px solid #A1A1A1
+}
+
+._list_detailed{
+    width: 704px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+._list_detailed li{
+    display:inline-flex;
+    list-style-type:none;
+    
+}
+
+._list_detailed > ul {
+    height:500px;
+    padding-top: 6px;
+    
+    background-color:#E6E6E6;
+    
+    border-radius: 0 0 4px 0;
+    border-right: 1px solid #dddddd;
+    border-bottom: 2px solid #c5c5c5;
+}
+
+._list_detailed_header{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 703px;
+    height: 25px;
+}
+
+._list_detailed_header > label{
+    padding: 6px 20px;
+    
+    border-radius: 0 0 4px 0;
+    border-right: 1px solid #A1A1A1;
+    border-bottom: 2px solid #c5c5c5;
+}
+
+
+
