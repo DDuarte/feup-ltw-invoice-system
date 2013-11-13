@@ -22,7 +22,7 @@ $queries = [
     "ProductCode" => [
         "range" => "SELECT id FROM product WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM product WHERE id = :value",
-        "contains" => "SELECT id FROM product WHERE id LIKE '%:value%'",
+        "contains" => "SELECT id FROM product WHERE id LIKE :value",
         "min" => "SELECT MIN(id) AS id FROM product",
         "max" => "SELECT MAX(id) AS id FROM product"
     ],
