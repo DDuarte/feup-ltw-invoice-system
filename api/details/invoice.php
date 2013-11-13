@@ -14,7 +14,7 @@ class InvoiceLine
         $taxStmt->execute();
 
         $taxResult = $taxStmt->fetch();
-        
+
         if ($taxResult == null)
             return 404;
 

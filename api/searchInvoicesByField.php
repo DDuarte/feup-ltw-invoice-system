@@ -7,7 +7,7 @@
     {
         if ($fieldInUse == "GrossTotal")
             $value = strval($value);
-        
+
         if ($operation == "contains")
             return "%" . $value . "%";
 
@@ -56,31 +56,31 @@
         ],
         "GrossTotal" => [
             "range" => "SELECT invoice.id AS id
-                        FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id 
+                        FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id
                         GROUP BY invoice.id
                         HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) BETWEEN :min AND :max",
             "equal" => "SELECT invoice.id AS id
-                        FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id 
+                        FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id
                         GROUP BY invoice.id
-                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) = :value",  
+                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) = :value",
             "contains" => "SELECT invoice.id AS id
-                        FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id 
+                        FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id
                         GROUP BY invoice.id
-                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) LIKE :value", 
+                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) LIKE :value",
             "min" => "SELECT line.invoice_id AS id
-                        FROM line JOIN tax ON line.tax_id = tax.id 
+                        FROM line JOIN tax ON line.tax_id = tax.id
                         GROUP BY line.invoice_id
-                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN 
+                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN
                             (   SELECT MIN(grossTotal) FROM (SELECT SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS grossTotal
-                                FROM line JOIN tax ON line.tax_id = tax.id 
+                                FROM line JOIN tax ON line.tax_id = tax.id
                                 GROUP BY line.invoice_id)
                             )",
             "max" => "SELECT line.invoice_id AS id
-                        FROM line JOIN tax ON line.tax_id = tax.id 
+                        FROM line JOIN tax ON line.tax_id = tax.id
                         GROUP BY line.invoice_id
-                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN 
+                        HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN
                             (   SELECT MAX(grossTotal) FROM (SELECT SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS grossTotal
-                                FROM line JOIN tax ON line.tax_id = tax.id 
+                                FROM line JOIN tax ON line.tax_id = tax.id
                                 GROUP BY line.invoice_id)
                             )"
 
@@ -138,8 +138,6 @@
         $convertedValue = ConvertIfNeeded($field, $op, $value);
         $stmt->bindParam(':value', $convertedValue, $param_type[$field]);
     }
-    
-
 
     $stmt->execute();
     $results = $stmt->fetchAll();
