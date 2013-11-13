@@ -52,14 +52,14 @@ class Customer
 
     public function toArray()
     {
-        $billingAddress = Array(
+        $billingAddress = [
             'AddressDetail' => $this->_addressDetail,
             'City' => $this->_city,
             'PostalCode' => $this->_postalCode,
             'Country' => $this->_country
-        );
+        ];
 
-        return Array(
+        return [
             'CustomerId'     => $this->_customerId,
             'AccountId'      => $this->_accountId,
             'CustomerTaxID'  => $this->_customerTaxID,
@@ -67,7 +67,7 @@ class Customer
             'BillingAddress' => $billingAddress,
             'Email'          => $this->_email,
             'SelfBillingIndicator' => $this->_selfBillingIndicator
-        );
+        ];
     }
 
     public function encode($type)
@@ -78,7 +78,7 @@ class Customer
         $array = $this->toArray();
 
         if ($type == "xml")
-            return xml_encode(Array("Customer" => $array));
+            return xml_encode(["Customer" => $array]);
         else
             return json_encode($array);
     }

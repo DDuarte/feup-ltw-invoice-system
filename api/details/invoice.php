@@ -7,7 +7,8 @@ class InvoiceLine
     public function initFromDbLine($db, $line)
     {
         $taxId = $line['tax_id'];
-        
+
+        /** @var $db PDO */
         $taxStmt = $db->prepare('SELECT type, percentage FROM tax WHERE id = :id');
         $taxStmt->bindParam(':id', $taxId, PDO::PARAM_INT);
         $taxStmt->execute();
@@ -42,19 +43,19 @@ class InvoiceLine
 
     public function toArray()
     {
-        $tax = Array(
+        $tax = [
             'TaxType' => $this->_taxType,
             'TaxPercentage' => $this->_taxPercentage
-        );
+        ];
 
-        return Array(
-            'LineNumber' =>     $this->_number,
-            'ProductCode' =>    $this->_productCode,
-            'Quantity' =>       $this->_quantity,
-            'UnitPrice' =>      $this->_unitPrice,
+        return [
+            'LineNumber'   => $this->_number,
+            'ProductCode'  => $this->_productCode,
+            'Quantity'     => $this->_quantity,
+            'UnitPrice'    => $this->_unitPrice,
             'CreditAmount' => $this->_creditAmount,
-            'Tax' => $tax
-        );
+            'Tax'          => $tax
+        ];
     }
 
     private $_number;
@@ -100,7 +101,7 @@ class Invoice
             return 404;
         }
 
-        $this->_lines = Array();
+        $this->_lines = [];
 
         $this->_taxPayable = 0.0;
         $this->_netTotal = 0.0;
@@ -130,26 +131,26 @@ class Invoice
 
     public function toArray()
     {
-        $lines = Array();
+        $lines = [];
 
         $i = 0;
         foreach ($this->_lines as $line)
             /** @var $line InvoiceLine */
             $lines[$i++] = $line->toArray();
 
-        $documentTotals = Array(
+        $documentTotals = [
             'TaxPayable' => $this->_taxPayable,
             'NetTotal' => $this->_netTotal,
             'GrossTotal' => $this->_grossTotal
-        );
+        ];
 
-        return Array(
+        return [
             'InvoiceNo' => $this->_no,
             'InvoiceDate' => $this->_date,
             'CustomerID' => $this->_customerID,
             'Line' => $lines,
             'DocumentTotals' => $documentTotals
-        );
+        ];
     }
 
     public function encode($type)
@@ -160,7 +161,7 @@ class Invoice
         $array = $this->toArray();
 
         if ($type == "xml")
-            return xml_encode(Array("Invoice" => $array));
+            return xml_encode(["Invoice" => $array]);
         else
             return json_encode($array);
     }

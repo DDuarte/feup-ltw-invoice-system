@@ -25,36 +25,36 @@
         return 0;
     }
 
-    $param_type = Array(
+    $param_type = [
         "InvoiceNo" => PDO::PARAM_INT,
         "InvoiceDate" => PDO::PARAM_STR,
         "CompanyName" => PDO::PARAM_STR,
         "GrossTotal" => PDO::PARAM_STR
-    );
+    ];
 
-    $queries = Array(
-        "InvoiceNo" => Array(
+    $queries = [
+        "InvoiceNo" => [
             "range" => "SELECT id FROM invoice WHERE id BETWEEN :min AND :max",
             "equal" => "SELECT id FROM Invoice WHERE id = :value",
             "contains" => "SELECT id FROM Invoice WHERE id LIKE '%:value%'",
             "min" => "SELECT MIN(id) AS id FROM Invoice",
             "max" => "SELECT MAX(id) AS id FROM Invoice"
-        ),
-        "InvoiceDate" => Array(
+        ],
+        "InvoiceDate" => [
             "range" => "SELECT id FROM invoice WHERE billing_date BETWEEN :min AND :max",
             "equal" => "SELECT id FROM invoice WHERE billing_date = :value",
             "contains" => "SELECT id FROM invoice WHERE billing_date LIKE :value",
             "min" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MIN(billing_date) FROM invoice)",
             "max" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MAX(billing_date) FROM invoice)"
-        ),
-        "CompanyName" => Array(
+        ],
+        "CompanyName" => [
             "range" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name BETWEEN :min AND :max",
             "equal" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name = :value",
             "contains" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name LIKE :value",
             "min" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MIN(company_name) FROM customer)",
             "max" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MAX(company_name) FROM customer)"
-        ),
-        "GrossTotal" => Array(
+        ],
+        "GrossTotal" => [
             "range" => "SELECT invoice.id AS id
                         FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id 
                         GROUP BY invoice.id
@@ -84,8 +84,8 @@
                                 GROUP BY line.invoice_id)
                             )"
 
-        ),
-    );
+        ],
+    ];
 
     $fieldError = getParameter("field", $field);
     if ($fieldError)
@@ -144,7 +144,7 @@
     $stmt->execute();
     $results = $stmt->fetchAll();
 
-    $toBeReturned = Array();
+    $toBeReturned = [];
 
     $i = 0;
     foreach($results as $result)

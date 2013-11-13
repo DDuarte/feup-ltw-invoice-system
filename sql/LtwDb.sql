@@ -91,8 +91,8 @@ INSERT INTO tax (id, type, percentage) VALUES
 (1, 'IVA', 23);
 
 INSERT INTO product (id, description, unit_price) VALUES
-(125, 'Produto 1', 90),
-(126, 'Produto 2', 450);
+(125, 'Product 1', 90),
+(126, 'Product 2', 450);
 
 INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax_id) VALUES
 (125, 1, 1, 3, 90, 1),

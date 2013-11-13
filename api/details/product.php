@@ -35,13 +35,13 @@ class Product
 
     public function toArray()
     {
-        return Array(
+        return [
             'ProductType' => $this->_type,
             'ProductCode' => $this->_code,
             'ProductDescription' => $this->_description,
             'ProductNumberCode' => $this->_numberCode,
             'UnitPrice' => $this->_unitPrice
-        );
+        ];
     }
 
     public function encode($type)
@@ -54,7 +54,7 @@ class Product
         if ($type == "xml")
         {
             unset($array['UnitPrice']); // unit price is not present in SAFT
-            return xml_encode(Array("Product" => $array));
+            return xml_encode(["Product" => $array]);
         }
         else
             return json_encode($array);
