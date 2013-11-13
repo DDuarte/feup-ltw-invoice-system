@@ -3,6 +3,8 @@
     require 'details/invoice.php';
     require 'details/utils.php';
 
+    $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
+
     function ConvertIfNeeded($fieldInUse, $operation, $value)
     {
         if ($fieldInUse == "GrossTotal")
@@ -35,10 +37,10 @@
     $queries = [
         "InvoiceNo" => [
             "range" => "SELECT id FROM invoice WHERE id BETWEEN :min AND :max",
-            "equal" => "SELECT id FROM Invoice WHERE id = :value",
-            "contains" => "SELECT id FROM Invoice WHERE id LIKE '%:value%'",
-            "min" => "SELECT MIN(id) AS id FROM Invoice",
-            "max" => "SELECT MAX(id) AS id FROM Invoice"
+            "equal" => "SELECT id FROM invoice WHERE id = :value",
+            "contains" => "SELECT id FROM invoice WHERE id LIKE '%:value%'",
+            "min" => "SELECT MIN(id) AS id FROM invoice",
+            "max" => "SELECT MAX(id) AS id FROM invoice"
         ],
         "InvoiceDate" => [
             "range" => "SELECT id FROM invoice WHERE billing_date BETWEEN :min AND :max",
@@ -145,7 +147,7 @@
     $toBeReturned = [];
 
     $i = 0;
-    foreach($results as $result)
+    foreach ($results as $result)
     {
         $invoice = new Invoice;
         $invoice->queryDbByNo($result['id']);
