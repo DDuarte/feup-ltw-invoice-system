@@ -1,6 +1,6 @@
 <?php
 
-require 'xml_utils.php';
+require_once 'xml_utils.php';
 
 class InvoiceLine
 {

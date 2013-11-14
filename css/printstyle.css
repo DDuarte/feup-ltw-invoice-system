@@ -1,0 +1,58 @@
+#lines
+{
+    width:100%;
+    border-collapse:collapse;
+}
+
+#lines td, #lines th
+{
+    border:1px solid gray;
+    padding:3px 7px 2px 7px;
+}
+
+#lines th
+{
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:darkgray;
+    color:#ffffff;
+}
+
+#lines tr
+{
+    text-align:right;
+}
+
+#lines tr:nth-child(odd)
+{
+    color:#000000;
+    background-color:lightgray;
+}
+
+#totals
+{
+    float:right;
+    width:25%;
+    border-collapse:collapse;
+}
+
+#totals td, #totals tr .title
+{
+    border:1px solid gray;
+    padding:3px 7px 2px 7px;
+}
+
+#totals tr .title
+{
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:darkgray;
+    color:#ffffff;
+}
+
+#totals tr
+{
+    text-align:center;
+}
