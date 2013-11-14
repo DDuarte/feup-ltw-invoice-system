@@ -15,17 +15,17 @@
     <div style="float:right;margin-right:20px">
         <p class="invoiceInfo" style="margin-top:0">
             <b>Invoice Information: </b><br>
-            #<span id="InvoiceNo"></span><br>
-            <time id="InvoiceDate" datetime=""></time>
+            #<span id="InvoiceNo">NO INVOICE ID</span><br>
+            <time id="InvoiceDate" datetime="NO DATE">NO DATE</time>
         </p>
     </div>
     <div style="margin-left:20px">
        <p class="customerInfo">
            <b>Customer Information: </b><br>
-           #<span id="CustomerId"></span> - NIF: <span id="CustomerTaxID"></span><br>
-           <b><span id="CompanyName"></span></b><br>
-           <span id="AddressDetail"></span> <span id="City"></span> <span id="PostalCode"></span> <span id="Country"></span><br>
-           <a id="Email" href="mailto:feup@feup.com"></a>
+           #<span id="CustomerId">NO ID</span> - NIF: <span id="CustomerTaxID">NO TAX ID</span><br>
+           <b><span id="CompanyName">NO COMPANY NAME</span></b><br>
+           <span id="AddressDetail">NO ADDRESS DETAIL</span> <span id="City">NO CITY</span> <span id="PostalCode">NO POSTAL CODE</span> <span id="Country">NO COUNTRY</span><br>
+           <a id="Email" href="mailto:NO EMAIL">NO EMAIL</a>
        </p>
     </div>
 </div>
@@ -41,75 +41,22 @@
             <th>Tax</th>
             <th colspan="2">Credit Amount</th>
         </tr>
-        <tr>
-            <td><span id="LineNumber">1</span></td>
-            <td># <span id="ProductCode">125</span></td>
-            <td><span id="ProductDescription">Product 1</span></td>
-            <td><span id="Quantity">3</span></td>
-            <td><span id="UnityPrice">90</span> &euro;</td>
-            <td><span id="TaxPercentage">23</span>% <span id="TaxType">IVA</span></td>
-            <td colspan="2"><span id="CreditAmount">270</span> &euro;</td>
-        </tr>
-        <tr>
-            <td><span id="LineNumber">2</span></td>
-            <td># <span id="ProductCode">124</span></td>
-            <td><span id="ProductDescription">Product 2Product 2Product 2Product 2Product 2</span></td>
-            <td><span id="Quantity">3</span></td>
-            <td><span id="UnityPrice">90</span> &euro;</td>
-            <td><span id="TaxPercentage">23</span>% <span id="TaxType">IVA</span></td>
-            <td colspan="2"><span id="CreditAmount">270</span> &euro;</td>
-        </tr>
-        <tr>
-            <td><span id="LineNumber">1</span></td>
-            <td># <span id="ProductCode">125</span></td>
-            <td><span id="ProductDescription">Product 1</span></td>
-            <td><span id="Quantity">3</span></td>
-            <td><span id="UnityPrice">90</span> &euro;</td>
-            <td><span id="TaxPercentage">23</span>% <span id="TaxType">IVA</span></td>
-            <td colspan="2"><span id="CreditAmount">270</span> &euro;</td>
-        </tr>
-        <tr>
-            <td><span id="LineNumber">2</span></td>
-            <td># <span id="ProductCode">124</span></td>
-            <td><span id="ProductDescription">Product 2</span></td>
-            <td><span id="Quantity">3</span></td>
-            <td><span id="UnityPrice">90</span> &euro;</td>
-            <td><span id="TaxPercentage">23</span>% <span id="TaxType">IVA</span></td>
-            <td colspan="2"><span id="CreditAmount">270</span> &euro;</td>
-        </tr>
-        <tr>
-            <td><span id="LineNumber">1</span></td>
-            <td># <span id="ProductCode">125</span></td>
-            <td><span id="ProductDescription">Product 1</span></td>
-            <td><span id="Quantity">3</span></td>
-            <td><span id="UnityPrice">90</span> &euro;</td>
-            <td><span id="TaxPercentage">23</span>% <span id="TaxType">IVA</span></td>
-            <td colspan="2"><span id="CreditAmount">270</span> &euro;</td>
-        </tr>
-        <tr>
-            <td><span id="LineNumber">2</span></td>
-            <td># <span id="ProductCode">124</span></td>
-            <td><span id="ProductDescription">Product 2</span></td>
-            <td><span id="Quantity">3</span></td>
-            <td><span id="UnityPrice">90</span> &euro;</td>
-            <td><span id="TaxPercentage">23</span>% <span id="TaxType">IVA</span></td>
-            <td colspan="2"><span id="CreditAmount">270</span> &euro;</td>
-        </tr>
-        <tr>
+        <tr class="totals">
             <td style="border:0;background-color:white" colspan="6"></td>
             <td class="title" style="background-color:white">Tax Payable</td>
-            <td style="background-color:white">165.6 &euro;</td>
+            <td style="background-color:white"><span id="TaxPlayable">NO TAX PAYABLE</span> &euro;</td>
         </tr>
-        <tr>
+        <tr class="totals">
             <td style="border:0;background-color:white" colspan="6"></td>
             <td class="title" style="background-color:white">Net Total</td>
-            <td style="background-color:white">720 &euro;</td>
+            <td style="background-color:white"><span id="NetTotal">NO NET TOTAL</span> &euro;</td>
         </tr>
-        <tr>
+        <tr class="totals">
             <td style="border:0;background-color:white" colspan="6"></td>
             <td class="title" style="background-color:white"><b>Gross Total</b></td>
-            <td style="background-color:white">885.6 &euro;</td>
+            <td style="background-color:white"><span id="GrossTotal">NO GROSS TOTAL</span> &euro;</td>
         </tr>
+
     </table>
 </div>
 </body>
