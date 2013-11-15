@@ -13,6 +13,8 @@ function loadInvoice() {
 
     $.getJSON( "api/getFullInvoice.php", { InvoiceNo: decodeURI(id) } )
         .done(function( data ) {
+            $(document).attr('title', 'Show Invoice #' + data.InvoiceNo);
+
             $('#InvoiceNo').text("FT SEQ/" + data.InvoiceNo);
             $('#InvoiceDate').attr("datetime", data.InvoiceDate).text(data.InvoiceDate);
 
