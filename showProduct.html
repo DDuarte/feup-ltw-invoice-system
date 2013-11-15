@@ -3,25 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet"  href="css/style.css" type="text/css">
-        <title></title>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/showProduct.js"></script>
+        <title>Show Product</title>
     </head>
-    <body>
+    <body onload="loadProduct()">
         <div class="_form">
             <div class="_header">
                 Show Product
             </div>
             <div class="_row _product_code">
                 <label for="productCode">Product Code</label>
-                <input type="text" id="productCode" disabled>
+                <input type="text" id="ProductCode" value="N/A" disabled>
             </div>
 
             <div class="_row _product_description _five_hundred">
                 <label for="productDescription">Product Description</label>
-                <input type="text" id="productDescription" disabled>
+                <input type="text" id="ProductDescription" value="N/A" disabled>
             </div>
             <div class="_row _unit_price _seventy">
                 <label for="unitPrice">Unit Price </label>
-                <input type="text" id="unitPrice" value="0,00 €" style="text-align: right;" disabled>
+                <input type="text" id="UnitPrice" value="N/A" style="text-align: right;" disabled>
             </div>
         </div>
     </body>
