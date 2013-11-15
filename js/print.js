@@ -13,7 +13,7 @@ function loadInvoice() {
 
     $.getJSON( "api/getFullInvoice.php", { InvoiceNo: decodeURI(id) } )
         .done(function( data ) {
-            $('#InvoiceNo').text(data.InvoiceNo);
+            $('#InvoiceNo').text("FT SEQ/" + data.InvoiceNo);
             $('#InvoiceDate').attr("datetime", data.InvoiceDate).text(data.InvoiceDate);
 
             $('#CustomerId').text(data.Customer.CustomerId);
@@ -25,24 +25,24 @@ function loadInvoice() {
             $('#Country').text(data.Customer.BillingAddress.Country);
             $('#Email').attr("href", "mailto:" + data.Customer.Email).text(data.Customer.Email);
 
-            $('#TaxPlayable').text(data.DocumentTotals.TaxPayable);
+            $('#TaxPayable').text(data.DocumentTotals.TaxPayable);
             $('#NetTotal').text(data.DocumentTotals.NetTotal);
             $('#GrossTotal').text(data.DocumentTotals.GrossTotal);
 
             var lines = data.Line;
             for (var i = 0; i < lines.length; i++)
             {
-                var a = '<tr>; \
-                    <td><span class="LineNumber">' + i + '</span></td> \
-                    <td># <span class="ProductCode">NO CODE</span></td> \
-                    <td><span class="ProductDescription">NO DESCR</span></td> \
-                    <td><span class="Quantity">NO QUANTITY</span></td> \
-                    <td><span class="UnitPrice">NO PRICE</span> &euro;</td> \
-                    <td><span class="TaxPercentage">NO TAX %</span>% <span class="TaxType">NO TAX TYPE</span></td> \
-                    <td colspan="2"><span class="CreditAmount">NO CREDIT AMOUNT</span> &euro;</td> \
+                var placeholder = '<tr>; \
+                    <td><span class="LineNumber">N/A</span></td> \
+                    <td># <span class="ProductCode">N/A</span></td> \
+                    <td><span class="ProductDescription">N/A</span></td> \
+                    <td><span class="Quantity">N/A</span></td> \
+                    <td><span class="UnitPrice">N/A</span> &euro;</td> \
+                    <td><span class="TaxPercentage">N/A</span>% <span class="TaxType">N/A</span></td> \
+                    <td colspan="2"><span class="CreditAmount">N/A</span> &euro;</td> \
                 </tr>';
 
-                $(a).insertAfter('#lines tr:not(.totals):last');
+                $(placeholder).insertAfter('#lines tr:not(.totals):last');
                 $('.LineNumber:last').text(lines[i].LineNumber);
                 $('.ProductCode:last').text(lines[i].Product.ProductCode);
                 $('.ProductDescription:last').text(lines[i].Product.ProductDescription);

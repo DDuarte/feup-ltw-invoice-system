@@ -5,7 +5,7 @@
     <link rel="stylesheet"  href="css/printstyle.css" type="text/css">
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/print.js"></script>
-    <title>Invoice Information #1</title>
+    <title>Invoice Information</title>
 </head>
 <body style="margin-right:40px;margin-left:40px" onload="loadInvoice()">
 <h1>Online Invoice System</h1>
@@ -15,17 +15,17 @@
     <div style="float:right;margin-right:20px">
         <p class="invoiceInfo" style="margin-top:0">
             <b>Invoice Information: </b><br>
-            #<span id="InvoiceNo">NO INVOICE ID</span><br>
-            <time id="InvoiceDate" datetime="NO DATE">NO DATE</time>
+            <span id="InvoiceNo">N/A</span><br>
+            <time id="InvoiceDate" datetime="N/A">N/A</time>
         </p>
     </div>
     <div style="margin-left:20px">
        <p class="customerInfo">
            <b>Customer Information: </b><br>
-           #<span id="CustomerId">NO ID</span> - NIF: <span id="CustomerTaxID">NO TAX ID</span><br>
-           <b><span id="CompanyName">NO COMPANY NAME</span></b><br>
-           <span id="AddressDetail">NO ADDRESS DETAIL</span> <span id="City">NO CITY</span> <span id="PostalCode">NO POSTAL CODE</span> <span id="Country">NO COUNTRY</span><br>
-           <a id="Email" href="mailto:NO EMAIL">NO EMAIL</a>
+           #<span id="CustomerId">N/A</span> - NIF: <span id="CustomerTaxID">N/A</span><br>
+           <b><span id="CompanyName">N/A</span></b><br>
+           <span id="AddressDetail">N/A</span> <span id="City">N/A</span> <span id="PostalCode">N/A</span> <span id="Country">N/A</span><br>
+           <a id="Email" href="mailto:N/A">N/A</a>
        </p>
     </div>
 </div>
@@ -44,19 +44,18 @@
         <tr class="totals">
             <td style="border:0;background-color:white" colspan="6"></td>
             <td class="title" style="background-color:white">Tax Payable</td>
-            <td style="background-color:white"><span id="TaxPlayable">NO TAX PAYABLE</span> &euro;</td>
+            <td style="background-color:white"><span id="TaxPayable">N/A</span> &euro;</td>
         </tr>
         <tr class="totals">
             <td style="border:0;background-color:white" colspan="6"></td>
             <td class="title" style="background-color:white">Net Total</td>
-            <td style="background-color:white"><span id="NetTotal">NO NET TOTAL</span> &euro;</td>
+            <td style="background-color:white"><span id="NetTotal">N/A</span> &euro;</td>
         </tr>
         <tr class="totals">
             <td style="border:0;background-color:white" colspan="6"></td>
             <td class="title" style="background-color:white"><b>Gross Total</b></td>
-            <td style="background-color:white"><span id="GrossTotal">NO GROSS TOTAL</span> &euro;</td>
+            <td style="background-color:white"><span id="GrossTotal">N/A</span> &euro;</td>
         </tr>
-
     </table>
 </div>
 </body>
