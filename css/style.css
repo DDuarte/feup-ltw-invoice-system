@@ -238,3 +238,7 @@ li > ._invoices_gross_total{
     border-radius: 4px;
     border-bottom: 2px solid #c5c5c5;
 }
+
+#SelfBillingIndicator {
+    width: auto;
+}
