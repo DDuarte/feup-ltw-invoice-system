@@ -25,11 +25,11 @@ body {
     
     border-bottom: 1px solid #DDD;
     
-    margin: 0 auto; !important
+    margin: 0 auto !important;
 }
 ._menu_bar{
     display: table;    
-    margin: 0 auto; !important
+    margin: 0 auto !important;
 }
 ._menu_item{
     display:inline-block;
@@ -51,8 +51,8 @@ body {
     
     padding-bottom: 3px!important; 
     
-   background: url("file://D:/Software/repos/ltw13-14/images/_menu_item_selected.png") no-repeat bottom center;
-    color: #404040; !important
+   background: url("../images/_menu_item_selected.png") no-repeat bottom center;
+    color: #404040 !important;
 }
 ._menu_item > a span{
     display:block;
