@@ -108,13 +108,11 @@ body {
 
 ._search_box{
     display: block;
-    position:absolute;
     
     font-size: 16px;
     
-    margin: 0 auto;
+    margin: 90px auto;
     
-    top: 145px;
     left:27%;
     
     border-radius: 4px;
