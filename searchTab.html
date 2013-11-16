@@ -46,14 +46,14 @@
                     </select>
                 </div>
                 <div class="_my_select _search_list doc_fields" id="customer_field_search_list">
-                    <select>
+                    <select id="customer_field_search_select">
                         <option value="CustomerID">Customer Id</option>
                         <option value="CustomerTaxID">Customer Tax Id</option>
                         <option value="CompanyName">Company Name</option>
                     </select>
                 </div>
                 <div class="_my_select _search_list doc_fields" id="invoice_field_search_list">
-                    <select>
+                    <select id="invoice_field_search_select">
                         <option value="InvoiceNo">Invoice Number</option>
                         <option value="InvoiceDate">Invoice Date</option>
                         <option value="CompanyName">Company Name</option>
@@ -61,7 +61,7 @@
                     </select>
                 </div>
                 <div class="_my_select _search_list doc_fields" id="product_field_search_list">
-                    <select>
+                    <select id="product_field_search_select">
                         <option value="ProductCode">Product Code</option>
                         <option value="ProducDescription">Product Description</option>
                     </select>
@@ -82,8 +82,9 @@
                 <div class="_field_search" id="field2_search_list">
                     <input type="text" id="field2">
                 </div>
-                <button id="search_button">Search</button>
+                <button id="search_button" onclick="search()">Search</button>
             </div>
         </div>
+        <div id="search_result"></div>
     </body>
 </html>

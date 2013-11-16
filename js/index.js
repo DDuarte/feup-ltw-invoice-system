@@ -31,3 +31,44 @@ function load() {
             }
     });
 }
+
+function search() {
+    var op = $('#op_search_select').val();
+    
+    var field = '';
+    var doc = '';
+    switch ($('#document_search_select').val())
+    {
+        case 'customer_field_search_list':
+            field = $('#customer_field_search_select').val();
+            doc = 'customer';
+        case 'product_field_search_list':
+            field = $('#product_field_search_select').val();
+            doc = 'product';
+        case 'invoice_field_search_list':
+            field = $('#invoice_field_search_select').val();
+            doc = 'invoice';
+    }
+    
+    var value1 = $('#field1').val();
+    var value2 = $('#field2').val();
+    
+    var getRequest = { };
+    if (value2 === undefined || value2.length === 0)
+        getRequest = { 'doc': doc, 'op': op, 'field': field, 'value[]': value1 };
+    else
+        getRequest = { 'doc': doc, 'op': op, 'field': field, 'value[]': [value1, value2] };
+    
+    /* $.ajax({
+        url: 'searchResults.html',
+        type: 'GET',
+        async: false,
+        data: $.param(getRequest),
+        complete: function(jqXHR, textStatus) {
+            alert(jqXHR);
+        }
+    }); */
+    
+    
+    $('#search_result').load('searchResults.html', decodeURI($.param(getRequest)));
+}
