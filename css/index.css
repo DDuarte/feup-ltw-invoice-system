@@ -78,7 +78,7 @@ body, input {
     
     font-size: 16px;
     
-    width: 75%;
+    width: 92%;
     height:250px;
     
     margin: 0 auto;
@@ -91,14 +91,12 @@ body, input {
 }
 
 ._search_first_line{
-    display:inline-block;
+    display:table;
     position:relative;
     
-    left:auto;
-    right: auto;
+    margin: 0 auto;
     
     top:20px;
-    left:30px
 }
 ._search_input{
     display:inline-block;
