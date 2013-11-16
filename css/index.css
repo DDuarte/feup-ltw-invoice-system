@@ -5,6 +5,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,a,
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{
     display:block
 }
+p{
+    padding: 5px 20px
+}
 body, input {
     color: #777;
     font-family: "Open Sans",arial,sans-serif;
@@ -21,6 +24,10 @@ body {
     font-family: 'Verdana', 'Calibri', 'Arial',serif;
     letter-spacing: -0.02em;
     font-size: 12px;
+    
+    height: 600px;
+    
+    background: url("../images/background.jpg") no-repeat center;
 }
 
 ._menu_navigator_bar{
@@ -77,11 +84,37 @@ body {
 }
 
 
+._info_block{
+    display:block;
+    position: relative;
+    
+    top: 300px;
+    
+    margin: 0 auto;
+    
+    padding: 30px;
+    
+    width: 50%;
+    height:inherit;
+}
+
+._text_block{
+    display: block;
+    position: relative;
+    
+    margin: 20px auto;
+    
+    font-size:16px;
+    
+    width:80%;
+    height:80%;
+}
 
 ._search_box{
     display: block;
     
     font-size: 16px;
+    
     
     width: 92%;
     
@@ -92,6 +125,11 @@ body {
     border-radius: 4px;
     /*border-bottom: solid 2px;
     border-right: solid 2px;*/
+}
+
+p{
+    text-align:justify;
+    text-justify:inter-word;
 }
 
 ._search_first_line{
