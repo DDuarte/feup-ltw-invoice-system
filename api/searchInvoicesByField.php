@@ -136,8 +136,8 @@ if ($op == "range")
 }
 else if ($op != "min" && $op != "max")
 {
-    ParseValue($field, $value);
-    $convertedValue = ConvertIfNeeded($field, $op, $value);
+    ParseValue($field, $value[0]);
+    $convertedValue = ConvertIfNeeded($field, $op, $value[0]);
     $stmt->bindParam(':value', $convertedValue, $param_type[$field]);
 }
 

@@ -71,7 +71,7 @@ class Invoice
 {
     public function queryDbByNo($invoiceNo)
     {
-        if (is_string($invoiceNo))
+        if (is_string($invoiceNo) && !is_numeric($invoiceNo))
         {
             $parseError = parseInvoiceNoFromString($invoiceNo, $invoiceNo);
             if ($parseError) return $parseError;
