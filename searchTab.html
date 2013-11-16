@@ -63,7 +63,7 @@
                 <div class="_my_select _search_list doc_fields" id="product_field_search_list">
                     <select id="product_field_search_select">
                         <option value="ProductCode">Product Code</option>
-                        <option value="ProducDescription">Product Description</option>
+                        <option value="ProductDescription">Product Description</option>
                     </select>
                 </div>
                 <div class="_my_select _search_list" id="op_search_list">
@@ -85,6 +85,11 @@
                 <button id="search_button" onclick="search()">Search</button>
             </div>
         </div>
-        <div id="search_result"></div>
+        <div class="search_results">
+            <table id="search_results_table">
+                <tr id="header">
+                </tr>
+            </table>
+        </div>
     </body>
 </html>

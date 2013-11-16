@@ -79,13 +79,11 @@ body {
 
 
 ._search_box{
-    position:relative;
     display: block;
     
     font-size: 16px;
     
     width: 92%;
-    height:250px;
     
     margin: 0 auto;
     
@@ -213,4 +211,33 @@ button {
     appearance:none;
     -moz-appearance:none;
     -webkit-appearance:none;
+}
+
+.search_results {
+    padding: 30px;
+    width: 720px;
+    height: 282px;
+    margin: 0 auto;
+}
+
+#search_results_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#search_results_table td, #search_results_table th {
+    border: 1px solid gray;
+    padding: 3px 7px 2px 7px;
+}
+
+#search_results_table th {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: darkgray;
+    color: white;
+}
+
+#search_results_table tr {
+    text-align: center;
 }
