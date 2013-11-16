@@ -2,10 +2,25 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <script src="js/jquery-1.10.2.min.js"></script>
         <link rel="stylesheet"  href="css/style.css" type="text/css">
         <title></title>
     </head>
     <body>
+        <script>            
+            jQuery(document).ready(function () {
+                $('._invoice').on('click',
+                    function () {
+                        if ($(this).hasClass("_active")) {
+                            $(this).removeClass("_active");
+                        }
+                        else {
+                            $('._active').removeClass("_active");
+                            $(this).addClass("_active");
+                        }
+                    });
+                });
+        </script>
         <div class="_form">
             <div class="_header">
                 List of Invoices
@@ -44,7 +59,10 @@
                                 <label class="_invoices_gross_total">50,00€</label>
                             </li>
                             <li>
-                                <label class="_invoices_all_information">data here</label>
+                                <label class="_invoices_all_information">data here</label> <br />
+                            </li>
+                            <li>
+                                <label class="_invoices_all_information">data here</label> <br />
                             </li>
                         </ul>
                     </li>
