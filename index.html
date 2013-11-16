@@ -3,13 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <title>Online Invoicing System</title>
-        <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="js/index.js"></script-->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/index.js"></script>
         <link rel="stylesheet"  href="css/index.css" type="text/css">
     </head>
-    <body>
-        <!--h1>Online Invoicing System</h1-->
-        
+    <body onload="load()">
         <nav class="_menu_navigator_bar">
             <ul class="_menu_bar">
                 <li class="_menu_item selected" id="separator1">
@@ -34,31 +32,58 @@
                 </li> 
             </ul>
         </nav>
-        
         <div class="_search_box">
             <div class="_search_first_line">
                 <div class="_search_input">
-                    <label>Search</label>
-                    <input type="text">
+                    <label for="document_search_select">Search</label>
                 </div>
-                <div class="_my_select _search_list" id="search_list">
+                <div class="_my_select _search_list" id="document_search_list">
+                    <select id="document_search_select">
+                        <option value="none">Select document</option>
+                        <option value="customer_field_search_list">Customer</option>
+                        <option value="invoice_field_search_list">Invoice</option>
+                        <option value="product_field_search_list">Product</option>
+                    </select>
+                </div>
+                <div class="_my_select _search_list doc_fields" id="customer_field_search_list">
                     <select>
-                        <option selected> Select search </option>
-                        <option>Customer</option>
-                        <option>Invoice</option>
-                        <option>Product</option>
+                        <option>Customer Id</option>
+                        <option>Customer Tax Id</option>
+                        <option>Company Name</option>
                     </select>
                 </div>
-                <div class="_my_select _search_list" id="settings_list">
-                    <select disabled>
-                        <option selected> Select setting </option>
-                        <option>Price</option>
-                        <option>Date</option>
-                        <option>Name</option>
+                <div class="_my_select _search_list doc_fields" id="invoice_field_search_list">
+                    <select>
+                        <option>Invoice Number</option>
+                        <option>Invoice Date</option>
+                        <option>Company Name</option>
+                        <option>Gross Total</option>
                     </select>
                 </div>
+                <div class="_my_select _search_list doc_fields" id="product_field_search_list">
+                    <select>
+                        <option>Product Code</option>
+                        <option>Product Description</option>
+                    </select>
+                </div>
+                <div class="_my_select _search_list" id="op_search_list">
+                    <select id="op_search_select">
+                        <option value="equal">equal to</option>
+                        <option value="contains">with</option>
+                        <option value="range">between</option>
+                        <option value="min">minimum</option>
+                        <option value="max">maximum</option>
+                    </select>
+                </div>
+                <div class="_field_search" id="field1_search_list">
+                    <input type="text" id="field1">
+                </div>
+                <span id="between_span">and</span>
+                <div class="_field_search" id="field2_search_list">
+                    <input type="text" id="field2">
+                </div>
+                <button id="search_button">Search</button>
             </div>
         </div>
-        
     </body>
 </html>
