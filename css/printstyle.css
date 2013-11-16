@@ -3,6 +3,19 @@
     margin: 1cm;
 }
 
+body{
+    font-family: "Open Sans",arial,sans-serif;
+}
+
+._header_title{
+    display:block;
+    padding: 15px 4px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid;
+    border-color: red;
+    font-size:22px;
+}
+
 ._table
 {
     display: table;
