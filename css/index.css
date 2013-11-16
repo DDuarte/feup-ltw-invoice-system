@@ -5,7 +5,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,a,
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{
     display:block
 }
-body {
+body, input {
     color: #777;
     font-family: "Open Sans",arial,sans-serif;
     font-size: 13px;
@@ -70,4 +70,105 @@ body {
     color:red;
 }
 
+
+
+._search_box{
+    position:relative;
+    display: block;
+    
+    font-size: 16px;
+    
+    width: 75%;
+    height:250px;
+    
+    margin: 0 auto;
+    
+    top: 150px;
+    
+    border-radius: 4px;
+    /*border-bottom: solid 2px;
+    border-right: solid 2px;*/
+}
+
+._search_first_line{
+    display:inline-block;
+    position:relative;
+    
+    left:auto;
+    right: auto;
+    
+    top:20px;
+    left:30px
+}
+._search_input{
+    display:inline-block;
+    
+    padding: 6px 10px;
+}
+
+._search_input > label{
+    
+    display:inline-block;
+    
+    padding: 6px 10px;
+    
+}
+
+._search_input > input{  
+    display:inline-block;
+    
+    font-size: 16px;
+    text-align: right;
+    
+    padding: 5px 10px;
+    
+    border-radius: 4px;
+    border-top:1px solid #c5c5c5;
+    border-right:1px solid #dddddd;
+    border-left:1px solid #dddddd;
+}
+
+._search_list{
+    display:inline-block;
+    
+    padding: 6px 10px;
+}
+
+._my_select{
+    position:relative
+}
+._my_select:after {
+    content:'';
+    right:9px;
+    top:11px;
+    padding: 17px;
+    position:absolute;
+    background: url(../images/select_box_arrow.png) no-repeat 0 0;
+    cursor:pointer;
+    pointer-events: none;
+}
+
+select {
+    position: relative;
+    display: inline-block;
+
+    background: #eaeaea;
+
+    width: 150px;
+    padding: 8px 8px;
+
+    text-align: left;
+
+    border-radius: 4px;
+    border-top: 1px solid #c5c5c5;
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-bottom-style: hidden;
+
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+
+    cursor:pointer;
+}
 

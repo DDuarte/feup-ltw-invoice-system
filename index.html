@@ -12,22 +12,22 @@
         
         <nav class="_menu_navigator_bar">
             <ul class="_menu_bar">
-                <li class="_menu_item selected" data-tab-id="#separator1">
+                <li class="_menu_item selected" id="separator1">
                     <a href="#separator1">
                         <span>Home</span>
                     </a>
                 </li> 
-                <li class="_menu_item" data-tab-id="#separator">
+                <li class="_menu_item" id="separator2">
                     <a href="#separator2">
                         <span>Invoices</span>
                     </a>
                 </li> 
-                <li class="_menu_item" data-tab-id="#separator3">
+                <li class="_menu_item" id="separator3">
                     <a href="#separator3">
                         <span>About</span>
                     </a>
                 </li> 
-                <li class="_menu_item" data-tab-id="#separator4">
+                <li class="_menu_item" id="separator4">
                     <a href="#separator4">
                         <span>Help</span>
                     </a>
@@ -35,6 +35,30 @@
             </ul>
         </nav>
         
+        <div class="_search_box">
+            <div class="_search_first_line">
+                <div class="_search_input">
+                    <label>Search</label>
+                    <input type="text">
+                </div>
+                <div class="_my_select _search_list" id="search_list">
+                    <select>
+                        <option selected> Select search </option>
+                        <option>Customer</option>
+                        <option>Invoice</option>
+                        <option>Product</option>
+                    </select>
+                </div>
+                <div class="_my_select _search_list" id="settings_list">
+                    <select disabled>
+                        <option selected> Select setting </option>
+                        <option>Price</option>
+                        <option>Date</option>
+                        <option>Name</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         
     </body>
 </html>
