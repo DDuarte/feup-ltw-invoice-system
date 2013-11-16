@@ -1,49 +1,60 @@
-#lines
+@page {
+    size: A4;
+    margin: 1cm;
+}
+
+._table
 {
+    display: table;
     width:100%;
     border-collapse:collapse;
+    page-break-inside:auto;
 }
 
-#lines td, #lines th
+._row
 {
-    border:1px solid gray;
-    padding:3px 7px 2px 7px;
-}
-
-#lines th
-{
-    text-align:center;
-    padding-top:5px;
-    padding-bottom:4px;
-    background-color:darkgray;
-    color:#ffffff;
-}
-
-#lines tr
-{
+    display: table-row;
     text-align:right;
+    page-break-inside: avoid;  
+    page-break-after: auto;
 }
 
-#lines tr:nth-child(odd)
+._row._header
+{
+    display: table-header-group;
+}
+
+._table ._row:nth-child(odd)
 {
     color:#000000;
     background-color:lightgray;
 }
 
-#totals
+._cell, ._header
 {
-    float:right;
-    width:25%;
-    border-collapse:collapse;
+    border:1px solid gray;
+    display: table-cell;
+    padding-right: 25px;  
+    padding:3px 7px 2px 7px;
 }
 
-#totals td, #totals tr .title
+._header
+{
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:darkgray;
+    color:#ffffff;   
+    
+}
+
+.totals ._cell, .totals._row .title
 {
     border:1px solid gray;
     padding:3px 7px 2px 7px;
 }
 
-#totals tr .title
+.totals ._row .title
 {
     text-align:center;
     padding-top:5px;
@@ -52,7 +63,7 @@
     color:#ffffff;
 }
 
-#totals tr
+.totals ._row
 {
     text-align:center;
 }

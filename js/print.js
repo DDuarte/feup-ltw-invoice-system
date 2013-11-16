@@ -8,7 +8,7 @@ function getUrlVars() {
 
 function loadInvoice() {
     var id = getUrlVars()['InvoiceNo'];
-    if (id == undefined)
+    if (id === undefined)
         return;
 
     $.getJSON( "api/getFullInvoice.php", { InvoiceNo: decodeURI(id) } )
@@ -32,17 +32,18 @@ function loadInvoice() {
             var lines = data.Line;
             for (var i = 0; i < lines.length; i++)
             {
-                var placeholder = '<tr>; \
-                    <td><span class="LineNumber">N/A</span></td> \
-                    <td># <span class="ProductCode">N/A</span></td> \
-                    <td><span class="ProductDescription">N/A</span></td> \
-                    <td><span class="Quantity">N/A</span></td> \
-                    <td><span class="UnitPrice">N/A</span> &euro;</td> \
-                    <td><span class="TaxPercentage">N/A</span>% <span class="TaxType">N/A</span></td> \
-                    <td colspan="2"><span class="CreditAmount">N/A</span> &euro;</td> \
-                </tr>';
+                var placeholder = 
+                '<div class="_row"> \
+                    <div class="_cell"><span class="LineNumber">N/A</span></div> \
+                    <div class="_cell"># <span class="ProductCode">N/A</span></div> \
+                    <div class="_cell"><span class="ProductDescription">N/A</span></div> \
+                    <div class="_cell"><span class="Quantity">N/A</span></div> \
+                    <div class="_cell"><span class="UnitPrice">N/A</span> &euro;</div> \
+                    <div class="_cell"><span class="TaxPercentage">N/A</span>% <span class="TaxType">N/A</span></div> \
+                    <div class="_cell" style="-webkit-column-span:2"><span class="CreditAmount">N/A</span> &euro;</div> \
+                </div>';
 
-                $(placeholder).insertAfter('#lines tr:not(.totals):last');
+                $(placeholder).insertAfter('#lines ._row:not(.totals):last');
                 $('.LineNumber:last').text(lines[i].LineNumber);
                 $('.ProductCode:last').text(lines[i].Product.ProductCode);
                 $('.ProductDescription:last').text(lines[i].Product.ProductDescription);
@@ -51,6 +52,6 @@ function loadInvoice() {
                 $('.TaxPercentage:last').text(lines[i].Tax.TaxPercentage);
                 $('.TaxType:last').text(lines[i].Tax.TaxType);
                 $('.CreditAmount:last').text(lines[i].CreditAmount);
-            }
+                }
         });
 }

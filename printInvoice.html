@@ -31,32 +31,32 @@
 </div>
 <br>
 <div>
-    <table id="lines">
-        <tr>
-            <th>#</th>
-            <th>Code</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
-            <th>Tax</th>
-            <th colspan="2">Credit Amount</th>
-        </tr>
-        <tr class="totals">
-            <td style="border:0;background-color:white" colspan="6"></td>
-            <td class="title" style="background-color:white">Tax Payable</td>
-            <td style="background-color:white"><span id="TaxPayable">N/A</span> &euro;</td>
-        </tr>
-        <tr class="totals">
-            <td style="border:0;background-color:white" colspan="6"></td>
-            <td class="title" style="background-color:white">Net Total</td>
-            <td style="background-color:white"><span id="NetTotal">N/A</span> &euro;</td>
-        </tr>
-        <tr class="totals">
-            <td style="border:0;background-color:white" colspan="6"></td>
-            <td class="title" style="background-color:white"><b>Gross Total</b></td>
-            <td style="background-color:white"><span id="GrossTotal">N/A</span> &euro;</td>
-        </tr>
-    </table>
+    <div class="_table" id="lines">
+        <div class="_row _header">
+            <div class="_header">#              </div>
+            <div class="_header">Code           </div>
+            <div class="_header">Description    </div>
+            <div class="_header">Quantity       </div>
+            <div class="_header">Unit Price     </div>
+            <div class="_header">Tax            </div>
+            <div class="_header">Credit Amount  </div>
+        </div>
+    </div>
+    
+    <div class="_table" style="width:auto; float:right; margin-top: 10px">
+        <div class="_row totals">
+            <div class="_cell title" style="background-color:white">Tax Payable</div>
+            <div class="_cell" style="background-color:white"><span id="TaxPayable">N/A</span> &euro;</div>
+        </div>
+        <div class="_row totals" style="background-color:white">
+            <div class="_cell title" style="background-color:white">Net Total</div>
+            <div class="_cell" style="background-color:white"><span id="NetTotal">N/A</span> &euro;</div>
+        </div>
+        <div class="_row totals" style="background-color:white">
+            <div class="_cell title" style="background-color:white"><b>Gross Total</b></div>
+            <div class="_cell" style="background-color:white"><span id="GrossTotal">N/A</span> &euro;</div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
