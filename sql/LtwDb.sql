@@ -88,27 +88,89 @@ INSERT INTO role (name) VALUES
 /* INSERTIONS */
 
 INSERT INTO tax (id, type, percentage) VALUES
-(1, 'IVA', 23);
+(1, 'IVA', 23),
+(2, 'VAT', 18);
 
 INSERT INTO product (id, description, unit_price) VALUES
-(125, 'Product 1', 90),
-(126, 'Product 2', 450);
+(125, 'MSI nGTX560-ti OC edition GPU', 	229),
+(126, 'OCZ Vector4 128Gb SSD', 			100),
+(127, 'GSkill 1600Mhz 2x2Gb RAM', 		50),
+(128, 'Samsung Pinpoint F3 2TB HDD', 	70),
+(129, 'Generic Sata cable', 			2),
+(130, 'Samsung 840 EVO 512GB SSD', 		380),
+(131, 'Asus nGTX 780ti matrix', 		550),
+(132, 'Msi R290x Lightning edition', 	500),
+(133, 'Asus P67 Sabertooth motherboard', 130),
+(134, 'ASRock Z77 pro3 motherboard', 	100),
+(135, 'XFX Pro 550W Bronze PSU', 		80),
+(136, 'Corsair 1050i Gold PSU', 		120),
+(137, 'Coolermaster HAF-X pc case', 	100),
+(138, 'Coolermaster HAF-xb pc case', 					90),
+(139, 'Corsair carbide R300 pc case', 					70),
+(140, 'LG liteon dvd drive', 							20),
+(141, 'Computer hardware for dummies book, 2nd edition', 8),
+(142, 'Razer Deathadder 2013 edition mouse', 45),
+(143, 'Microsoft Office 1 month trial retail', 13),
+(144, 'Windows 7.9 premium retail', 79),
+(145, 'Asus N550-CN214H laptop', 1100),
+(146, 'Asus n56-S4800 laptop', 900),
+(147, 'Intel core i5 3930K CPU', 150),
+(148, 'Amd A8 cpu', 100),
+(149, 'LG 23 inch widescreen LED monitor (1920x1080)', 140),
+(150, '50 shades of grey book, 3rd edition', 22);
 
 INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax_id) VALUES
 (125, 1, 1, 3, 90, 1),
 (126, 2, 1, 1, 450, 1),
 (125, 1, 2, 4, 90, 1),
-(126, 2, 2, 10, 450, 1);
+(126, 2, 2, 10, 450, 1),
+(127, 1, 3, 7, 40, 3),
+(129, 2 , 3, 7, 2, 3),
+(128, 3 , 3, 7, 380, 3),
+(129, 4 , 3, 7, 550, 3),
+(130, 5 , 3, 7, 500, 3),
+(131, 6 , 3, 7, 130, 3),
+(132, 7 , 3, 7, 100, 3),
+(133, 8 , 3, 7, 80, 3),
+(134, 9 , 3, 7, 120, 3),
+(135, 10, 3, 7, 100, 3),
+(136, 11, 3, 7, 90, 3),
+(137, 12, 3, 7, 70, 3),
+(138, 13, 3, 7, 20, 3),
+(139, 14, 3, 7, 8, 3),
+(140, 15, 3, 7, 45, 3),
+(141, 16, 3, 7, 13, 3),
+(142, 17, 3, 7, 79, 3),
+(143, 18, 3, 7, 1100, 3),
+(144, 19, 3, 7, 900, 3),
+(145, 20, 3, 7, 150, 3),
+(146, 21, 3, 7, 100, 3),
+(147, 22, 3, 7, 150, 3),
+(148, 23, 3, 7, 100, 3),
+(148, 1, 4, 7, 140, 3);
 
 INSERT INTO invoice (id, billing_date, customer_id) VALUES
 (1, '2013-09-27', 555560),
-(2, '2013-09-27', 555560);
+(2, '2013-09-27', 555560),
+(3, '2013-09-30', 555568),
+(4, '2013-10-24', 555565),
+(5, '2013-10-21', 555566),
+(6, '2013-11-10', 555567),
+(8, '2013-07-22', 555568);
 
 INSERT INTO city (id, name) VALUES
-(1, 'Porto');
+(1, 'Porto'),
+(2, 'Lisbon'),
+(3, 'London');
 
 INSERT INTO customer (id, tax_id, company_name, email, detail, city_id, postal_code, country_code) VALUES
-(555560, 123, 'FEUP', 'feup@feup.com', 'qqcoisa', 1, '1234-567', 'PT');
+(555560, 123, 'FEUP', 'feup@feup.com', 'Faculdade de Engenharia da Universidade do Porto', 1, '4200-465', 'PT'),
+(555561, 124, 'UP', 'up@up.com', 'Universidade do Porto', 1, '3222-222', 'PT'),
+(555565, 125, 'WSI', 'comercial@wsi-bg.pt', 'Computer store specialized in laptops and costumer disservice', 1, '3343-433', 'PT'),
+(555566, 126, 'Alientech', 'comercial@alientech.pt', 'Electronics store', 1, '1233-333', 'PT'),
+(555567, 127, 'Fnac', 'comercial@fnac.pt', 'General technology goods store', 1, '1000-155', 'PT'),
+(555568, 128, 'Memory', 'comercial@memory.co', 'General technology goods store', 3, '1000-155', 'GB');
+
 
 INSERT INTO country (code, name) VALUES
 ('AF', 'Afghanistan'),
