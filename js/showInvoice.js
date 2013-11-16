@@ -15,16 +15,16 @@ function loadInvoice() {
         .done(function( data ) {
             $(document).attr('title', 'Show Invoice #' + data.InvoiceNo);
 
-            $('#InvoiceNo').text("FT SEQ/" + data.InvoiceNo);
-            $('#InvoiceDate').attr("datetime", data.InvoiceDate).text(data.InvoiceDate);
+            $('#InvoiceNo').attr('value', "FT SEQ/" + data.InvoiceNo);
+            $('#InvoiceDate').attr('value', data.InvoiceDate);
 
-            //<a href="showCostumer.html?CustomerID=555560">555560</a>
-            $('#CustomerId').html("<a href=\"showCostumer.html?CustomerID=" + data.Customer.CustomerId + "\">" + data.Customer.CustomerId + "</a");
-            $('#CompanyName').text(data.Customer.CompanyName);
+            $('#CustomerId').attr('value', data.Customer.CustomerId);
+            $('#CustomerIdLink').attr('href', "showCustomer.html?CustomerID=" + data.Customer.CustomerId);
 
-            $('#TaxPayable').html(data.DocumentTotals.TaxPayable + " &euro;");
-            $('#NetTotal').html(data.DocumentTotals.NetTotal + " &euro;");
-            $('#GrossTotal').html(data.DocumentTotals.GrossTotal + " &euro;");
+            $('#CompanyName').attr('value', data.Customer.CompanyName);
+            $('#TaxPayable').attr('value', data.DocumentTotals.TaxPayable + " €");
+            $('#NetTotal').attr('value', data.DocumentTotals.NetTotal + " €");
+            $('#GrossTotal').attr('value', data.DocumentTotals.GrossTotal + " €");
 
             var lines = data.Line;
             for (var i = 0; i < lines.length; i++)
@@ -32,47 +32,51 @@ function loadInvoice() {
                 var placeholder = '<div class="_invoice_line _sub_row"> \
                     <div class="_row _line_number"> \
                         <label>Line #</label> \
-                        <label class="LineNumber">N/A</label> \
+                        <input type="text" class="LineNumber" value="N/A" disabled> \
                     </div> \
                     <div class="_row _product_code"> \
                         <label>Product Code</label> \
-                        <label class="ProductCode">N/A</label> \
+                        <input type="number" class="ProductCode" value="N/A" disabled> \
+                        <a class="ProductCodeLink" target="_blank"><img title="Product Info" src="images/icon_arrow.gif"></a> \
                     </div> \
                     <div class="_row _product_description"> \
                         <label>Product Description</label> \
-                        <label class="_five_hundred ProductDescription">N/A</label> \
+                        <input type="text" class="ProductDescription" value="N/A" disabled> \
                     </div> \
                     <div class="_row _quantity"> \
                         <label>Quantity</label> \
-                        <label class="Quantity">N/A</label> \
+                        <input type="number" class="Quantity" value="N/A" disabled> \
                     </div> \
                     <div class="_row _unit_price"> \
                         <label>Unit Price</label> \
-                        <label class="UnitPrice">N/A</label> \
+                        <input type="text" class="UnitPrice" value="N/A" disabled> \
                     </div> \
                     <div class="_row _credit_amount"> \
                         <label>Credit Amount</label> \
-                        <label class="CreditAmount">N/A</label> \
+                        <input type="text" class="CreditAmount" value="N/A" disabled> \
                     </div> \
                     <div class="_row _tax_type"> \
                         <label>Tax Type</label> \
-                        <label class="TaxType">N/A</label> \
+                        <input type="text" class="TaxType" value="N/A" disabled> \
                     </div> \
                     <div class="_row _tax_percentage"> \
                         <label>Tax Percentage</label> \
-                        <label class="TaxPercentage">N/A</label> \
+                        <input type="text" class="TaxPercentage" value="N/A" disabled> \
                     </div> \
                 </div>';
 
                 $('._line_title').append(placeholder);
-                $('.LineNumber:last').text(lines[i].LineNumber);
-                $('.ProductCode:last').html("<a href=\"showProduct.html&ProductCode=" + lines[i].Product.ProductCode + "\">"  + lines[i].Product.ProductCode +  "</a>");
-                $('.ProductDescription:last').text(lines[i].Product.ProductDescription);
-                $('.Quantity:last').text(lines[i].Quantity);
-                $('.UnitPrice:last').html(lines[i].UnitPrice + " &euro;");
-                $('.TaxPercentage:last').text(lines[i].Tax.TaxPercentage + " %");
-                $('.TaxType:last').text(lines[i].Tax.TaxType);
-                $('.CreditAmount:last').html(lines[i].CreditAmount + " &euro;");
+                $('.LineNumber:last').attr('value', lines[i].LineNumber);
+
+                $('.ProductCode:last').attr('value', lines[i].Product.ProductCode);
+                $('.ProductCodeLink:last').attr('href', "showProduct.html?ProductCode=" + lines[i].Product.ProductCode);
+
+                $('.ProductDescription:last').attr('value', lines[i].Product.ProductDescription);
+                $('.Quantity:last').attr('value', lines[i].Quantity);
+                $('.UnitPrice:last').attr('value', lines[i].UnitPrice + " €");
+                $('.TaxPercentage:last').attr('value', lines[i].Tax.TaxPercentage + " %");
+                $('.TaxType:last').attr('value', lines[i].Tax.TaxType);
+                $('.CreditAmount:last').attr('value', lines[i].CreditAmount + " €");
             }
         });
 }

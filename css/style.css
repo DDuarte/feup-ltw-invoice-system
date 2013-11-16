@@ -225,14 +225,14 @@ li > ._invoices_gross_total{
 
 ._invoice_line:last-child {
     position: relative;
-    height: 290px;
+    height: 320px;
     border-radius: 0;
     border-bottom: 0;
 }
 
 ._invoice_line {
     position: relative;
-    height: 290px;
+    height: 320px;
     margin-bottom: 10px;
     
     border-radius: 4px;
