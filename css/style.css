@@ -15,7 +15,7 @@ center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, t
     background:transparent
 }
 body{
-    font-family: 'Verdana', 'Calibri', 'Arial',serif;
+    font-family: "Open Sans",arial,sans-serif;
     letter-spacing: -0.02em;
     font-size: 12px;
 }
