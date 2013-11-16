@@ -7,11 +7,11 @@ function getUrlVars() {
 }
 
 function loadCustomer() {
-    var id = getUrlVars()['CustomerID'];
+    var id = getUrlVars()['CustomerId'];
     if (id == undefined)
         return;
 
-    $.getJSON("api/getCustomer.php", { CustomerID: decodeURI(id) })
+    $.getJSON("api/getCustomer.php", { CustomerId: decodeURI(id) })
         .done(function(data) {
             $(document).attr('title', 'Show Customer #' + data.CustomerId);
 

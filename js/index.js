@@ -69,7 +69,7 @@ function search() {
             'printHtml': 'printInvoice.html',
             'tableHeader': ['Number', 'Date', 'Client Code', 'Total Amount'],
             'key': 'InvoiceNo',
-            'jsonFields': ['InvoiceNo', 'InvoiceDate', 'CustomerID', { 'DocumentTotals': 'GrossTotal' }],
+            'jsonFields': ['InvoiceNo', 'InvoiceDate', 'CustomerId', { 'DocumentTotals': 'GrossTotal' }],
             'fields': ['InvoiceNo', 'InvoiceDate', 'CompanyName', 'GrossTotal']
         },
         'product': {
@@ -86,9 +86,9 @@ function search() {
             'detailsHtml': 'showCustomer.html',
             'hasPrint': false,
             'tableHeader': ['Customer Id', 'Company Name'],
-            'key': 'CustomerID',
-            'jsonFields': ['CustomerID', 'CompanyName'],
-            'fields': ['CustomerID', 'CustomerTaxID', 'CompanyName']
+            'key': 'CustomerId',
+            'jsonFields': ['CustomerId', 'CompanyName'],
+            'fields': ['CustomerId', 'CustomerTaxID', 'CompanyName']
         }
     }
 

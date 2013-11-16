@@ -14,13 +14,13 @@ function ConvertIfNeeded($fieldInUse, $operation, $value)
 }
 
 $param_type = [
-    "CustomerID" => PDO::PARAM_INT,
+    "CustomerId" => PDO::PARAM_INT,
     "CustomerTaxID" => PDO::PARAM_INT,
     "CompanyName" => PDO::PARAM_STR
 ];
 
 $queries = [
-    "CustomerID" => [
+    "CustomerId" => [
         "range" => "SELECT id FROM customer WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM customer WHERE id = :value",
         "contains" => "SELECT id FROM customer WHERE id LIKE :value",

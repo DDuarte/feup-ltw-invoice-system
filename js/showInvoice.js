@@ -19,7 +19,7 @@ function loadInvoice() {
             $('#InvoiceDate').attr('value', data.InvoiceDate);
 
             $('#CustomerId').attr('value', data.Customer.CustomerId);
-            $('#CustomerIdLink').attr('href', "showCustomer.html?CustomerID=" + data.Customer.CustomerId);
+            $('#CustomerIdLink').attr('href', "showCustomer.html?CustomerId=" + data.Customer.CustomerId);
 
             $('#CompanyName').attr('value', data.Customer.CompanyName);
             $('#TaxPayable').attr('value', data.DocumentTotals.TaxPayable + " €");
