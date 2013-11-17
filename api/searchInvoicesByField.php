@@ -8,7 +8,7 @@ $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
 function ConvertIfNeeded($fieldInUse, $operation, $value)
 {
     if ($fieldInUse == "GrossTotal")
-        $value = strval($value);
+       $value = strval($value);
 
     if ($operation == "contains")
         return "%" . $value . "%";
@@ -67,11 +67,11 @@ $queries = [
         "range" => "SELECT invoice.id AS id
                     FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id
                     GROUP BY invoice.id
-                    HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) BETWEEN :min AND :max",
+                    HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) BETWEEN CAST(:min AS REAL) AND CAST(:max AS REAL)",
         "equal" => "SELECT invoice.id AS id
                     FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id
                     GROUP BY invoice.id
-                    HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) = :value",
+                    HAVING CAST(SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS TEXT) = :value",
         "contains" => "SELECT invoice.id AS id
                     FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id
                     GROUP BY invoice.id
