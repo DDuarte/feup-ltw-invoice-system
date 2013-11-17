@@ -84,7 +84,7 @@ class Invoice
         $invoiceStmt->execute();
 
         $invoiceResult = $invoiceStmt->fetch();
-
+        
         if ($invoiceResult == null)
         {
             return 404;
@@ -96,31 +96,29 @@ class Invoice
 
         $linesResult = $linesStmt->fetchAll();
 
-        if ($linesResult == null)
-        {
-            return 404;
-        }
-
         $this->_lines = [];
 
         $this->_taxPayable = 0.0;
         $this->_netTotal = 0.0;
-
-        $i = 0;
-        foreach ($linesResult as $line)
+        
+        if ($linesResult != null)
         {
-            $invoiceLine = new InvoiceLine;
-            $error = $invoiceLine->initFromDbLine($db, $line);
+            $i = 0;
+            foreach ($linesResult as $line)
+            {
+                $invoiceLine = new InvoiceLine;
+                $error = $invoiceLine->initFromDbLine($db, $line);
 
-            if ($error)
-                return $error;
+                if ($error)
+                    return $error;
 
-            $this->_taxPayable += $invoiceLine->getTaxPercentage() / 100.0 * $invoiceLine->getCreditAmount();
-            $this->_netTotal += $invoiceLine->getCreditAmount();
+                $this->_taxPayable += $invoiceLine->getTaxPercentage() / 100.0 * $invoiceLine->getCreditAmount();
+                $this->_netTotal += $invoiceLine->getCreditAmount();
 
-            $this->_lines[$i++] = $invoiceLine;
+                $this->_lines[$i++] = $invoiceLine;
+            }
         }
-
+        
         $this->_no = $invoiceNo;
         $this->_date = $invoiceResult['billing_date'];
         $this->_customerID = (int)$invoiceResult['customer_id'];
