@@ -1,4 +1,6 @@
-function load() {
+function load(activeSeparator) {
+    $('#pageHeader').load( "header.html", function() { $('#' + activeSeparator).addClass('selected'); });
+    
     $('.doc_fields').hide();
     $('#op_search_list').hide();
     $('._field_search').hide();
@@ -139,6 +141,20 @@ function search() {
                 $('#search_results_table').append('</tr>');
             }
         });
+}
+
+function loadSearch() {
+    
+    //update the index header with the newly selected option
+    $('.selected').removeClass('selected');
+    $('#separator2').addClass('selected');
+    
+    // remove contents from the document information area
+    $( "._info_block" ).empty();
+    
+    // load the about.html page
+    $( "._info_block" ).load( "search.html");
+    load();
 }
 
 function loadAbout() {

@@ -7,31 +7,8 @@
         <script src="js/index.js"></script>
         <link rel="stylesheet"  href="css/index.css" type="text/css">
     </head>
-    <body onload="load()">
-        <nav class="_menu_navigator_bar">
-            <ul class="_menu_bar">
-                <li class="_menu_item selected" id="separator1">
-                    <a href="index.html">
-                        <span>Home</span>
-                    </a>
-                </li> 
-                <li class="_menu_item" id="separator2">
-                    <a href="searchTab.html">
-                        <span>Search</span>
-                    </a>
-                </li> 
-                <li class="_menu_item" id="separator3">
-                    <a href="#separator3">
-                        <span>Management</span>
-                    </a>
-                </li> 
-                <li onClick="loadAbout()" class="_menu_item" id="separator4">
-                    <a href="#separator4">
-                        <span>About</span>
-                    </a>
-                </li> 
-            </ul>
-        </nav>
+    <body onload="load('index')">
+        <div id="pageHeader"></div>
         
         <div class="_info_block">
             <h1>OIS</h1>
