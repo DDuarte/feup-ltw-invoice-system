@@ -38,14 +38,14 @@ $queries = [
     "InvoiceNo" => [
         "range" => "SELECT id FROM invoice WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM invoice WHERE id = :value",
-        "contains" => "SELECT id FROM invoice WHERE id LIKE '%:value%'",
+        "contains" => "SELECT id FROM invoice WHERE CAST(id AS TEXT) LIKE '%:value%'",
         "min" => "SELECT MIN(id) AS id FROM invoice",
         "max" => "SELECT MAX(id) AS id FROM invoice"
     ],
     "InvoiceDate" => [
         "range" => "SELECT id FROM invoice WHERE billing_date BETWEEN :min AND :max",
         "equal" => "SELECT id FROM invoice WHERE billing_date = :value",
-        "contains" => "SELECT id FROM invoice WHERE billing_date LIKE :value",
+        "contains" => "SELECT id FROM invoice WHERE CAST(billing_date AS TEXT) LIKE :value",
         "min" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MIN(billing_date) FROM invoice)",
         "max" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MAX(billing_date) FROM invoice)"
     ],
@@ -68,7 +68,7 @@ $queries = [
         "contains" => "SELECT invoice.id AS id
                     FROM invoice JOIN line ON invoice.id = line.invoice_id join tax ON line.tax_id = tax.id
                     GROUP BY invoice.id
-                    HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) LIKE :value",
+                    HAVING CAST(SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS TEXT) LIKE :value",
         "min" => "SELECT line.invoice_id AS id
                     FROM line JOIN tax ON line.tax_id = tax.id
                     GROUP BY line.invoice_id

@@ -23,14 +23,14 @@ $queries = [
     "CustomerId" => [
         "range" => "SELECT id FROM customer WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM customer WHERE id = :value",
-        "contains" => "SELECT id FROM customer WHERE id LIKE :value",
+        "contains" => "SELECT id FROM customer WHERE CAST(id AS TEXT) LIKE :value",
         "min" => "SELECT MIN(id) AS id FROM customer",
         "max" => "SELECT MAX(id) AS id FROM customer"
     ],
     "CustomerTaxID" => [
         "range" => "SELECT id FROM customer WHERE tax_id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM customer WHERE tax_id = :value",
-        "contains" => "SELECT id FROM customer WHERE tax_id LIKE :value",
+        "contains" => "SELECT id FROM customer WHERE CAST(tax_id AS TEXT) LIKE :value",
         "min" => "SELECT id FROM customer WHERE tax_id IN (SELECT MIN(tax_id) FROM customer)",
         "max" => "SELECT id FROM customer WHERE tax_id IN (SELECT MAX(tax_id) FROM customer)"
     ],
