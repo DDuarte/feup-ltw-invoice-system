@@ -12,7 +12,7 @@ function load() {
         $('#between_span').hide();
         $('#search_button').hide();
 
-        if ($(this).val() != 'none') {
+        if ($(this).val() !== 'none') {
             $('#' + $(this).val()).show();
             $('#op_search_list').show();
             $('#field1_search_list').show();
@@ -137,4 +137,17 @@ function search() {
                 $('#search_results_table').append('</tr>');
             }
         });
+}
+
+function loadAbout() {
+    
+    //update the index header with the newly selected option
+    $('.selected').removeClass('selected');
+    $('#separator4').addClass('selected');
+    
+    // remove contents from the document information area
+    $( "._info_block" ).empty();
+    
+    // load the about.html page
+    $( "._info_block" ).load( "about.html");
 }

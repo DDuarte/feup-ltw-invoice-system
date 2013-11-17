@@ -2,3 +2,5 @@
 *.db
 .idea/*
 *.jar
+
+sql/sqlite3.exe
