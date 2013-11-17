@@ -1,6 +1,6 @@
 function getUrlVars() {
     var vars = {};
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         vars[key] = value;
     });
     return vars;
@@ -11,8 +11,10 @@ function loadProduct() {
     if (id == undefined)
         return;
 
-    $.getJSON("api/getProduct.php", { ProductCode: decodeURI(id) })
-        .done(function(data) {
+    $.getJSON("api/getProduct.php", {
+        ProductCode: decodeURI(id)
+    })
+        .done(function (data) {
             $(document).attr('title', 'Show Product #' + data.ProductCode);
 
             $('#ProductCode').attr('value', data.ProductCode);

@@ -1,13 +1,16 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,a,abbr,address,cite,code,*{
-    margin:0;
-    padding:0;
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,a,abbr,address,cite,code,* {
+    margin: 0;
+    padding: 0;
 }
-article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{
-    display:block
+
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
+    display: block;
 }
-p{
-    padding: 5px 20px
+
+p {
+    padding: 5px 20px;
 }
+
 body, input {
     color: #777;
     font-family: 'Verdana', 'Calibri', 'Arial',serif;
@@ -19,144 +22,119 @@ body, input {
     line-height: 1.4;
 }
 
-body{
-    
+body {
     min-height: 1000px;
-    
     background: url("../images/background.jpg") repeat-y center center;
 }
 
-._menu_navigator_bar{
+._menu_navigator_bar {
     display: table;
-    
     width: 708px;
     height: 60px;
-    
     border-bottom: 1px solid #DDD;
-    
     margin: 0 auto !important;
 }
-._menu_bar{
-    display: table;    
+
+._menu_bar {
+    display: table;
     margin: 0 auto !important;
 }
-._menu_item{
-    display:inline-block;
+
+._menu_item {
+    display: inline-block;
     width: 118px;
-    height:59px;
+    height: 59px;
 }
-._menu_item > a{
-    display:inline-block;
+
+._menu_item > a {
+    display: inline-block;
     width: 100%;
     height: 100%;
-    text-decoration:none;
+    text-decoration: none;
     position: static;
-    
     background-color: transparent;
-    color: #a7a7a7
+    color: #a7a7a7;
 }
-.selected > a{
-    position:relative;
-    
-    padding-bottom: 3px!important; 
-    
-   background: url("../images/_menu_item_selected.png") no-repeat bottom center;
+
+.selected > a {
+    position: relative;
+    padding-bottom: 3px!important;
+    background: url("../images/_menu_item_selected.png") no-repeat bottom center;
     color: #404040 !important;
 }
-._menu_item > a span{
-    display:block;
-    position:relative;
-    
+
+._menu_item > a span {
+    display: block;
+    position: relative;
     top: 35%;
     width: 100%;
-    
     font-size: 16px;
-    
-    text-align:center
+    text-align: center;
 }
 
 ._menu_item > a:hover {
-    color:red;
+    color: red;
 }
 
-
-._info_block{
-    display:block;
-    position: relative;
-    
-    top: 48px;
-    
-    margin: 0 auto;
-    
-    padding: 30px;
-    
-    width: 50%;
-    height:inherit;
-}
-
-._text_block{
+._info_block {
     display: block;
     position: relative;
-    
+    top: 48px;
+    margin: 0 auto;
+    padding: 30px;
+    width: 50%;
+    height: inherit;
+}
+
+._text_block {
+    display: block;
+    position: relative;
     //margin: 20px auto;
     margin: 0 80px;
-    
-    font-size:16px;
-    
-    width:80%;
-    height:80%;
+    font-size: 16px;
+    width: 80%;
+    height: 80%;
 }
 
-._search_box{
+._search_box {
     display: block;
-    
     font-size: 16px;
-    
     margin: 90px auto;
-    
-    left:27%;
-    
+    left: 27%;
     border-radius: 4px;
     /*border-bottom: solid 2px;
-    border-right: solid 2px;*/
+    border-right: solid 2px;*/;
 }
 
-p{
-    text-align:justify;
-    text-justify:inter-word;
+p {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
-._search_first_line{
-    display:table;
-    
+._search_first_line {
+    display: table;
     margin: 0 auto;
 }
-._search_input{
-    display:inline-block;
-    
+
+._search_input {
+    display: inline-block;
     padding: 6px 10px;
 }
 
-._search_input > label{
-    
-    display:inline-block;
-    
+._search_input > label {
+    display: inline-block;
     padding: 6px 10px;
-    
 }
 
-._search_input > input{  
-    display:inline-block;
-    
+._search_input > input {
+    display: inline-block;
     font-size: 16px;
     text-align: right;
-    
     padding: 5px 10px;
-    
     border-radius: 4px;
-    border-top:1px solid #c5c5c5;
-    border-right:1px solid #dddddd;
-    border-left:1px solid #dddddd;
+    border-top: 1px solid #c5c5c5;
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
 }
 
 ._search_list {
@@ -164,42 +142,37 @@ p{
     padding: 6px 10px;
 }
 
-._my_select{
-    position:relative
+._my_select {
+    position: relative;
 }
+
 ._my_select:after {
-    position:absolute;
-    content:'';
-    right:9px;
-    top:11px;
+    position: absolute;
+    content: '';
+    right: 9px;
+    top: 11px;
     padding: 17px;
     background: url(../images/select_box_arrow.png) no-repeat 0 0;
-    cursor:pointer;
+    cursor: pointer;
     pointer-events: none;
 }
 
 select {
     position: relative;
     display: inline-block;
-
     background: #eaeaea;
-
     width: 150px;
     padding: 8px 8px;
-
     text-align: left;
-
     border-radius: 4px;
     border-top: 1px solid #c5c5c5;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     border-bottom-style: hidden;
-
-    appearance:none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
-
-    cursor:pointer;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
 }
 
 ._field_search {
@@ -220,9 +193,9 @@ input {
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     border-bottom-style: hidden;
-    appearance:none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 button {
@@ -237,9 +210,9 @@ button {
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     border-bottom-style: groove;
-    appearance:none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 .search_results {
@@ -271,26 +244,18 @@ button {
     text-align: center;
 }
 
-._sub_title{
-    padding: 10px 30px
-}
-._names_list{
-    padding: 10px 110px
-}
-._usability_list{
-    padding: 15px 70px
+._sub_title {
+    padding: 10px 30px;
 }
 
-._no_margin{
-    margin: 0 !important
+._names_list {
+    padding: 10px 110px;
 }
 
+._usability_list {
+    padding: 15px 70px;
+}
 
-
-
-
-
-
-
-
-
+._no_margin {
+    margin: 0 !important;
+}

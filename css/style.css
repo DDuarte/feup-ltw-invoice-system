@@ -1,217 +1,224 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,a,abbr,address,cite,code,*{
-    margin:0;
-    padding:0;
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,a,abbr,address,cite,code,* {
+    margin: 0;
+    padding: 0;
 }
-article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{
-    display:block
+
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
+    display: block;
 }
 
 center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-    margin:0;
-    padding:0;
-    border:0;
-    outline:0;
-    font-size:100%;
-    background:transparent
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    background: transparent;
 }
-body{
+
+body {
     font-family: "Open Sans",arial,sans-serif;
     letter-spacing: -0.02em;
     font-size: 12px;
 }
 
-._form{
+._form {
     padding: 30px;
     width: 720px;
     height: 282px;
     margin: 0 auto;
 }
-._form >._header{
-    display:block;
+
+._form >._header {
+    display: block;
     padding: 15px 4px;
     margin-bottom: 10px;
     border-bottom: 1px solid;
     border-color: red;
-    font-size:20px;
+    font-size: 20px;
 }
-label{
-    display:inline-block;
+
+label {
+    display: inline-block;
     padding: 4px;
     width: 200px;
-    float:left;
+    float: left;
 }
-._row{
+
+._row {
     display: block;
     position: relative;
-
     padding: 4px;
     width: 100%;
     font-size: 14px;
-
     float: left;
 }
-._sub_row > ._row{
+
+._sub_row > ._row {
     display: block;
     position: relative;
-
-    margin-left:50px;
-    width:   100%;
+    margin-left: 50px;
+    width: 100%;
 }
-._sub_row >._row label{
+
+._sub_row >._row label {
     padding: 4px 2px;
     width: 150px;
 }
-input{
+
+input {
     /*float:left;*/
-
     display: inline-block;
-    background:#eaeaea;
+    background: #eaeaea;
     width: 135px;
-
-    color:#434343;
-    font-size:12px;
-    padding:5px;
-
+    color: #434343;
+    font-size: 12px;
+    padding: 5px;
     border-radius: 4px;
-    border-top:1px solid #c5c5c5;
-    border-right:1px solid #dddddd;
-    border-left:1px solid #dddddd;
+    border-top: 1px solid #c5c5c5;
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
 }
+
 select {
     position: relative;
     display: inline-block;
-
     background: #eaeaea;
-
     width: 150px;
     padding: 6px 8px;
-
     text-align: left;
-
     border-radius: 4px;
     border-top: 1px solid #c5c5c5;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     border-bottom-style: hidden;
-
-    appearance:none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
-
-    cursor:pointer;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
 }
 
 /* Targeting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    select {padding-right:18px}
+    select {
+        padding-right: 18px;
+    }
 }
 
-._my_select{
-    position:relative
+._my_select {
+    position: relative;
 }
+
 ._my_select:after {
-    content:'';
-    right:0;
-    top:7px;
-    padding:17px;
-    position:absolute;
+    content: '';
+    right: 0;
+    top: 7px;
+    padding: 17px;
+    position: absolute;
     background: url(../images/select_box_arrow.png) no-repeat 0 0;
-    cursor:pointer;
+    cursor: pointer;
     pointer-events: none;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    select {padding-right:18px}
+    select {
+        padding-right: 18px;
+    }
 }
-div._five_hundred input{
+
+div._five_hundred input {
     width: 500px;
 }
-label._five_hundred{
-    width: 500px !important
+
+label._five_hundred {
+    width: 500px !important;
 }
-div._hundred input{
+
+div._hundred input {
     width: 100px;
 }
-div._seventy input{
+
+div._seventy input {
     width: 70px;
 }
 
-._invoices_number{
-    width: 135px
+._invoices_number {
+    width: 135px;
 }
-._invoices_date{
-    width: 135px
+
+._invoices_date {
+    width: 135px;
 }
-._invoices_client_code{
-    width: 135px
+
+._invoices_client_code {
+    width: 135px;
 }
-._invoices_gross_total{
-    width: 134px
+
+._invoices_gross_total {
+    width: 134px;
 }
-._invoices_all_information{
+
+._invoices_all_information {
     width: 662px;
-    display: none
+    display: none;
 }
-li._invoice{
+
+li._invoice {
     max-height: 34px;
     height: auto;
 }
 
-li > ._invoices_gross_total{
-    text-align:right;
+li > ._invoices_gross_total {
+    text-align: right;
 }
 
-._list_detailed ul li label{
+._list_detailed ul li label {
     padding: 10px 20px;
     margin: 0;
-
-   border-right: 1px solid #A1A1A1
+    border-right: 1px solid #A1A1A1;
 }
-._list_detailed ul li label:last-child{
+
+._list_detailed ul li label:last-child {
     padding: 10px 20px;
     margin: 0;
-
-   border-right: 0
+    border-right: 0;
 }
-._list_detailed{
+
+._list_detailed {
     width: 704px;
     height: 150px;
     margin: 0 auto;
 }
 
-._list_detailed li{
-    display:inline-flex;
-    list-style-type:none;
-
+._list_detailed li {
+    display: inline-flex;
+    list-style-type: none;
 }
 
 ._list_detailed > ul {
-    height:500px;
+    height: 500px;
     padding-top: 6px;
-
-    background-color:#E6E6E6;
-
+    background-color: #E6E6E6;
     border-radius: 0 0 4px 0;
     border-right: 1px solid #dddddd;
     border-bottom: 2px solid #c5c5c5;
 }
 
-._list_detailed_header{
+._list_detailed_header {
     margin-top: 20px;
     margin-bottom: 5px;
     width: 703px;
     height: 25px;
 }
 
-._list_detailed_header > label{
+._list_detailed_header > label {
     padding: 6px 20px;
-
     border-radius: 0 0 4px 0;
     border-right: 1px solid #A1A1A1;
     border-bottom: 2px solid #c5c5c5;
 }
 
-._line_title{
+._line_title {
 }
 
 ._invoice_line:last-child {
@@ -225,7 +232,6 @@ li > ._invoices_gross_total{
     position: relative;
     height: 320px;
     margin-bottom: 10px;
-    
     border-radius: 4px;
     border-bottom: 2px solid #c5c5c5;
 }

@@ -3,97 +3,83 @@
     margin: 1cm;
 }
 
-body{
+body {
     font-family: "Open Sans",arial,sans-serif;
 }
 
-._header_title{
-    display:block;
+._header_title {
+    display: block;
     padding: 15px 4px;
     margin-bottom: 10px;
     border-bottom: 1px solid;
     border-color: red;
-    font-size:22px;
+    font-size: 22px;
 }
 
-._table
-{
+._table {
     display: table;
-    width:100%;
-    border-collapse:collapse;
-    page-break-inside:auto;   
-    
+    width: 100%;
+    border-collapse: collapse;
+    page-break-inside: auto;
     border-radius: 4px;
 }
 
-._row
-{
+._row {
     display: table-row;
-    text-align:right;
-    page-break-inside: avoid;  
+    text-align: right;
+    page-break-inside: avoid;
     page-break-after: auto;
 }
 
-._row._header
-{
+._row._header {
     display: table-header-group;
 }
 
-._table ._row:nth-child(odd)
-{
-    color:#000000;
-    background-color:#E6E6E6;
-    
+._table ._row:nth-child(odd) {
+    color: #000000;
+    background-color: #E6E6E6;
 }
 
-._cell, ._header
-{
-    border:1px solid gray;
+._cell, ._header {
+    border: 1px solid gray;
     display: table-cell;
-    padding-right: 25px;  
-    padding:3px 7px 2px 7px;
+    padding-right: 25px;
+    padding: 3px 7px 2px 7px;
 }
 
-._header:first-child 
-{
+._header:first-child {
     border-top-left-radius: 6px;
 }
-._header:last-child 
-{
+
+._header:last-child {
     border-right: 1px solid #FF4D4D;
     border-top-right-radius: 6px;
 }
 
-._header
-{
-    text-align:center;
-    padding-top:5px;
-    padding-bottom:4px;
-    background-color:#7A7A7A;
-    color:#ffffff;    
-    
+._header {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #7A7A7A;
+    color: #ffffff;
     border: 0;
-    
     border-right: 1px solid white;
 }
 
-.totals ._cell, .totals._row .title
-{
-    border:0;
-    padding:3px 7px 2px 7px;
-    text-align:right;
+.totals ._cell, .totals._row .title {
+    border: 0;
+    padding: 3px 7px 2px 7px;
+    text-align: right;
 }
 
-.totals, ._row .title
-{
-    text-align:center;
-    padding-top:5px;
-    padding-bottom:4px;
-    background-color:#7A7A7A;
-    color:#ffffff;
+.totals, ._row .title {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #7A7A7A;
+    color: #ffffff;
 }
 
-.totals ._row
-{
-    text-align:center;
+.totals ._row {
+    text-align: center;
 }

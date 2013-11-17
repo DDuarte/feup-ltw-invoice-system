@@ -1,6 +1,6 @@
 function getUrlVars() {
     var vars = {};
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         vars[key] = value;
     });
     return vars;
@@ -11,8 +11,10 @@ function loadCustomer() {
     if (id == undefined)
         return;
 
-    $.getJSON("api/getCustomer.php", { CustomerId: decodeURI(id) })
-        .done(function(data) {
+    $.getJSON("api/getCustomer.php", {
+        CustomerId: decodeURI(id)
+    })
+        .done(function (data) {
             $(document).attr('title', 'Show Customer #' + data.CustomerId);
 
             $('#CustomerId').attr('value', data.CustomerId);

@@ -1,6 +1,9 @@
 function load(activeSeparator) {
-    $('#pageHeader').load( "header.html", function() { $('.selected').removeClass('selected'); $('#' + activeSeparator).addClass('selected'); });
-    
+    $('#pageHeader').load("header.html", function () {
+        $('.selected').removeClass('selected');
+        $('#' + activeSeparator).addClass('selected');
+    });
+
     $('.doc_fields').hide();
     $('#op_search_list').hide();
     $('._field_search').hide();
@@ -9,7 +12,7 @@ function load(activeSeparator) {
     $('#between_span').hide();
     $('#search_button').hide();
 
-    $('#document_search_select').change(function() {
+    $('#document_search_select').change(function () {
         $('.doc_fields').hide();
         $('#op_search_list').hide();
         $('._field_search').hide();
@@ -23,48 +26,56 @@ function load(activeSeparator) {
             $('#search_button').show();
         }
     });
-    
-    $('#op_search_select').change(function() {
+
+    $('#op_search_select').change(function () {
         $('#field2_search_list').hide();
         $('#field2').val('');
         $('#between_span').hide();
-        if ($('#op_search_select').val() === 'range')
-            {
-                $('#field2_search_list').show();
-                $('#between_span').show();
-            }
+        if ($('#op_search_select').val() === 'range') {
+            $('#field2_search_list').show();
+            $('#between_span').show();
+        }
     });
 }
 
 function search() {
     var op = $('#op_search_select').val();
-    
+
     var field = '';
     var doc = '';
-    switch ($('#document_search_select').val())
-    {
-        case 'customer_field_search_list':
-            field = $('#customer_field_search_select').val();
-            doc = 'customer';
-            break;
-        case 'product_field_search_list':
-            field = $('#product_field_search_select').val();
-            doc = 'product';
-            break;
-        case 'invoice_field_search_list':
-            field = $('#invoice_field_search_select').val();
-            doc = 'invoice';
-            break;
+    switch ($('#document_search_select').val()) {
+    case 'customer_field_search_list':
+        field = $('#customer_field_search_select').val();
+        doc = 'customer';
+        break;
+    case 'product_field_search_list':
+        field = $('#product_field_search_select').val();
+        doc = 'product';
+        break;
+    case 'invoice_field_search_list':
+        field = $('#invoice_field_search_select').val();
+        doc = 'invoice';
+        break;
     }
-    
+
     var value1 = $('#field1').val();
     var value2 = $('#field2').val();
-    
-    var getRequest = { };
+
+    var getRequest = {};
     if (value2 === undefined || value2.length === 0)
-        getRequest = { 'doc': doc, 'op': op, 'field': field, 'value[]': value1 };
+        getRequest = {
+            'doc': doc,
+            'op': op,
+            'field': field,
+            'value[]': value1
+        };
     else
-        getRequest = { 'doc': doc, 'op': op, 'field': field, 'value[]': [value1, value2] };
+        getRequest = {
+            'doc': doc,
+            'op': op,
+            'field': field,
+            'value[]': [value1, value2]
+        };
 
     var arr = {
         'invoice': {
@@ -73,7 +84,9 @@ function search() {
             'printHtml': 'printInvoice.html',
             'tableHeader': ['Number', 'Date', 'Client Code', 'Total Amount'],
             'key': 'InvoiceNo',
-            'jsonFields': ['InvoiceNo', 'InvoiceDate', 'CustomerId', { 'DocumentTotals': 'GrossTotal' }],
+            'jsonFields': ['InvoiceNo', 'InvoiceDate', 'CustomerId', {
+                'DocumentTotals': 'GrossTotal'
+            }],
             'fields': ['InvoiceNo', 'InvoiceDate', 'CompanyName', 'GrossTotal']
         },
         'product': {
@@ -99,73 +112,65 @@ function search() {
     var ops = ['range', 'equal', 'contains', 'min', 'max'];
 
     $.getJSON('api/' + arr[doc].api, getRequest)
-        .done(function(data) {
-            
+        .done(function (data) {
+
             $('.search_results').empty();
             $('.search_results').append('<table id="search_results_table"><tr id="header"></tr></table>');
-            
-            for (var i = 0; i < arr[doc].tableHeader.length; ++i)
-            {
-                $('#header').append('<th>' + arr[doc].tableHeader[i] + '</th>');   
+
+            for (var i = 0; i < arr[doc].tableHeader.length; ++i) {
+                $('#header').append('<th>' + arr[doc].tableHeader[i] + '</th>');
             }
 
             $('#header').append('<th>Details</th>');
             if (arr[doc].printHtml)
                 $('#header').append('<th>Print</th>');
 
-            for (var i = 0; i < data.length; ++i)
-            {
+            for (var i = 0; i < data.length; ++i) {
                 $('#search_results_table').append('<tr>');
-                for (var j = 0; j < arr[doc].jsonFields.length; ++j)
-                {
-                    if (typeof arr[doc].jsonFields[j] === 'object')
-                    {
-                        for (var key in arr[doc].jsonFields[j])
-                        {
+                for (var j = 0; j < arr[doc].jsonFields.length; ++j) {
+                    if (typeof arr[doc].jsonFields[j] === 'object') {
+                        for (var key in arr[doc].jsonFields[j]) {
                             $('#search_results_table tbody').append('<td>' + data[i][key][arr[doc].jsonFields[j][key]] + '</td>');
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $('#search_results_table tbody').append('<td>' + data[i][arr[doc].jsonFields[j]] + '</td>');
                     }
                 }
-                
+
                 $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/icon_details.gif" title="more info" width="20" height="20"></a></td>');
-                
-                if (arr[doc].printHtml)
-                {
+
+                if (arr[doc].printHtml) {
                     $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].printHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/icon_print.gif" title="print" width="20" height="20"></a></td>');
                 }
-                
+
                 $('#search_results_table').append('</tr>');
             }
         });
 }
 
 function loadSearch() {
-    
+
     //update the index header with the newly selected option
     $('.selected').removeClass('selected');
     $('#separator2').addClass('selected');
-    
+
     // remove contents from the document information area
-    $( "._info_block" ).empty();
-    
+    $("._info_block").empty();
+
     // load the about.html page
-    $( "._info_block" ).load( "search.html");
+    $("._info_block").load("search.html");
     load();
 }
 
 function loadAbout() {
-    
+
     //update the index header with the newly selected option
     $('.selected').removeClass('selected');
     $('#separator4').addClass('selected');
-    
+
     // remove contents from the document information area
-    $( "._info_block" ).empty();
-    
+    $("._info_block").empty();
+
     // load the about.html page
-    $( "._info_block" ).load( "about.html");
+    $("._info_block").load("about.html");
 }

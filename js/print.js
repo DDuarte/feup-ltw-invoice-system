@@ -1,6 +1,6 @@
 function getUrlVars() {
     var vars = {};
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         vars[key] = value;
     });
     return vars;
@@ -11,8 +11,10 @@ function loadInvoice() {
     if (id === undefined)
         return;
 
-    $.getJSON( "api/getFullInvoice.php", { InvoiceNo: decodeURI(id) } )
-        .done(function( data ) {
+    $.getJSON("api/getFullInvoice.php", {
+        InvoiceNo: decodeURI(id)
+    })
+        .done(function (data) {
             $('#InvoiceNo').text("FT SEQ/" + data.InvoiceNo);
             $('#InvoiceDate').attr("datetime", data.InvoiceDate).text(data.InvoiceDate);
 
@@ -30,10 +32,9 @@ function loadInvoice() {
             $('#GrossTotal').text(data.DocumentTotals.GrossTotal);
 
             var lines = data.Line;
-            for (var i = 0; i < lines.length; i++)
-            {
-                var placeholder = 
-                '<div class="_row"> \
+            for (var i = 0; i < lines.length; i++) {
+                var placeholder =
+                    '<div class="_row"> \
                     <div class="_cell"><span class="LineNumber">N/A</span></div> \
                     <div class="_cell"><span class="ProductCode">N/A</span></div> \
                     <div class="_cell"><span class="ProductDescription">N/A</span></div> \
@@ -52,6 +53,6 @@ function loadInvoice() {
                 $('.TaxPercentage:last').text(lines[i].Tax.TaxPercentage);
                 $('.TaxType:last').text(lines[i].Tax.TaxType);
                 $('.CreditAmount:last').text(lines[i].CreditAmount);
-                }
+            }
         });
 }

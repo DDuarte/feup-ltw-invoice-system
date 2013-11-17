@@ -1,6 +1,6 @@
 function getUrlVars() {
     var vars = {};
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         vars[key] = value;
     });
     return vars;
@@ -11,8 +11,10 @@ function loadInvoice() {
     if (id == undefined)
         return;
 
-    $.getJSON( "api/getFullInvoice.php", { InvoiceNo: decodeURI(id) } )
-        .done(function( data ) {
+    $.getJSON("api/getFullInvoice.php", {
+        InvoiceNo: decodeURI(id)
+    })
+        .done(function (data) {
             $(document).attr('title', 'Show Invoice #' + data.InvoiceNo);
 
             $('#InvoiceNo').attr('value', "FT SEQ/" + data.InvoiceNo);
@@ -27,8 +29,7 @@ function loadInvoice() {
             $('#GrossTotal').attr('value', data.DocumentTotals.GrossTotal + " €");
 
             var lines = data.Line;
-            for (var i = 0; i < lines.length; i++)
-            {
+            for (var i = 0; i < lines.length; i++) {
                 var placeholder = '<div class="_invoice_line _sub_row"> \
                     <div class="_row _line_number"> \
                         <label>Line #</label> \

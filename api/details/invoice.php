@@ -84,7 +84,7 @@ class Invoice
         $invoiceStmt->execute();
 
         $invoiceResult = $invoiceStmt->fetch();
-        
+
         if ($invoiceResult == null)
         {
             return 404;
@@ -100,7 +100,7 @@ class Invoice
 
         $this->_taxPayable = 0.0;
         $this->_netTotal = 0.0;
-        
+
         if ($linesResult != null)
         {
             $i = 0;
@@ -118,7 +118,7 @@ class Invoice
                 $this->_lines[$i++] = $invoiceLine;
             }
         }
-        
+
         $this->_no = $invoiceNo;
         $this->_date = $invoiceResult['billing_date'];
         $this->_customerID = (int)$invoiceResult['customer_id'];
