@@ -147,7 +147,7 @@ class Invoice
         return [
             'InvoiceNo' => $this->_no,
             'InvoiceDate' => $this->_date,
-            'CustomerId' => $this->_customerId,
+            'CustomerId' => $this->_customerID,
             'Line' => $lines,
             'DocumentTotals' => $documentTotals
         ];
