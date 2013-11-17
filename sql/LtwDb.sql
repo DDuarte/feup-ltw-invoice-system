@@ -227,12 +227,12 @@ INSERT INTO city (id, name) VALUES
 (3, 'London');
 
 INSERT INTO customer (id, tax_id, company_name, email, detail, city_id, postal_code, country_code) VALUES
-(555560, 123, 'FEUP', 'feup@feup.com', 'Faculdade de Engenharia da Universidade do Porto', 1, '4200-465', 'PT'),
-(555561, 124, 'UP', 'up@up.com', 'Universidade do Porto', 1, '3222-222', 'PT'),
-(555565, 125, 'WSI', 'comercial@wsi-bg.pt', 'Computer store specialized in laptops and costumer disservice', 1, '3343-433', 'PT'),
-(555566, 126, 'Alientech', 'comercial@alientech.pt', 'Electronics store', 1, '1233-333', 'PT'),
-(555567, 127, 'Fnac', 'comercial@fnac.pt', 'General technology goods store', 1, '1000-155', 'PT'),
-(555568, 128, 'Memory', 'comercial@memory.co', 'General technology goods store', 3, '1000-155', 'GB');
+(555560, 123, 'FEUP', 'feup@feup.com', 'Rua Dr. Roberto Frias, s/n', 1, '4200-465', 'PT'),
+(555561, 124, 'UP', 'up@up.com', 'Praça Gomes Teixeira', 1, '4099-002', 'PT'),
+(555565, 125, 'WSI', 'comercial@wsi-bg.pt', 'Rua Faria Guimarães, 765', 1, '4200-291', 'PT'),
+(555566, 126, 'Alienctech', 'comercial@alientech.pt', 'Rua da Torrinha, 194', 1, '4050-610', 'PT'),
+(555567, 127, 'FNAC', 'comercial@fnac.pt', 'Rua Professor Carlos Alberto Mota Pinto, nr 9 - 6 B', 2, '1070-374', 'PT'),
+(555568, 128, 'Memory', 'comercial@memory.co', 'London', 3, '1000-155', 'GB');
 
 
 INSERT INTO country (code, name) VALUES
