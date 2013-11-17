@@ -80,9 +80,9 @@ function search() {
             'api': 'searchProductsByField.php',
             'detailsHtml': 'showProduct.html',
             'hasPrint': false,
-            'tableHeader': ['Product Code'],
+            'tableHeader': ['Product Code', 'Description'],
             'key': 'ProductCode',
-            'jsonFields': ['ProductCode'],
+            'jsonFields': ['ProductCode', 'ProductDescription'],
             'fields': ['ProductCode', 'ProductDescription']
         },
         'customer': {
