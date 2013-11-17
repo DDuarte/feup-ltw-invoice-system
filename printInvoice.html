@@ -7,19 +7,19 @@
     <script src="js/print.js"></script>
     <title>Invoice Information</title>
 </head>
-<body style="margin-right:40px;margin-left:40px" onload="loadInvoice()">
+<body onload="loadInvoice()">
     <div class="_header_title">
         Online Invoice System
     </div>
 <div>
-    <div style="float:right;margin-right:20px">
+    <div id="invoice_info">
         <p class="invoiceInfo" style="margin-top:0">
             <b>Invoice Information: </b><br>
             <span id="InvoiceNo">N/A</span><br>
             <time id="InvoiceDate" datetime="N/A">N/A</time>
         </p>
     </div>
-    <div style="margin-left:20px">
+    <div id="customer_info">
        <p class="customerInfo">
            <b>Customer Information: </b><br>
            #<span id="CustomerId">N/A</span> - NIF: <span id="CustomerTaxID">N/A</span><br>
@@ -43,18 +43,18 @@
         </div>
     </div>
 
-    <div class="_table" style="width:auto; float:right; margin-top: 10px; margin-bottom: 40px;">
+    <div class="_table totals_div">
         <div class="_row totals">
-            <div class="_cell title" style="border-top-left-radius:6px; border-bottom: 1px solid white">Tax Payable</div>
-            <div class="_cell" style="background-color:white;color:gray; border: 1px solid gray"><span id="TaxPayable">N/A</span> &euro;</div>
+            <div class="_cell title" id="tax_payable_title">Tax Payable</div>
+            <div class="_cell total_value"><span id="TaxPayable">N/A</span> &euro;</div>
         </div>
         <div class="_row totals">
-            <div class="_cell title" style="border-bottom: 1px solid white">Net Total</div>
-            <div class="_cell" style="background-color:white;color:gray; border: 1px solid gray"><span id="NetTotal">N/A</span> &euro;</div>
+            <div class="_cell title" id="net_total_tile">Net Total</div>
+            <div class="_cell total_value"><span id="NetTotal">N/A</span> &euro;</div>
         </div>
         <div class="_row totals">
-            <div class="_cell title" style="border-bottom-left-radius:6px"><b>Gross Total</b></div>
-            <div class="_cell" style="background-color:white;color:black; border: 1px solid gray"><span id="GrossTotal">N/A</span> &euro;</div>
+            <div class="_cell title" id="gross_total_title"><b>Gross Total</b></div>
+            <div class="_cell total_value"><span id="GrossTotal">N/A</span> &euro;</div>
         </div>
     </div>
 </div>

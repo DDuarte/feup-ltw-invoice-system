@@ -83,3 +83,43 @@ body {
 .totals ._row {
     text-align: center;
 }
+
+body {
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+#invoice_info {
+    float: right;
+    margin-right: 20px;
+}
+
+#customer_info {
+    margin-left: 20px;
+}
+
+.totals_div {
+    width: auto;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.total_value {
+    background-color: white;
+    color: gray;
+    border: 1px solid gray !important;
+}
+
+#tax_payable_title {
+    border-top-left-radius: 6px;
+    border-bottom: 1px solid white;
+}
+
+#net_total_tile {
+    border-bottom: 1px solid white;
+}
+
+#gross_total_title {
+    border-bottom-left-radius: 6px;
+}

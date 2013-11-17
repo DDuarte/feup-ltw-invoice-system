@@ -239,3 +239,7 @@ li > ._invoices_gross_total {
 #SelfBillingIndicator {
     width: auto;
 }
+
+#UnitPrice {
+    text-align: right;
+}
