@@ -21,7 +21,9 @@ body{
     display: table;
     width:100%;
     border-collapse:collapse;
-    page-break-inside:auto;
+    page-break-inside:auto;   
+    
+    border-radius: 4px;
 }
 
 ._row
@@ -40,7 +42,8 @@ body{
 ._table ._row:nth-child(odd)
 {
     color:#000000;
-    background-color:lightgray;
+    background-color:#E6E6E6;
+    
 }
 
 ._cell, ._header
@@ -51,28 +54,42 @@ body{
     padding:3px 7px 2px 7px;
 }
 
+._header:first-child 
+{
+    border-top-left-radius: 6px;
+}
+._header:last-child 
+{
+    border-right: 1px solid #FF4D4D;
+    border-top-right-radius: 6px;
+}
+
 ._header
 {
     text-align:center;
     padding-top:5px;
     padding-bottom:4px;
-    background-color:darkgray;
-    color:#ffffff;   
+    background-color:#7A7A7A;
+    color:#ffffff;    
     
+    border: 0;
+    
+    border-right: 1px solid white;
 }
 
 .totals ._cell, .totals._row .title
 {
-    border:1px solid gray;
+    border:0;
     padding:3px 7px 2px 7px;
+    text-align:right;
 }
 
-.totals ._row .title
+.totals, ._row .title
 {
     text-align:center;
     padding-top:5px;
     padding-bottom:4px;
-    background-color:darkgray;
+    background-color:#7A7A7A;
     color:#ffffff;
 }
 
