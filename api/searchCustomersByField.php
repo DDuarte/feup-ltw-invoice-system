@@ -13,16 +13,17 @@ function ConvertIfNeeded($fieldInUse, $operation, $value)
     return $value;
 }
 
-function GetValidParamType($fieldInUse, $operation)
-{
-    return $operation == "contains" ? PDO::PARAM_STR : $param_type[$fieldInUse];
-}
-
 $param_type = [
     "CustomerId" => PDO::PARAM_INT,
     "CustomerTaxID" => PDO::PARAM_INT,
     "CompanyName" => PDO::PARAM_STR
 ];
+
+function GetValidParamType($fieldInUse, $operation)
+{
+    global $param_type;
+    return $operation == "contains" ? PDO::PARAM_STR : $param_type[$fieldInUse];
+}
 
 $queries = [
     "CustomerId" => [

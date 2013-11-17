@@ -5,12 +5,6 @@ require 'details/utils.php';
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
 
-function GetValidParamType($fieldInUse, $operation)
-{
-    if ($operation == "contains" && $fieldInUse == "InvoiceNo") return PDO::PARAM_STR;
-    return $param_type[$fieldInUse];
-}
-
 function ConvertIfNeeded($fieldInUse, $operation, $value)
 {
     if ($fieldInUse == "GrossTotal")
@@ -39,6 +33,13 @@ $param_type = [
     "CompanyName" => PDO::PARAM_STR,
     "GrossTotal" => PDO::PARAM_STR
 ];
+
+function GetValidParamType($fieldInUse, $operation)
+{
+    global $param_type;
+    if ($operation == "contains" && $fieldInUse == "InvoiceNo") return PDO::PARAM_STR;
+    return $param_type[$fieldInUse];
+}
 
 $queries = [
     "InvoiceNo" => [
