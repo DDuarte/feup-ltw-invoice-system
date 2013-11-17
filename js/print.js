@@ -35,7 +35,7 @@ function loadInvoice() {
                 var placeholder = 
                 '<div class="_row"> \
                     <div class="_cell"><span class="LineNumber">N/A</span></div> \
-                    <div class="_cell"># <span class="ProductCode">N/A</span></div> \
+                    <div class="_cell"><span class="ProductCode">N/A</span></div> \
                     <div class="_cell"><span class="ProductDescription">N/A</span></div> \
                     <div class="_cell"><span class="Quantity">N/A</span></div> \
                     <div class="_cell"><span class="UnitPrice">N/A</span> &euro;</div> \
