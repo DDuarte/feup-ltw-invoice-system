@@ -5,6 +5,12 @@ require 'details/utils.php';
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
 
+function GetValidParamType($fieldInUse, $operation)
+{
+    if ($operation == "contains" && $fieldInUse == "InvoiceNo") return PDO::PARAM_STR;
+    return $param_type[$fieldInUse];
+}
+
 function ConvertIfNeeded($fieldInUse, $operation, $value)
 {
     if ($fieldInUse == "GrossTotal")
@@ -16,9 +22,9 @@ function ConvertIfNeeded($fieldInUse, $operation, $value)
     return $value;
 }
 
-function ParseValue($fileInUse, &$value)
+function ParseValue($fileInUse, $operation, &$value)
 {
-    if ($fileInUse == "InvoiceNo")
+    if ($fileInUse == "InvoiceNo" && $operation != "contains")
     {
         $error = parseInvoiceNoFromString($value, $value);
         if ($error) return $error;
@@ -38,7 +44,7 @@ $queries = [
     "InvoiceNo" => [
         "range" => "SELECT id FROM invoice WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM invoice WHERE id = :value",
-        "contains" => "SELECT id FROM invoice WHERE CAST(id AS TEXT) LIKE '%:value%'",
+        "contains" => "SELECT id FROM invoice WHERE 'FT SEQ/' || CAST(id AS TEXT) LIKE :value",
         "min" => "SELECT MIN(id) AS id FROM invoice",
         "max" => "SELECT MAX(id) AS id FROM invoice"
     ],
@@ -126,19 +132,19 @@ if ($op == "range")
     if (!is_array($value) || !count($value) == 2)
         exit($error400);
 
-    ParseValue($field, $value[0]);
-    ParseValue($field, $value[1]);
+    ParseValue($field, $op, $value[0]);
+    ParseValue($field, $op, $value[1]);
 
     $minValue = ConvertIfNeeded($field, $op, $value[0]);
-    $stmt->bindParam(':min', $minValue, $param_type[$field]);
+    $stmt->bindParam(':min', $minValue, GetValidParamType($field, $op));
     $maxValue = ConvertIfNeeded($field, $op, $value[1]);
-    $stmt->bindParam(':max', $maxValue, $param_type[$field]);
+    $stmt->bindParam(':max', $maxValue, GetValidParamType($field, $op));
 }
 else if ($op != "min" && $op != "max")
 {
-    ParseValue($field, $value[0]);
+    ParseValue($field, $op, $value[0]);
     $convertedValue = ConvertIfNeeded($field, $op, $value[0]);
-    $stmt->bindParam(':value', $convertedValue, $param_type[$field]);
+    $stmt->bindParam(':value', $convertedValue, GetValidParamType($field, $op));
 }
 
 $stmt->execute();

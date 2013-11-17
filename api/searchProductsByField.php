@@ -13,6 +13,12 @@ function ConvertIfNeeded($fieldInUse, $operation, $value)
     return $value;
 }
 
+function GetValidParamType($fieldInUse, $operation)
+{
+    return $operation == "contains" ? PDO::PARAM_STR : $param_type[$fieldInUse];
+}
+
+
 $param_type = [
     "ProductCode" => PDO::PARAM_INT,
     "ProductDescription" => PDO::PARAM_STR
@@ -73,14 +79,14 @@ if ($op == "range")
         exit($error400);
 
     $minValue = ConvertIfNeeded($field, $op, $value[0]);
-    $stmt->bindParam(':min', $minValue, $param_type[$field]);
+    $stmt->bindParam(':min', $minValue, GetValidParamType($field, $op));
     $maxValue = ConvertIfNeeded($field, $op, $value[1]);
-    $stmt->bindParam(':max', $maxValue, $param_type[$field]);
+    $stmt->bindParam(':max', $maxValue, GetValidParamType($field, $op));
 }
 else if ($op != "min" && $op != "max")
 {
     $convertedValue = ConvertIfNeeded($field, $op, $value[0]);
-    $stmt->bindParam(':value', $convertedValue, $param_type[$field]);
+    $stmt->bindParam(':value', $convertedValue, GetValidParamType($field, $op));
 }
 
 $stmt->execute();
