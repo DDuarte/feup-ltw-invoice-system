@@ -39,7 +39,7 @@ function loadInvoice() {
                         <input type="number" class="ProductCode" value="N/A" disabled> \
                         <a class="ProductCodeLink" target="_blank"><img title="Product Info" src="images/icon_arrow.gif"></a> \
                     </div> \
-                    <div class="_row _product_description"> \
+                    <div class="_row _product_description _five_hundred"> \
                         <label>Product Description</label> \
                         <input type="text" class="ProductDescription" value="N/A" disabled> \
                     </div> \
