@@ -1,5 +1,5 @@
 function load(activeSeparator) {
-    $('#pageHeader').load( "header.html", function() { $('#' + activeSeparator).addClass('selected'); });
+    $('#pageHeader').load( "header.html", function() { $('.selected').removeClass('selected'); $('#' + activeSeparator).addClass('selected'); });
     
     $('.doc_fields').hide();
     $('#op_search_list').hide();
