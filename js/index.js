@@ -24,18 +24,25 @@ function load(activeSeparator) {
             $('#op_search_list').show();
             $('#field1_search_list').show();
             $('#search_button').show();
+            onChangeFunction();
         }
     });
 
-    $('#op_search_select').change(function () {
+    var onChangeFunction = function () {
+        $('#field1_search_list').show();
+        $('#field1').val('');
         $('#field2_search_list').hide();
         $('#field2').val('');
         $('#between_span').hide();
         if ($('#op_search_select').val() === 'range') {
             $('#field2_search_list').show();
             $('#between_span').show();
+        } else if ($('#op_search_select').val() === 'min' || $('#op_search_select').val() === 'max') {
+            $('#field1_search_list').hide();
         }
-    });
+    };
+    
+    $('#op_search_select').change(onChangeFunction);
 }
 
 function search() {
