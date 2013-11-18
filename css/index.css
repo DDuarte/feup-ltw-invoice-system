@@ -84,6 +84,7 @@ body {
     padding: 30px;
     width: 50%;
     height: inherit;
+    margin-bottom: 40px;
 }
 
 ._text_block {
@@ -220,6 +221,8 @@ button {
     width: 720px;
     height: 282px;
     margin: 0 auto;
+    height: inherit;
+    margin-bottom: 40px;
 }
 
 #search_results_table {
