@@ -255,6 +255,10 @@ button {
     padding: 10px 110px;
 }
 
+._names_list > li {
+    display: table;
+}
+
 ._usability_list {
     padding: 15px 70px;
 }
