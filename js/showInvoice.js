@@ -33,36 +33,36 @@ function loadInvoice() {
                 var placeholder = '<div class="_invoice_line _sub_row"> \
                     <div class="_row _line_number"> \
                         <label>Line #</label> \
-                        <input type="text" class="LineNumber" value="N/A" disabled> \
+                        <input type="text" class="LineNumber" value="N/A" readonly> \
                     </div> \
                     <div class="_row _product_code"> \
                         <label>Product Code</label> \
-                        <input type="number" class="ProductCode" value="N/A" disabled> \
+                        <input type="number" class="ProductCode" value="N/A" readonly> \
                         <a class="ProductCodeLink" target="_blank"><img title="Product Info" src="images/icon_arrow.gif"></a> \
                     </div> \
                     <div class="_row _product_description _five_hundred"> \
                         <label>Product Description</label> \
-                        <input type="text" class="ProductDescription" value="N/A" disabled> \
+                        <input type="text" class="ProductDescription" value="N/A" readonly> \
                     </div> \
                     <div class="_row _quantity"> \
                         <label>Quantity</label> \
-                        <input type="number" class="Quantity" value="N/A" disabled> \
+                        <input type="number" class="Quantity" value="N/A" readonly> \
                     </div> \
                     <div class="_row _unit_price"> \
                         <label>Unit Price</label> \
-                        <input type="text" class="UnitPrice" value="N/A" disabled> \
+                        <input type="text" class="UnitPrice" value="N/A" readonly> \
                     </div> \
                     <div class="_row _credit_amount"> \
                         <label>Credit Amount</label> \
-                        <input type="text" class="CreditAmount" value="N/A" disabled> \
+                        <input type="text" class="CreditAmount" value="N/A" readonly> \
                     </div> \
                     <div class="_row _tax_type"> \
                         <label>Tax Type</label> \
-                        <input type="text" class="TaxType" value="N/A" disabled> \
+                        <input type="text" class="TaxType" value="N/A" readonly> \
                     </div> \
                     <div class="_row _tax_percentage"> \
                         <label>Tax Percentage</label> \
-                        <input type="text" class="TaxPercentage" value="N/A" disabled> \
+                        <input type="text" class="TaxPercentage" value="N/A" readonly> \
                     </div> \
                 </div>';
 
