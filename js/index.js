@@ -8,7 +8,7 @@ function load(activeSeparator) {
     $('#op_search_list').hide();
     $('._field_search').hide();
     $('#field1').val('');
-    $('#field2').val('');
+    $('#field2').val('').prop('required', false);
     $('#between_span').hide();
     $('#search_button').hide();
 
@@ -32,11 +32,12 @@ function load(activeSeparator) {
         $('#field1_search_list').show();
         $('#field1').val('');
         $('#field2_search_list').hide();
-        $('#field2').val('');
+        $('#field2').val('').prop('required', false);
         $('#between_span').hide();
         if ($('#op_search_select').val() === 'range') {
             $('#field2_search_list').show();
             $('#between_span').show();
+            $('#field2').prop('required', true);
         }
     };
     
