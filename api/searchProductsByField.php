@@ -29,15 +29,19 @@ $queries = [
         "range" => "SELECT id FROM product WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM product WHERE id = :value",
         "contains" => "SELECT id FROM product WHERE CAST(id AS TEXT) LIKE :value",
-        "min" => "SELECT MIN(id) AS id FROM product",
-        "max" => "SELECT MAX(id) AS id FROM product"
+        "min" => "SELECT id FROM product WHERE id >= :value",
+        "max" => "SELECT id FROM product WHERE id <= :value"
+        // "min" => "SELECT MIN(id) AS id FROM product",
+        // "max" => "SELECT MAX(id) AS id FROM product"
     ],
     "ProductDescription" => [
         "range" => "SELECT id FROM product WHERE description BETWEEN :min AND :max",
         "equal" => "SELECT id FROM product WHERE description = :value",
         "contains" => "SELECT id FROM product WHERE description LIKE :value",
-        "min" => "SELECT id FROM product WHERE description IN (SELECT MIN(description) FROM invoice)",
-        "max" => "SELECT id FROM product WHERE description IN (SELECT MAX(description) FROM invoice)"
+        "min" => "SELECT id FROM product WHERE description >= :value",
+        "max" => "SELECT id FROM product WHERE description <= :value"
+        // "min" => "SELECT id FROM product WHERE description IN (SELECT MIN(description) FROM invoice)",
+        // "max" => "SELECT id FROM product WHERE description IN (SELECT MAX(description) FROM invoice)"
     ],
 ];
 
@@ -83,7 +87,7 @@ if ($op == "range")
     $maxValue = ConvertIfNeeded($field, $op, $value[1]);
     $stmt->bindParam(':max', $maxValue, GetValidParamType($field, $op));
 }
-else if ($op != "min" && $op != "max")
+else
 {
     $convertedValue = ConvertIfNeeded($field, $op, $value[0]);
     $stmt->bindParam(':value', $convertedValue, GetValidParamType($field, $op));

@@ -37,8 +37,6 @@ function load(activeSeparator) {
         if ($('#op_search_select').val() === 'range') {
             $('#field2_search_list').show();
             $('#between_span').show();
-        } else if ($('#op_search_select').val() === 'min' || $('#op_search_select').val() === 'max') {
-            $('#field1_search_list').hide();
         }
     };
     

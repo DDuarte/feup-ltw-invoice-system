@@ -30,22 +30,28 @@ $queries = [
         "range" => "SELECT id FROM customer WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM customer WHERE id = :value",
         "contains" => "SELECT id FROM customer WHERE CAST(id AS TEXT) LIKE :value",
-        "min" => "SELECT MIN(id) AS id FROM customer",
-        "max" => "SELECT MAX(id) AS id FROM customer"
+        "min" => "SELECT id FROM customer WHERE id >= :value",
+        "max" => "SELECT if FROM customer WHERE id <= :value"
+        // "min" => "SELECT MIN(id) AS id FROM customer",
+        // "max" => "SELECT MAX(id) AS id FROM customer"
     ],
     "CustomerTaxID" => [
         "range" => "SELECT id FROM customer WHERE tax_id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM customer WHERE tax_id = :value",
         "contains" => "SELECT id FROM customer WHERE CAST(tax_id AS TEXT) LIKE :value",
-        "min" => "SELECT id FROM customer WHERE tax_id IN (SELECT MIN(tax_id) FROM customer)",
-        "max" => "SELECT id FROM customer WHERE tax_id IN (SELECT MAX(tax_id) FROM customer)"
+        "min" => "SELECT id FROM customer WHERE tax_id >= :value",
+        "max" => "SELECT id FROM customer WHERE tax_id <= :value"
+        // "min" => "SELECT id FROM customer WHERE tax_id IN (SELECT MIN(tax_id) FROM customer)",
+        // "max" => "SELECT id FROM customer WHERE tax_id IN (SELECT MAX(tax_id) FROM customer)"
     ],
     "CompanyName" => [
         "range" => "SELECT id FROM customer WHERE company_name BETWEEN :min AND :max",
         "equal" => "SELECT id FROM customer WHERE company_name = :value",
         "contains" => "SELECT id FROM customer WHERE company_name LIKE :value",
-        "min" => "SELECT id FROM customer WHERE company_name IN (SELECT MIN(company_name) FROM customer)",
-        "max" => "SELECT id FROM customer WHERE company_name IN (SELECT MAX(company_name) FROM customer)"
+        "min" => "SELECT id FROM customer WHERE company_name >= :value",
+        "max" => "SELECT id FROM customer WHERE company_name <= :value"
+        // "min" => "SELECT id FROM customer WHERE company_name IN (SELECT MIN(company_name) FROM customer)",
+        // "max" => "SELECT id FROM customer WHERE company_name IN (SELECT MAX(company_name) FROM customer)"
     ],
 ];
 
@@ -91,7 +97,7 @@ if ($op == "range")
     $maxValue = ConvertIfNeeded($field, $op, $value[1]);
     $stmt->bindParam(':max', $maxValue, GetValidParamType($field, $op));
 }
-else if ($op != "min" && $op != "max")
+else
 {
     $convertedValue = ConvertIfNeeded($field, $op, $value[0]);
     $stmt->bindParam(':value', $convertedValue, GetValidParamType($field, $op));
