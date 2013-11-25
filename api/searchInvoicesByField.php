@@ -47,27 +47,27 @@ $queries = [
         "equal" => "SELECT id FROM invoice WHERE id = :value",
         "contains" => "SELECT id FROM invoice WHERE 'FT SEQ/' || CAST(id AS TEXT) LIKE :value",
         "min" => "SELECT id FROM invoice WHERE id >= :value",
-        "max" => "SELECT id FROM invoice WHERE id <= :value"
-        // "min" => "SELECT MIN(id) AS id FROM invoice",
-        // "max" => "SELECT MAX(id) AS id FROM invoice"
+        "max" => "SELECT id FROM invoice WHERE id <= :value",
+        "minvalue" => "SELECT MIN(id) AS id FROM invoice",
+        "maxvalue" => "SELECT MAX(id) AS id FROM invoice"
     ],
     "InvoiceDate" => [
         "range" => "SELECT id FROM invoice WHERE billing_date BETWEEN :min AND :max",
         "equal" => "SELECT id FROM invoice WHERE billing_date = :value",
         "contains" => "SELECT id FROM invoice WHERE CAST(billing_date AS TEXT) LIKE :value",
         "min" => "SELECT id FROM invoice WHERE billing_date >= :value",
-        "max" => "SELECT id FROM invoice WHERE billing_date <= :value"
-        // "min" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MIN(billing_date) FROM invoice)",
-        // "max" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MAX(billing_date) FROM invoice)"
+        "max" => "SELECT id FROM invoice WHERE billing_date <= :value",
+        "minvalue" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MIN(billing_date) FROM invoice)",
+        "maxvalue" => "SELECT id FROM invoice WHERE billing_date IN (SELECT MAX(billing_date) FROM invoice)"
     ],
     "CompanyName" => [
         "range" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name BETWEEN :min AND :max",
         "equal" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name = :value",
         "contains" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name LIKE :value",
         "min" => "SELECT invoice.id FROM invoice WHERE billing_date >= :value",
-        "max" => "SELECT invoice.id FROM invoice WHERE billing_date <= :value"
-        // "min" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MIN(company_name) FROM customer)",
-        // "max" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MAX(company_name) FROM customer)"
+        "max" => "SELECT invoice.id FROM invoice WHERE billing_date <= :value",
+        "minvalue" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MIN(company_name) FROM customer)",
+        "maxvalue" => "SELECT invoice.id AS id FROM invoice JOIN customer on invoice.customer_id = customer.id WHERE customer.company_name IN (SELECT MAX(company_name) FROM customer)"
     ],
     "GrossTotal" => [
         "range" => "SELECT invoice.id AS id
@@ -89,23 +89,23 @@ $queries = [
         "max" => "SELECT line.invoice_id AS id
                   FROM line JOIN tax ON line.tax_id = tax.id
                   GROUP BY line.invoice_id
-                  HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) <= CAST(:value AS REAL)"
-        // "min" => "SELECT line.invoice_id AS id
-        //          FROM line JOIN tax ON line.tax_id = tax.id
-        //          GROUP BY line.invoice_id
-        //          HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN
-        //              (   SELECT MIN(grossTotal) FROM (SELECT SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS grossTotal
-        //                  FROM line JOIN tax ON line.tax_id = tax.id
-        //                  GROUP BY line.invoice_id)
-        //              )",
-        // "max" => "SELECT line.invoice_id AS id
-        //             FROM line JOIN tax ON line.tax_id = tax.id
-        //             GROUP BY line.invoice_id
-        //             HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN
-        //                 (   SELECT MAX(grossTotal) FROM (SELECT SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS grossTotal
-        //                     FROM line JOIN tax ON line.tax_id = tax.id
-        //                     GROUP BY line.invoice_id)
-        //                 )"
+                  HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) <= CAST(:value AS REAL)",
+        "minvalue" => "SELECT line.invoice_id AS id
+                 FROM line JOIN tax ON line.tax_id = tax.id
+                 GROUP BY line.invoice_id
+                 HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN
+                     (   SELECT MIN(grossTotal) FROM (SELECT SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS grossTotal
+                         FROM line JOIN tax ON line.tax_id = tax.id
+                         GROUP BY line.invoice_id)
+                     )",
+        "maxvalue" => "SELECT line.invoice_id AS id
+                    FROM line JOIN tax ON line.tax_id = tax.id
+                    GROUP BY line.invoice_id
+                    HAVING SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) IN
+                        (   SELECT MAX(grossTotal) FROM (SELECT SUM((tax.percentage / 100.0 + 1) * line.quantity * line.unit_price) AS grossTotal
+                            FROM line JOIN tax ON line.tax_id = tax.id
+                            GROUP BY line.invoice_id)
+                        )"
 
     ],
 ];
@@ -125,7 +125,7 @@ if ($opError)
 }
 
 $valueError = getParameter("value", $value);
-if ($valueError && $op != "min" && $op != "max")
+if ($valueError && $op != "minvalue" && $op != "maxvalue")
 {
     $error =  "error" . $valueError;
     exit($$error);
@@ -155,7 +155,7 @@ if ($op == "range")
     $maxValue = ConvertIfNeeded($field, $op, $value[1]);
     $stmt->bindParam(':max', $maxValue, GetValidParamType($field, $op));
 }
-else
+else if ($op != "minvalue" && $op != "maxvalue")
 {
     ParseValue($field, $op, $value[0]);
     $convertedValue = ConvertIfNeeded($field, $op, $value[0]);

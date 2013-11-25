@@ -30,7 +30,7 @@ function load(activeSeparator) {
 
     var onChangeFunction = function () {
         $('#field1_search_list').show();
-        $('#field1').val('');
+        $('#field1').val('').prop('required', true);
         $('#field2_search_list').hide();
         $('#field2').val('').prop('required', false);
         $('#between_span').hide();
@@ -38,9 +38,12 @@ function load(activeSeparator) {
             $('#field2_search_list').show();
             $('#between_span').show();
             $('#field2').prop('required', true);
+        } else if ($('#op_search_select').val() === 'minvalue' || $('#op_search_select').val() === 'maxvalue') {
+            $('#field1_search_list').hide();
+            $('#field1').prop('required', false);
         }
     };
-    
+
     $('#op_search_select').change(onChangeFunction);
 }
 
@@ -115,7 +118,7 @@ function search() {
         }
     }
 
-    var ops = ['range', 'equal', 'contains', 'min', 'max'];
+    var ops = ['range', 'equal', 'contains', 'min', 'max', 'minvalue', 'maxvalue'];
 
     $.getJSON('api/' + arr[doc].api, getRequest)
         .done(function (data) {

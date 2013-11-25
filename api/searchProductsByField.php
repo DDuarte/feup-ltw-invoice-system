@@ -30,18 +30,18 @@ $queries = [
         "equal" => "SELECT id FROM product WHERE id = :value",
         "contains" => "SELECT id FROM product WHERE CAST(id AS TEXT) LIKE :value",
         "min" => "SELECT id FROM product WHERE id >= :value",
-        "max" => "SELECT id FROM product WHERE id <= :value"
-        // "min" => "SELECT MIN(id) AS id FROM product",
-        // "max" => "SELECT MAX(id) AS id FROM product"
+        "max" => "SELECT id FROM product WHERE id <= :value",
+        "minvalue" => "SELECT MIN(id) AS id FROM product",
+        "maxvalue" => "SELECT MAX(id) AS id FROM product"
     ],
     "ProductDescription" => [
         "range" => "SELECT id FROM product WHERE description BETWEEN :min AND :max",
         "equal" => "SELECT id FROM product WHERE description = :value",
         "contains" => "SELECT id FROM product WHERE description LIKE :value",
         "min" => "SELECT id FROM product WHERE description >= :value",
-        "max" => "SELECT id FROM product WHERE description <= :value"
-        // "min" => "SELECT id FROM product WHERE description IN (SELECT MIN(description) FROM invoice)",
-        // "max" => "SELECT id FROM product WHERE description IN (SELECT MAX(description) FROM invoice)"
+        "max" => "SELECT id FROM product WHERE description <= :value",
+        "minvalue" => "SELECT id FROM product WHERE description IN (SELECT MIN(description) FROM invoice)",
+        "maxvalue" => "SELECT id FROM product WHERE description IN (SELECT MAX(description) FROM invoice)"
     ],
 ];
 
@@ -60,7 +60,7 @@ if ($opError)
 }
 
 $valueError = getParameter("value", $value);
-if ($valueError && $op != "min" && $op != "max")
+if ($valueError && $op != "minvalue" && $op != "maxvalue")
 {
     $error =  "error" . $valueError;
     exit($$error);
@@ -87,7 +87,7 @@ if ($op == "range")
     $maxValue = ConvertIfNeeded($field, $op, $value[1]);
     $stmt->bindParam(':max', $maxValue, GetValidParamType($field, $op));
 }
-else
+else if ($op != "minvalue" && $op != "maxvalue")
 {
     $convertedValue = ConvertIfNeeded($field, $op, $value[0]);
     $stmt->bindParam(':value', $convertedValue, GetValidParamType($field, $op));
