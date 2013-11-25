@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS product (
     unit_price INTEGER CHECK (unit_price > 0));
 
 CREATE TABLE IF NOT EXISTS invoice (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     billing_date DATE NOT NULL,
     customer_id INTEGER,
     FOREIGN KEY(customer_id) REFERENCES customer(id)
