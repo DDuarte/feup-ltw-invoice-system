@@ -1,5 +1,5 @@
 function load(activeSeparator) {
-    $('#pageHeader').load("header.html", function () {
+    $('#pageHeader').load("header.php", function () {
         $('.selected').removeClass('selected');
         $('#' + activeSeparator).addClass('selected');
     });
@@ -89,8 +89,8 @@ function search() {
     var arr = {
         'invoice': {
             'api': 'searchInvoicesByField.php',
-            'detailsHtml': 'showInvoice.html',
-            'printHtml': 'printInvoice.html',
+            'detailsHtml': 'showInvoice.php',
+            'printHtml': 'printInvoice.php',
             'tableHeader': ['Number', 'Date', 'Client Code', 'Total Amount'],
             'key': 'InvoiceNo',
             'jsonFields': ['InvoiceNo', 'InvoiceDate', 'CustomerId', {
@@ -100,7 +100,7 @@ function search() {
         },
         'product': {
             'api': 'searchProductsByField.php',
-            'detailsHtml': 'showProduct.html',
+            'detailsHtml': 'showProduct.php',
             'hasPrint': false,
             'tableHeader': ['Product Code', 'Description'],
             'key': 'ProductCode',
@@ -109,7 +109,7 @@ function search() {
         },
         'customer': {
             'api': 'searchCustomersByField.php',
-            'detailsHtml': 'showCustomer.html',
+            'detailsHtml': 'showCustomer.php',
             'hasPrint': false,
             'tableHeader': ['Customer Id', 'Company Name'],
             'key': 'CustomerId',
@@ -166,8 +166,8 @@ function loadSearch() {
     // remove contents from the document information area
     $("._info_block").empty();
 
-    // load the about.html page
-    $("._info_block").load("search.html");
+    // load the about.php page
+    $("._info_block").load("search.php");
     load();
 }
 
@@ -180,6 +180,6 @@ function loadAbout() {
     // remove contents from the document information area
     $("._info_block").empty();
 
-    // load the about.html page
-    $("._info_block").load("about.html");
+    // load the about.php page
+    $("._info_block").load("about.php");
 }

@@ -1,3 +1,10 @@
+<?php
+
+require 'api/details/user_management.php';
+redirect_if_not_logged_in();
+
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>

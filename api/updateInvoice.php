@@ -1,5 +1,10 @@
 <?php
 
+require 'details/user_management.php';
+
+if (!is_logged_in())
+    exit('{"error":{"code":403,"reason":"Not authenticated"}}');
+
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
 
 if (!isset($_POST['invoice']))

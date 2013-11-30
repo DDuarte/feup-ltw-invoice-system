@@ -1,3 +1,10 @@
+<?php
+
+require 'api/details/user_management.php';
+redirect_if_not_logged_in();
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,20 +18,26 @@
         <nav class="_menu_navigator_bar">
             <ul class="_menu_bar">
                 <li class="_menu_item selected" id="index">
-                    <a href="index.html">
+                    <a href="index.php">
                         <span>Home</span>
                     </a>
                 </li>
                 <li class="_menu_item" id="search">
-                    <a href="search.html">
+                    <a href="search.php">
                         <span>Search</span>
                     </a>
                 </li>
                 <li class="_menu_item" id="about">
-                    <a href="about.html">
+                    <a href="about.php">
                         <span>About</span>
                     </a>
                 </li>
+                <li class="_menu_item" id="logout">
+                    <a href="api/logout.php">
+                        <span>Logout</span>
+                    </a>
+                </li>
+
             </ul>
         </nav>
     </body>

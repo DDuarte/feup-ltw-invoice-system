@@ -80,10 +80,13 @@ CREATE TABLE IF NOT EXISTS tax (
     percentage INTEGER CHECK (percentage > 0)
 );
 
-INSERT INTO role (name) VALUES
-('Reader'),
-('Editor'),
-('Administrator');
+INSERT INTO user (username, password, role_id) VALUES
+('admin', 'admin', 3);
+
+INSERT INTO role (id, name) VALUES
+(1, 'Reader'),
+(2, 'Editor'),
+(3, 'Administrator');
 
 /* INSERTIONS */
 

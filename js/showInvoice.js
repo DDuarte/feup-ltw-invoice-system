@@ -21,7 +21,7 @@ function loadInvoice() {
             $('#InvoiceDate').attr('value', data.InvoiceDate);
 
             $('#CustomerId').attr('value', data.Customer.CustomerId);
-            $('#CustomerIdLink').attr('href', "showCustomer.html?CustomerId=" + data.Customer.CustomerId);
+            $('#CustomerIdLink').attr('href', "showCustomer.php?CustomerId=" + data.Customer.CustomerId);
 
             $('#CompanyName').attr('value', data.Customer.CompanyName);
             $('#TaxPayable').attr('value', data.DocumentTotals.TaxPayable + " €");
@@ -70,7 +70,7 @@ function loadInvoice() {
                 $('.LineNumber:last').attr('value', lines[i].LineNumber);
 
                 $('.ProductCode:last').attr('value', lines[i].Product.ProductCode);
-                $('.ProductCodeLink:last').attr('href', "showProduct.html?ProductCode=" + lines[i].Product.ProductCode);
+                $('.ProductCodeLink:last').attr('href', "showProduct.php?ProductCode=" + lines[i].Product.ProductCode);
 
                 $('.ProductDescription:last').attr('value', lines[i].Product.ProductDescription);
                 $('.Quantity:last').attr('value', lines[i].Quantity);
