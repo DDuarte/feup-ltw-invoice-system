@@ -73,6 +73,8 @@ CREATE TABLE IF NOT EXISTS line (
 CREATE TABLE IF NOT EXISTS tax (
     id INTEGER PRIMARY KEY,
     type CHAR(50) NOT NULL,
+    country_region CHAR(5) NOT NULL,
+    description CHAR(255) NOT NULL,
     percentage INTEGER CHECK (percentage > 0)
 );
 
@@ -86,9 +88,9 @@ INSERT INTO role (id, name) VALUES
 
 /* INSERTIONS */
 
-INSERT INTO tax (id, type, percentage) VALUES
-(1, 'IVA', 23),
-(2, 'VAT', 18);
+INSERT INTO tax (id, type, country_region, description, percentage) VALUES
+(1, 'IVA', 'PT', 'Taxa Normal (23%)', 23),
+(2, 'VAT', 'UK', 'Standard Tax (20%)', 20);
 
 INSERT INTO product (id, description, unit_price) VALUES
 (125, 'MSI nGTX560-ti OC edition GPU',     229),

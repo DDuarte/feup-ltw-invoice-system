@@ -4,14 +4,15 @@ require_once 'xml_utils.php';
 
 class Customer
 {
-    public function queryDbById($customerId)
+    public function queryDbById($customerId, $db = null)
     {
         if (empty($customerId) || !is_numeric($customerId))
         {
             return 400;
         }
 
-        $db = new PDO('sqlite:../sql/OIS.db');
+        if (!$db)
+            $db = new PDO('sqlite:../sql/OIS.db');
 
         $customerStmt = $db->prepare('SELECT tax_id, company_name, email, detail, city, postal_code, country_code FROM customer WHERE id = :id');
         $customerStmt->bindParam(':id', $customerId, PDO::PARAM_INT);

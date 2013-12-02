@@ -4,14 +4,15 @@ require_once 'xml_utils.php';
 
 class Product
 {
-    public function queryDbById($productId)
+    public function queryDbById($productId, $db = null)
     {
         if (empty($productId) || !is_numeric($productId))
         {
             return 400;
         }
 
-        $db = new PDO('sqlite:../sql/OIS.db');
+        if (!$db)
+            $db = new PDO('sqlite:../sql/OIS.db');
 
         $productStmt = $db->prepare('SELECT description, unit_price FROM product WHERE id = :id');
         $productStmt->bindParam(':id', $productId, PDO::PARAM_INT);

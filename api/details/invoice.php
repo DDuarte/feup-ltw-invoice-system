@@ -2,6 +2,7 @@
 
 require_once 'xml_utils.php';
 require_once 'product.php';
+require_once 'tax.php';
 
 class InvoiceLine
 {
@@ -9,18 +10,8 @@ class InvoiceLine
     {
         $taxId = $line['tax_id'];
 
-        /** @var $db PDO */
-        $taxStmt = $db->prepare('SELECT type, percentage FROM tax WHERE id = :id');
-        $taxStmt->bindParam(':id', $taxId, PDO::PARAM_INT);
-        $taxStmt->execute();
-
-        $taxResult = $taxStmt->fetch();
-
-        if ($taxResult == null)
-            return 404;
-
-        $this->_taxType = $taxResult['type'];
-        $this->_taxPercentage = (int)$taxResult['percentage'];
+        $this->_tax = new Tax();
+        $this->_tax->queryDbById($taxId, $db);
 
         $this->_number      =   (int)$line['line_number'];
         $this->_quantity    =   (int)$line['quantity'];
@@ -29,7 +20,7 @@ class InvoiceLine
         $this->_creditAmount = $this->_quantity * $this->_unitPrice;
 
         $this->_product = new Product;
-        $error = $this->_product->queryDbById((int)$line['product_id']);
+        $error = $this->_product->queryDbById((int)$line['product_id'], $db);
         if ($error)
             return $error;
 
@@ -38,7 +29,7 @@ class InvoiceLine
 
     public function getTaxPercentage()
     {
-        return $this->_taxPercentage;
+        return $this->_tax->getPercentage();
     }
 
     public function getCreditAmount()
@@ -49,36 +40,35 @@ class InvoiceLine
     public function toArray()
     {
         $tax = [
-            'TaxType' => $this->_taxType,
-            'TaxPercentage' => $this->_taxPercentage
+            'TaxId'         => $this->_tax->getId(),
+            'TaxType'       => $this->_tax->getType(),
+            'TaxPercentage' => $this->_tax->getPercentage()
         ];
 
         return [
-            'LineNumber'   => $this->_number,
-            'ProductCode'  => $this->_product->getCode(),
+            'LineNumber'    => $this->_number,
+            'ProductCode'   => $this->_product->getCode(),
             'ProductDescription' => $this->_product->getDescription(),
-            'Quantity'     => $this->_quantity,
+            'Quantity'      => $this->_quantity,
             'UnitOfMeasure' => 'Euro',
-            'TaxPointDate' => 'N/A',
-            'UnitPrice'    => $this->_unitPrice,
-            'CreditAmount' => $this->_creditAmount,
-            'Tax'          => $tax
+            'TaxPointDate'  => 'N/A',
+            'UnitPrice'     => $this->_unitPrice,
+            'CreditAmount'  => $this->_creditAmount,
+            'Tax'           => $tax
         ];
     }
 
     private $_number;
     private $_product;
-    private $_productDescription;
     private $_quantity;
     private $_unitPrice;
     private $_creditAmount;
-    private $_taxType;
-    private $_taxPercentage;
+    private $_tax;
 }
 
 class Invoice
 {
-    public function queryDbByNo($invoiceNo)
+    public function queryDbByNo($invoiceNo, $db = null)
     {
         if (is_string($invoiceNo) && !is_numeric($invoiceNo))
         {
@@ -86,7 +76,8 @@ class Invoice
             if ($parseError) return $parseError;
         }
 
-        $db = new PDO('sqlite:../sql/OIS.db');
+        if (!$db)
+            $db = new PDO('sqlite:../sql/OIS.db');
 
         $invoiceStmt = $db->prepare('SELECT billing_date, customer_id, user_id, strftime(\'%Y-%m-%dT%H:%M:%S\', entry_date) as entry_datef FROM invoice WHERE id = :id');
         $invoiceStmt->bindParam(':id', $invoiceNo, PDO::PARAM_INT);
@@ -145,6 +136,7 @@ class Invoice
         $i = 0;
         foreach ($this->_lines as $line)
         {
+            /** @var $line InvoiceLine */
             $l = $line->toArray();
             $l['TaxPointDate'] = $this->_date;
             $lines[$i++] = $l;
@@ -204,6 +196,7 @@ class Invoice
     private $_lines;
     private $_taxPayable;
     private $_netTotal;
+    private $_entryDate;
     private $_grossTotal;
 }
 
