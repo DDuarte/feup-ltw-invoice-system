@@ -2,19 +2,14 @@
     require 'details/user_management.php';
 
     if (!array_key_exists("username", $_POST))
-    {
-        header("Location: ../authenticate.php");
-        exit();
-    }
+        redirect();
 
     $username = $_POST['username'];
     $username = htmlspecialchars($username);
 
     if (!array_key_exists("password", $_POST))
-    {
-        header("Location: ../authenticate.php");
-        exit();
-    }
+        redirect();
+
     $password = $_POST['password'];
     $password = htmlspecialchars($password);
 
@@ -38,4 +33,4 @@
         }
     }
 
-    header("Location: ../authenticate.php");
+    redirect();

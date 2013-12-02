@@ -6,12 +6,22 @@ function is_logged_in()
     return array_key_exists("username", $_SESSION);
 }
 
+function redirect()
+{
+    $root = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']); // because Windows.
+    $host = str_replace('\\', '/', $_SERVER['HTTP_HOST']);
+    $dir = str_replace('\\', '/', dirname(__FILE__));
+
+    $str = str_replace($root, $host, $dir);
+    $str .= "/../../authenticate.php";
+    header("Location: " . (array_key_exists('HTTPS', $_SERVER) ? 'https://' : 'http://') . $str);
+    exit(0); // exit even if above code is not executed
+}
+
 function redirect_if_not_logged_in()
 {
     if (!is_logged_in())
-    {
-        header("Location: " . $_SERVER['REQUEST_URI'] . "authenticate.php");
-    }
+        redirect();
 }
 
 function get_role()

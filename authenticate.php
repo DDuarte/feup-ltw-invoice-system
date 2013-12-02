@@ -2,8 +2,12 @@
 
 require 'api/details/user_management.php';
 
-if (!is_logged_in())
+if (is_logged_in())
 {
+    header("Location: index.php");
+    exit(0);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -28,12 +32,3 @@ if (!is_logged_in())
     </div>
     </body>
 </html>
-
-<?php
-}
-else
-{
-    header("Location: index.php");
-}
-
-?>
