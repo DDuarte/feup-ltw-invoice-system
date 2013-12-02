@@ -34,7 +34,6 @@
             {
                 session_start();
                 $_SESSION['username'] = $result['username'];
-                $_SESSION['role'] = $result['role'];
             }
         }
     }
