@@ -7,9 +7,38 @@ function getUrlVars() {
 }
 
 function loadCustomer() {
-    var id = getUrlVars()['CustomerId'];
-    if (id == undefined)
-        return;
+
+    var urlVars = getUrlVars();
+    var action = urlVars['action'];
+
+    if (action !== 'create')
+    {
+        var id = getUrlVars()['CustomerId'];
+        if (id == undefined)
+            return;
+    }
+
+    var onSuccess;
+    switch(action)
+    {
+        case 'edit':
+        {
+            onSuccess = showEditableProductData;
+            break;
+        }
+        case 'create':
+        {
+            onSuccess = showBlankProductData;
+            break;
+        }
+        case undefined:
+        {
+            onSuccess = showProductData;
+            break;
+        }
+        default:
+            return;
+    }
 
     $.getJSON("api/getCustomer.php", {
         CustomerId: decodeURI(id)
