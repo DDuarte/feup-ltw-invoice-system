@@ -1,9 +1,16 @@
 <?php
-    function xml_encode($mixed, $domElement = null, $DOMDocument = null) {
+    function xml_encode($mixed, $attrs = [], $domElement = null, $DOMDocument = null) {
         if (is_null($DOMDocument)) {
             $DOMDocument = new DOMDocument;
             $DOMDocument->formatOutput = true;
-            xml_encode($mixed, $DOMDocument, $DOMDocument);
+            xml_encode($mixed, null, $DOMDocument, $DOMDocument);
+
+            foreach ($attrs as $name => $value) {
+                $domAttribute = $DOMDocument->createAttribute($name);
+                $domAttribute->value = $value;
+                $DOMDocument->firstChild->appendChild($domAttribute);
+            }
+
             return $DOMDocument->saveXML();
         }
         else {
@@ -28,7 +35,7 @@
                         $node = $plural;
                     }
     
-                    xml_encode($mixedElement, $node, $DOMDocument);
+                    xml_encode($mixedElement, null, $node, $DOMDocument);
                 }
             }
             else {
