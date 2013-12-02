@@ -15,23 +15,23 @@ redirect_if_not_logged_in();
         <title>Show Product</title>
     </head>
     <body onload="loadProduct()">
-        <div class="_form">
+        <form class="_form">
             <div class="_header">
                 Show Product
             </div>
             <div class="_row _product_code">
                 <label for="productCode">Product Code</label>
-                <input type="text" id="ProductCode" value="N/A" readonly>
+                <input name="product_code" type="text" id="ProductCode" value="N/A" readonly>
             </div>
 
             <div class="_row _product_description _five_hundred">
                 <label for="productDescription">Product Description</label>
-                <input type="text" id="ProductDescription" value="N/A" readonly>
+                <input name="product_description" type="text" id="ProductDescription" value="N/A" readonly>
             </div>
             <div class="_row _unit_price _seventy">
                 <label for="unitPrice">Unit Price </label>
-                <input type="text" id="UnitPrice" value="N/A" readonly>
+                <input name="unit_price" type="text" id="UnitPrice" value="N/A" readonly>
             </div>
-        </div>
+        </form>
     </body>
 </html>

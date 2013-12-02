@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS customer (
 );
 
 CREATE TABLE IF NOT EXISTS product (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     description CHAR(50) NOT NULL,
     unit_price INTEGER CHECK (unit_price > 0));
 
