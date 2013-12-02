@@ -13,7 +13,7 @@ class Customer
 
         $db = new PDO('sqlite:../sql/OIS.db');
 
-        $customerStmt = $db->prepare('SELECT tax_id, company_name, email, detail, city_id, postal_code, country_code FROM customer WHERE id = :id');
+        $customerStmt = $db->prepare('SELECT tax_id, company_name, email, detail, city, postal_code, country_code FROM customer WHERE id = :id');
         $customerStmt->bindParam(':id', $customerId, PDO::PARAM_INT);
         $customerStmt->execute();
 
@@ -29,13 +29,7 @@ class Customer
         $this->_customerTaxID = $customerResult['tax_id'];
         $this->_companyName = $customerResult['company_name'];
         $this->_addressDetail = $customerResult['detail'];
-
-        $cityStmt = $db->prepare('SELECT name FROM city WHERE id = :id');
-        $cityStmt->bindParam(':id', $customerResult['city_id'], PDO::PARAM_INT);
-        $cityStmt->execute();
-        $cityResult = $cityStmt->fetch();
-
-        $this->_city = $cityResult['name'];
+        $this->_city = $customerResult['city'];
         $this->_postalCode = $customerResult['postal_code'];
 
         $countryStmt = $db->prepare('SELECT name FROM country WHERE code = :code');

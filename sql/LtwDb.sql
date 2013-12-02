@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS user (
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS invoice;
 DROP TABLE IF EXISTS product;
-DROP TABLE IF EXISTS city;
 DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS line;
 DROP TABLE IF EXISTS tax;
@@ -31,21 +30,15 @@ CREATE TABLE IF NOT EXISTS country (
     name CHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS city (
-    id INTEGER PRIMARY KEY,
-    name CHAR(50) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS customer (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tax_id INTEGER UNIQUE,
     company_name CHAR(100) NOT NULL,
     email CHAR(60) NOT NULL,
     detail CHAR(50),
-    city_id INTEGER,
+    city CHAR(30),
     postal_code CHAR(8) NOT NULL,
     country_code CHAR(2) NOT NULL,
-    FOREIGN KEY(city_id) REFERENCES city(id),
     FOREIGN KEY(country_code) REFERENCES country(code)
 );
 
@@ -226,18 +219,13 @@ INSERT INTO invoice (id, billing_date, customer_id) VALUES
 (6, '2013-11-10', 555567),
 (8, '2013-07-22', 555568);
 
-INSERT INTO city (id, name) VALUES
-(1, 'Porto'),
-(2, 'Lisbon'),
-(3, 'London');
-
-INSERT INTO customer (id, tax_id, company_name, email, detail, city_id, postal_code, country_code) VALUES
-(555560, 123, 'FEUP', 'feup@feup.com', 'Rua Dr. Roberto Frias, s/n', 1, '4200-465', 'PT'),
-(555561, 124, 'UP', 'up@up.com', 'Praça Gomes Teixeira', 1, '4099-002', 'PT'),
-(555565, 125, 'WSI', 'comercial@wsi-bg.pt', 'Rua Faria Guimarães, 765', 1, '4200-291', 'PT'),
-(555566, 126, 'Alientech', 'comercial@alientech.pt', 'Rua da Torrinha, 194', 1, '4050-610', 'PT'),
-(555567, 127, 'FNAC', 'comercial@fnac.pt', 'Rua Professor Carlos Alberto Mota Pinto, nr 9 - 6 B', 2, '1070-374', 'PT'),
-(555568, 128, 'Memory', 'comercial@memory.co', 'London', 3, '1000-155', 'GB');
+INSERT INTO customer (id, tax_id, company_name, email, detail, city, postal_code, country_code) VALUES
+(555560, 123, 'FEUP', 'feup@feup.com', 'Rua Dr. Roberto Frias, s/n', 'Porto', '4200-465', 'PT'),
+(555561, 124, 'UP', 'up@up.com', 'Praça Gomes Teixeira', 'Porto', '4099-002', 'PT'),
+(555565, 125, 'WSI', 'comercial@wsi-bg.pt', 'Rua Faria Guimarães, 765', 'Porto', '4200-291', 'PT'),
+(555566, 126, 'Alientech', 'comercial@alientech.pt', 'Rua da Torrinha, 194', 'Porto', '4050-610', 'PT'),
+(555567, 127, 'FNAC', 'comercial@fnac.pt', 'Rua Professor Carlos Alberto Mota Pinto, nr 9 - 6 B', 'Lisbon', '1070-374', 'PT'),
+(555568, 128, 'Memory', 'comercial@memory.co', 'London', 'London', '1000-155', 'GB');
 
 
 INSERT INTO country (code, name) VALUES
