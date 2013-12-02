@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS tax (
 );
 
 INSERT INTO user (username, password, role_id) VALUES
-('admin', 'admin', 3);
+('admin', '670506c9b67375007e1b50d698085e54bcd6e8bc6a7fece2a907ff42b83a92698147460dee66c1856ac9777875c7f0e5b1edac57486e7a841311ea6beeb235a2', 3);
 
 INSERT INTO role (id, name) VALUES
 (1, 'Reader'),

@@ -13,3 +13,8 @@ function redirect_if_not_logged_in()
         header("Location: ../../authenticate.php");
     }
 }
+
+function encrypt_credentials($username, $password)
+{
+    return hash("sha512", $username . ":" . $password);
+}

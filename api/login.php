@@ -1,4 +1,6 @@
 <?php
+    require 'details/user_management.php';
+
     if (!array_key_exists("username", $_POST))
     {
         header("Location: ../authenticate.php");
@@ -24,9 +26,11 @@
         $stmt->execute();
         $result = $stmt->fetch();
 
+        $hashedPassword = encrypt_credentials($username, $password);
+
         if ($result)
         {
-            if ($result['password'] == $password)
+            if ($result['password'] == $hashedPassword)
             {
                 session_start();
                 $_SESSION['username'] = $result['username'];
