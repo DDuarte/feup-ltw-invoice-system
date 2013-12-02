@@ -147,7 +147,7 @@ class Invoice
         {
             $l = $line->toArray();
             $l['TaxPointDate'] = $this->_date;
-            $lines[$i++] = l;
+            $lines[$i++] = $l;
         }
 
         $documentTotals = [
@@ -163,7 +163,7 @@ class Invoice
             'SourceBilling' => 'P'
         ];
 
-        $specialRegimes = 
+        $specialRegimes = [
             'SelfBillingIndicator' => 0,
             'CashVATSchemeIndicator' => 0,
             'ThirdPartiesBillingIndicator' => 0

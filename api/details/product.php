@@ -60,8 +60,8 @@ class Product
             return json_encode($array);
     }
     
-    public function getCode() { return $_code; }
-    public function getDescription() { return $_description; }
+    public function getCode() { return $this->_code; }
+    public function getDescription() { return $this->_description; }
 
     private $_type;
     private $_code;
