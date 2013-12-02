@@ -87,8 +87,8 @@ function showBlankProductData(data) {
                 product: requestStr
             },
             dataType: "JSON",
-            success: function (jsonStr) {
-                alert(JSON.stringify(jsonStr));
+            success: function (jsonObj) {
+                alert(JSON.stringify(jsonObj));
             }
         });
     };
@@ -110,30 +110,42 @@ function loadProduct() {
         if (id == undefined)
             return;
     }
+    $.ajax({
+        url: "api/user_is_editor.php",
+        success: function (is_editor) {
 
-    var onSuccess;
-    switch(action)
-    {
-        case 'edit':
-        {
-            onSuccess = showEditableProductData;
-            break;
-        }
-        case 'create':
-        {
-            onSuccess = showBlankProductData;
-            break;
-        }
-        case undefined:
-        {
-            onSuccess = showProductData;
-            break;
-        }
-        default:
-            return;
-    }
+            is_editor = JSON.parse(is_editor);
 
-    $.getJSON("api/getProduct.php", {
-        ProductCode: decodeURI(id)
-    }).done(onSuccess);
+            var onSuccess = null;
+            switch(action)
+            {
+                case 'edit':
+                {
+                    onSuccess = is_editor ? showEditableProductData : null;
+                    break;
+                }
+                case 'create':
+                {
+                    onSuccess = is_editor ? showBlankProductData : null;
+                    break;
+                }
+                case 'show':
+                case undefined:
+                {
+                    onSuccess = showProductData;
+                    break;
+                }
+            }
+
+            if (onSuccess == null)
+                return;
+
+            $.getJSON("api/getProduct.php", {
+                ProductCode: decodeURI(id)
+            }).done(onSuccess);
+        }
+
+    });
+
+
 }

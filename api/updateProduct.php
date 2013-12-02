@@ -3,7 +3,7 @@
 header("Content-type:application/json");
 require 'details/user_management.php';
 
-if (!is_logged_in())
+if (!is_editor())
     exit('{"error":{"code":403,"reason":"Not authenticated"}}');
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
@@ -45,5 +45,5 @@ if ($hasProductCode)
 
 $stmt->execute();
 
-exit($product);
+echo json_encode($db->lastInsertId());
 
