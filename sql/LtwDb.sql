@@ -50,8 +50,11 @@ CREATE TABLE IF NOT EXISTS product (
 CREATE TABLE IF NOT EXISTS invoice (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     billing_date DATE NOT NULL,
-    customer_id INTEGER,
-    FOREIGN KEY(customer_id) REFERENCES customer(id)
+    customer_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    entry_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(customer_id) REFERENCES customer(id),
+    FOREIGN KEY(user_id) REFERENCES user(id)
 );
 
 CREATE TABLE IF NOT EXISTS line (
@@ -210,14 +213,14 @@ INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax
 (128, 1, 5, 500, 150, 1),
 (127, 1, 8, 134, 69, 1);
 
-INSERT INTO invoice (id, billing_date, customer_id) VALUES
-(1, '2013-09-27', 555560),
-(2, '2013-09-27', 555560),
-(3, '2013-09-30', 555568),
-(4, '2013-10-24', 555565),
-(5, '2013-10-21', 555566),
-(6, '2013-11-10', 555567),
-(8, '2013-07-22', 555568);
+INSERT INTO invoice (id, billing_date, customer_id, user_id) VALUES
+(1, '2013-09-27', 555560, 1),
+(2, '2013-09-27', 555560, 1),
+(3, '2013-09-30', 555568, 1),
+(4, '2013-10-24', 555565, 1),
+(5, '2013-10-21', 555566, 1),
+(6, '2013-11-10', 555567, 1),
+(8, '2013-07-22', 555568, 1);
 
 INSERT INTO customer (id, tax_id, company_name, email, detail, city, postal_code, country_code) VALUES
 (555560, 123, 'FEUP', 'feup@feup.com', 'Rua Dr. Roberto Frias, s/n', 'Porto', '4200-465', 'PT'),

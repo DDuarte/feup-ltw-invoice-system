@@ -1,6 +1,7 @@
 <?php
 
 require_once 'xml_utils.php';
+require_once 'product.php';
 
 class InvoiceLine
 {
@@ -22,11 +23,15 @@ class InvoiceLine
         $this->_taxPercentage = (int)$taxResult['percentage'];
 
         $this->_number      =   (int)$line['line_number'];
-        $this->_productCode =   (int)$line['product_id'];
         $this->_quantity    =   (int)$line['quantity'];
         $this->_unitPrice   =   (float)$line['unit_price'];
 
         $this->_creditAmount = $this->_quantity * $this->_unitPrice;
+
+        $this->_product = new Product;
+        $error = $this->_product->queryDbById((int)$line['product_id']);
+        if ($error)
+            return $error;
 
         return 0;
     }
@@ -50,8 +55,11 @@ class InvoiceLine
 
         return [
             'LineNumber'   => $this->_number,
-            'ProductCode'  => $this->_productCode,
+            'ProductCode'  => $this->_product->getCode(),
+            'ProductDescription' => $this->_product->getDescription(),
             'Quantity'     => $this->_quantity,
+            'UnitOfMeasure' => 'Euro',
+            'TaxPointDate' => 'N/A',
             'UnitPrice'    => $this->_unitPrice,
             'CreditAmount' => $this->_creditAmount,
             'Tax'          => $tax
@@ -59,7 +67,8 @@ class InvoiceLine
     }
 
     private $_number;
-    private $_productCode;
+    private $_product;
+    private $_productDescription;
     private $_quantity;
     private $_unitPrice;
     private $_creditAmount;
@@ -79,7 +88,7 @@ class Invoice
 
         $db = new PDO('sqlite:../sql/OIS.db');
 
-        $invoiceStmt = $db->prepare('SELECT billing_date, customer_id FROM invoice WHERE id = :id');
+        $invoiceStmt = $db->prepare('SELECT billing_date, customer_id, user_id, strftime(\'%Y-%m-%dT%H:%M:%S\', entry_date) as entry_datef FROM invoice WHERE id = :id');
         $invoiceStmt->bindParam(':id', $invoiceNo, PDO::PARAM_INT);
         $invoiceStmt->execute();
 
@@ -122,6 +131,8 @@ class Invoice
         $this->_no = $invoiceNo;
         $this->_date = $invoiceResult['billing_date'];
         $this->_customerID = (int)$invoiceResult['customer_id'];
+        $this->_userID = (int)$invoiceResult['user_id'];
+        $this->_entryDate = $invoiceResult['entry_datef'];
         $this->_grossTotal = $this->_taxPayable + $this->_netTotal;
 
         return 0;
@@ -133,8 +144,11 @@ class Invoice
 
         $i = 0;
         foreach ($this->_lines as $line)
-            /** @var $line InvoiceLine */
-            $lines[$i++] = $line->toArray();
+        {
+            $l = $line->toArray();
+            $l['TaxPointDate'] = $this->_date;
+            $lines[$i++] = l;
+        }
 
         $documentTotals = [
             'TaxPayable' => $this->_taxPayable,
@@ -142,9 +156,28 @@ class Invoice
             'GrossTotal' => $this->_grossTotal
         ];
 
+        $documentStatus = [
+            'InvoiceStatus' => 'N',
+            'InvoiceStatusDate' => $this->_entryDate,
+            'SourceID' => $this->_userID,
+            'SourceBilling' => 'P'
+        ];
+
+        $specialRegimes = 
+            'SelfBillingIndicator' => 0,
+            'CashVATSchemeIndicator' => 0,
+            'ThirdPartiesBillingIndicator' => 0
+        ];
+
         return [
             'InvoiceNo' => $this->_no,
+            'DocumentStatus' => $documentStatus,
+            'Hash' => 0,
             'InvoiceDate' => $this->_date,
+            'InvoiceType' => 'FT',
+            'SpecialRegimes' => $specialRegimes,
+            'SourceID' => $this->_userID,
+            'SystemEntryDate' => $this->_entryDate,
             'CustomerId' => $this->_customerID,
             'Line' => $lines,
             'DocumentTotals' => $documentTotals
@@ -167,6 +200,7 @@ class Invoice
     private $_no;
     private $_date;
     private $_customerID;
+    private $_userID;
     private $_lines;
     private $_taxPayable;
     private $_netTotal;
