@@ -10,7 +10,7 @@ function redirect_if_not_logged_in()
 {
     if (!is_logged_in())
     {
-        header("Location: ../../authenticate.php");
+        header("Location: " . $_SERVER['REQUEST_URI'] . "authenticate.php");
     }
 }
 

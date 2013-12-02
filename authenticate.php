@@ -26,16 +26,6 @@ if (!is_logged_in())
             </div>
         </div>
     </div>
-
-
-<!--    <div style="display: block; width: 200px;padding: 100px 100px; margin: 0 auto">-->
-<!--        <form method="post" action="api/login.php" style="width: 170px; margin: 0 auto;">-->
-<!--            <label>Username: </label><br /><input type="text" name="username"/> <br />-->
-<!--            <label>Password: </label><br /><input type="text" name="password"/> <br />-->
-<!--            <input type="submit" style="margin-top: 20px" value="Login"/>-->
-<!--        </form>-->
-<!--    </div>-->
-
     </body>
 </html>
 
