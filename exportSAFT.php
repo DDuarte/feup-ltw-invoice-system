@@ -53,6 +53,8 @@ $customers = [];
 $taxes = [];
 $products = [];
 
+$totalCredit = 0.0;
+
 foreach ($invoiceIds as $id)
 {
     $inv = new Invoice();
@@ -64,6 +66,7 @@ foreach ($invoiceIds as $id)
 
     foreach ($invoice['Line'] as $line)
     {
+        $totalCredit += $line['CreditAmount'];
         array_push($productIds, $line['ProductCode']);
         array_push($taxIds, $line['Tax']['TaxId']);
     }
@@ -131,6 +134,14 @@ $xml = [
             'Customer' => $customers,
             'Product' => $products,
             'TaxTable' => $taxes
+        ],
+        'SourceDocuments' => [
+            'SalesInvoices' => [
+                'NumberOfEntries' => count($invoices),
+                'TotalDebit' => 0.00,
+                'TotalCredit' => $totalCredit,
+                'Invoice' => $invoices
+            ]
         ]
     ]
 ];
