@@ -30,7 +30,7 @@ redirect_if_not_logged_in();
             </div>
             <div class="_row _unit_price _seventy">
                 <label for="unitPrice">Unit Price </label>
-                <input name="unit_price" type="text" id="UnitPrice" value="N/A" readonly>
+                <input name="unit_price" type="number" id="UnitPrice" value="N/A" readonly>
             </div>
         </form>
     </body>

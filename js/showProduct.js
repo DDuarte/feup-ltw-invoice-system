@@ -11,7 +11,7 @@ function showProductData(data) {
 
     $('#ProductCode').attr('value', data.ProductCode);
     $('#ProductDescription').attr('value', data.ProductDescription);
-    $('#UnitPrice').attr('value', data.UnitPrice + " €");
+    $('#UnitPrice').attr('value', data.UnitPrice);
 }
 
 function showEditableProductData(data) {
@@ -20,14 +20,13 @@ function showEditableProductData(data) {
         return $(this).attr('id') !== 'ProductCode';
     }).removeAttr('readonly').attr('method', 'post').prop('required', true);
 
-    $('form').attr('method', 'post').attr('action', 'api/updateProduct.php')
-        .append('<input type="button" id="submit" value="Submit">');
-
     $('div._header').text('Edit product');
 
-    showProductData(data);
-
-    $("#submit").click(function () {
+    var submissionCallback = function (event) {
+        if (event.preventDefault)
+            event.preventDefault();
+        else
+            event.returnValue = false;
 
         var jsonObj = {
             ProductCode: $('#ProductCode').val(),
@@ -48,31 +47,40 @@ function showEditableProductData(data) {
                 alert(JSON.stringify(jsonStr));
             }
         });
-    });
+    };
+
+    showProductData(data);
+
+    $('form').attr('method', 'post').attr('action', 'api/updateProduct.php')
+        .append('<input type="submit" id="submit" value="Submit">').submit(submissionCallback);
+
+    $('#ProductDescription').focus();
 }
 
 function showBlankProductData(data) {
 
     $('div._product_code').remove();
 
-    $('input').removeAttr('readonly').prop('required', true);
+    $('input').removeAttr('readonly').prop('required', true).val('');
 
-    $('form')
-        .append('<input id="submit" type="button" value="Submit">');
+    $('#ProductDescription').focus();
 
-    $('div._header').text('Create new product');
+    var submissionCallback = function (event) {
+        // prevent the default form behaviour
+        if (event.preventDefault)
+            event.preventDefault();
+        else
+            event.returnValue = false;
 
-    $("#submit").click(function () {
-
-    var jsonObj = {
-        ProductCode: "",
-        description: $("#ProductDescription").val(),
-        unit_price: $("#UnitPrice").val()
-    }
+        var jsonObj = {
+            ProductCode: "",
+            description: $("#ProductDescription").val(),
+            unit_price: $("#UnitPrice").val()
+        }
 
         var requestStr = JSON.stringify(jsonObj);
 
-    $.ajax({
+        $.ajax({
             url: "api/updateProduct.php",
             type: "POST",
             data: {
@@ -83,7 +91,12 @@ function showBlankProductData(data) {
                 alert(JSON.stringify(jsonStr));
             }
         });
-    });
+    };
+
+    $('form')
+        .append('<input id="submit" type="submit" value="Submit">').submit(submissionCallback);
+
+    $('div._header').text('Create new product');
 }
 
 function loadProduct() {
