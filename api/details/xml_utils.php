@@ -48,3 +48,45 @@
 
         return null;
     }
+
+    function xml_decode($xml_string)
+    {
+        $root = new DOMDocument;
+        $root->loadXML($xml_string);
+
+        return xml_to_array($root);
+    }
+
+    function xml_to_array($root)
+    {
+        $result = array();
+
+        if ($root->hasChildNodes()) {
+            $children = $root->childNodes;
+            if ($children->length == 1) {
+                $child = $children->item(0);
+                if ($child->nodeType == XML_TEXT_NODE) {
+                    $result['_value'] = $child->nodeValue;
+                    return count($result) == 1
+                        ? $result['_value']
+                        : $result;
+                }
+            }
+            $groups = array();
+            foreach ($children as $child) {
+                if ($child->nodeName == "#text")
+                    continue;
+                if (!isset($result[$child->nodeName])) {
+                    $result[$child->nodeName] = xml_to_array($child);
+                } else {
+                    if (!isset($groups[$child->nodeName])) {
+                        $result[$child->nodeName] = array($result[$child->nodeName]);
+                        $groups[$child->nodeName] = 1;
+                    }
+                    $result[$child->nodeName][] = xml_to_array($child);
+                }
+            }
+        }
+
+        return $result;
+    }
