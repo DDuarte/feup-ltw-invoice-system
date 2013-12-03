@@ -103,7 +103,7 @@ foreach ($taxIds as $id)
     array_push($taxes, $tax);
 }
 
-$taxes = ['TaxTableEntry' => $taxes];
+$taxes = count($taxes) > 0 ? ['TaxTableEntry' => $taxes] : [];
 
 $xml = [
     'AuditFile' => [
@@ -145,6 +145,15 @@ $xml = [
         ]
     ]
 ];
+
+if (count($customers) == 0)
+    unset($xml["AuditFile"]["MasterFiles"]["Customer"]);
+if (count($products) == 0)
+    unset($xml["AuditFile"]["MasterFiles"]["Product"]);
+if (count($taxes) == 0)
+    unset($xml["AuditFile"]["MasterFiles"]["TaxTable"]);
+if (count($invoices) == 0)
+    unset($xml["AuditFile"]["SourceDocuments"]);
 
 $auditFileAttributes = [
     'xmlns' => 'urn:OECD:StandardAuditFile-Tax:PT_1.03_01',
