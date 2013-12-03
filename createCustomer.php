@@ -19,8 +19,8 @@ redirect_if_not_logged_in();
                 Create Customer
             </div>
             <div class="_row _customer_id _hundred">
-                <label for="CustomerId">Customer Id</label>
-                <input type="number" id="CustomerId" value="N/A" readonly>
+                <label for="CustomerID">Customer Id</label>
+                <input type="number" id="CustomerID" value="N/A" readonly>
             </div>
             <div class="_row _customer_tax_id _hundred">
                 <label for="CustomerTaxId">Customer Tax Id</label>

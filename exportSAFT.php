@@ -61,15 +61,19 @@ foreach ($invoiceIds as $id)
     $inv->queryDbByNo($id, $db);
     $invoice = $inv->toArray();
 
-    array_push($invoices, $invoice);
-    array_push($customerIds, $invoice['CustomerId']);
+    $invoice['InvoiceNo'] = 'FT SEQ/' . $invoice['InvoiceNo'];
 
-    foreach ($invoice['Line'] as $line)
+    foreach ($invoice['Line'] as &$line)
     {
         $totalCredit += $line['CreditAmount'];
         array_push($productIds, $line['ProductCode']);
         array_push($taxIds, $line['Tax']['TaxId']);
+        unset($line['Tax']['TaxId']);
+        unset($line['Tax']['Description']);
     }
+
+    array_push($invoices, $invoice);
+    array_push($customerIds, $invoice['CustomerID']);
 }
 
 $customerIds = array_unique($customerIds, SORT_NUMERIC);
@@ -90,6 +94,7 @@ foreach ($productIds as $id)
     $prod = new Product();
     $prod->queryDbById($id, $db);
     $product = $prod->toArray();
+    unset($product['UnitPrice']);
 
     array_push($products, $product);
 }
@@ -99,6 +104,8 @@ foreach ($taxIds as $id)
     $t = new Tax();
     $t->queryDbById($id, $db);
     $tax = $t->toArray();
+
+    unset($tax['TaxId']);
 
     array_push($taxes, $tax);
 }

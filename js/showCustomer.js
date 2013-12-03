@@ -23,9 +23,9 @@ function loadCountryCodes(target, toBeSelected) {
 }
 
 function showCustomerData(data) {
-    $(document).attr('title', 'Show Customer #' + data.CustomerId);
+    $(document).attr('title', 'Show Customer #' + data.CustomerID);
 
-    $('#CustomerId').attr('value', data.CustomerId);
+    $('#CustomerID').attr('value', data.CustomerID);
     $('#CustomerTaxId').attr('value', data.CustomerTaxID);
     $('#CompanyName').attr('value', data.CompanyName);
     $('#AddressDetail').attr('value', data.BillingAddress.AddressDetail);
@@ -44,7 +44,7 @@ function editSubmissionCallback(event) {
         event.returnValue = false;
 
     var jsonObj = {
-        CustomerID: $('#CustomerId').val(),
+        CustomerID: $('#CustomerID').val(),
         tax_id: $("#CustomerTaxId").val(),
         detail: $("#AddressDetail").val(),
         company_name: $('#CompanyName').val(),
@@ -64,7 +64,7 @@ function editSubmissionCallback(event) {
         },
         dataType: "JSON",
         success: function (jsonObj) {
-            location.href = "showCustomer.php?CustomerId=" + jsonObj
+            location.href = "showCustomer.php?CustomerID=" + jsonObj
         },
         error: function (jsonObj) {
             alert(JSON.stringify(jsonObj));
@@ -100,7 +100,7 @@ function createSubmissionCallback(event) {
         },
         dataType: "JSON",
         success: function (jsonObj) {
-            location.href = "showCustomer.php?CustomerId=" + jsonObj
+            location.href = "showCustomer.php?CustomerID=" + jsonObj
         },
         error: function (jsonObj) {
             alert(JSON.stringify(jsonObj));
@@ -110,13 +110,13 @@ function createSubmissionCallback(event) {
 }
 
 function showEditableCustomerData(data) {
-    $(document).attr('title', 'Edit Customer #' + data.CustomerId);
+    $(document).attr('title', 'Edit Customer #' + data.CustomerID);
 
     $('input').filter(function (index) {
-        return $(this).attr('id') !== 'CustomerId';
+        return $(this).attr('id') !== 'CustomerID';
     }).removeAttr('readonly').prop('required', true);
 
-    $('#CustomerId').attr('value', data.CustomerId);
+    $('#CustomerID').attr('value', data.CustomerID);
     $('#CustomerTaxId').attr('value', data.CustomerTaxID);
     $('#CompanyName').attr('value', data.CompanyName);
     $('#AddressDetail').attr('value', data.BillingAddress.AddressDetail);
@@ -135,10 +135,10 @@ function showBlankCustomerData(data) {
     $(document).attr('title', 'Create Customer');
 
     $('input').filter(function (index) {
-        return $(this).attr('id') !== 'CustomerId';
+        return $(this).attr('id') !== 'CustomerID';
     }).removeAttr('readonly').prop('required', true).val('');
 
-    $('#CustomerId').remove();
+    $('#CustomerID').remove();
 
     $('input#Country').replaceWith('<select id="Country"></select>').prop('required', true);
     loadCountryCodes('#Country', 'Portugal');
@@ -152,7 +152,7 @@ function loadCustomer() {
     var action = urlVars['action'];
 
     if (action !== 'create') {
-        var id = getUrlVars()['CustomerId'];
+        var id = getUrlVars()['CustomerID'];
         if (id == undefined) {
             alert('No customer id was detected');
             return;
@@ -181,6 +181,6 @@ function loadCustomer() {
     }
 
     $.getJSON("api/getCustomer.php", {
-        CustomerId: decodeURI(id)
+        CustomerID: decodeURI(id)
     }).done(onSuccess);
 }

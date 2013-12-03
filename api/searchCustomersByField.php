@@ -20,7 +20,7 @@ function ConvertIfNeeded($fieldInUse, $operation, $value)
 }
 
 $param_type = [
-    "CustomerId" => PDO::PARAM_INT,
+    "CustomerID" => PDO::PARAM_INT,
     "CustomerTaxID" => PDO::PARAM_INT,
     "CompanyName" => PDO::PARAM_STR
 ];
@@ -32,7 +32,7 @@ function GetValidParamType($fieldInUse, $operation)
 }
 
 $queries = [
-    "CustomerId" => [
+    "CustomerID" => [
         "range" => "SELECT id FROM customer WHERE id BETWEEN :min AND :max",
         "equal" => "SELECT id FROM customer WHERE id = :value",
         "contains" => "SELECT id FROM customer WHERE CAST(id AS TEXT) LIKE :value",

@@ -18,7 +18,7 @@ function loadInvoice() {
             $('#InvoiceNo').text("FT SEQ/" + data.InvoiceNo);
             $('#InvoiceDate').attr("datetime", data.InvoiceDate).text(data.InvoiceDate);
 
-            $('#CustomerId').text(data.Customer.CustomerId);
+            $('#CustomerID').text(data.Customer.CustomerID);
             $('#CustomerTaxID').text(data.Customer.CustomerTaxID);
             $('#CompanyName').text(data.Customer.CompanyName);
             $('#AddressDetail').text(data.Customer.BillingAddress.AddressDetail);

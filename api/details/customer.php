@@ -32,13 +32,7 @@ class Customer
         $this->_addressDetail = $customerResult['detail'];
         $this->_city = $customerResult['city'];
         $this->_postalCode = $customerResult['postal_code'];
-
-        $countryStmt = $db->prepare('SELECT name FROM country WHERE code = :code');
-        $countryStmt->bindParam(':code', $customerResult['country_code'], PDO::PARAM_STR);
-        $countryStmt->execute();
-        $countryResult = $countryStmt->fetch();
-
-        $this->_country = $countryResult['name'];
+        $this->_country = $customerResult['country_code'];
         $this->_email = $customerResult['email'];
         $this->_selfBillingIndicator = 0;
 
@@ -55,8 +49,8 @@ class Customer
         ];
 
         return [
-            'CustomerId'     => $this->_customerId,
-            'AccountId'      => $this->_accountId,
+            'CustomerID'     => $this->_customerId,
+            'AccountID'      => $this->_accountId,
             'CustomerTaxID'  => $this->_customerTaxID,
             'CompanyName'    => $this->_companyName,
             'BillingAddress' => $billingAddress,

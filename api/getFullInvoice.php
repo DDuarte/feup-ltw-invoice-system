@@ -33,7 +33,7 @@ if ($error)
 
 $invoiceArray = $invoice->toArray();
 
-$customerId = $invoiceArray['CustomerId'];
+$customerId = $invoiceArray['CustomerID'];
 
 $customer = new Customer;
 $error = $customer->queryDbById($customerId);
@@ -44,7 +44,7 @@ if ($error)
 }
 
 $invoiceArray['Customer'] = $customer->toArray();
-unset($invoiceArray['CustomerId']);
+unset($invoiceArray['CustomerID']);
 
 foreach ($invoiceArray['Line'] as &$line)
 {

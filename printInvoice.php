@@ -29,7 +29,7 @@ redirect_if_not_logged_in();
     <div id="customer_info">
        <p class="customerInfo">
            <b>Customer Information: </b><br>
-           #<span id="CustomerId">N/A</span> - NIF: <span id="CustomerTaxID">N/A</span><br>
+           #<span id="CustomerID">N/A</span> - NIF: <span id="CustomerTaxID">N/A</span><br>
            <b><span id="CompanyName">N/A</span></b><br>
            <span id="AddressDetail">N/A</span><br> <span id="City">N/A</span> <span id="PostalCode">N/A</span><br> <span id="Country">N/A</span><br>
            <a id="Email" href="mailto:N/A">N/A</a>

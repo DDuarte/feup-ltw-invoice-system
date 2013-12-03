@@ -11,7 +11,7 @@
 
     $db = new PDO('sqlite:../sql/OIS.db');
 
-    $field = 'CustomerId';
+    $field = 'CustomerID';
     $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
     $error404 = '{"error":{"code":404,"reason":"Customer not found"}}';
 

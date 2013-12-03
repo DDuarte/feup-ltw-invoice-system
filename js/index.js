@@ -93,7 +93,7 @@ function search() {
             'printHtml': 'printInvoice.php',
             'tableHeader': ['Number', 'Date', 'Client Code', 'Total Amount'],
             'key': 'InvoiceNo',
-            'jsonFields': ['InvoiceNo', 'InvoiceDate', 'CustomerId', {
+            'jsonFields': ['InvoiceNo', 'InvoiceDate', 'CustomerID', {
                 'DocumentTotals': 'GrossTotal'
             }],
             'fields': ['InvoiceNo', 'InvoiceDate', 'CompanyName', 'GrossTotal']
@@ -112,9 +112,9 @@ function search() {
             'detailsHtml': 'showCustomer.php',
             'hasPrint': false,
             'tableHeader': ['Customer Id', 'Company Name'],
-            'key': 'CustomerId',
-            'jsonFields': ['CustomerId', 'CompanyName'],
-            'fields': ['CustomerId', 'CustomerTaxID', 'CompanyName']
+            'key': 'CustomerID',
+            'jsonFields': ['CustomerID', 'CompanyName'],
+            'fields': ['CustomerID', 'CustomerTaxID', 'CompanyName']
         }
     }
 

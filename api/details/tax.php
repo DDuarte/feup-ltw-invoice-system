@@ -37,6 +37,7 @@ class Tax
     public function toArray()
     {
         return [
+            'TaxId' => $this->_id,
             'TaxType' => $this->_type,
             'TaxCountryRegion' => $this->_countryRegion,
             'TaxCode' => 'NOR',

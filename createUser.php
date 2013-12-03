@@ -21,7 +21,7 @@ redirect_if_not_logged_in();
         Create User
     </div>
     <div class="_row _username _hundred">
-        <label for="CustomerId">Username</label>
+        <label for="CustomerID">Username</label>
         <input type="text" id="UsernameId">
     </div>
     <div class="_row _password _hundred">

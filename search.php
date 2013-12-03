@@ -41,7 +41,7 @@ redirect_if_not_logged_in();
                     </div>
                     <div class="_my_select _search_list doc_fields" id="customer_field_search_list">
                         <select id="customer_field_search_select">
-                            <option value="CustomerId">Customer Id</option>
+                            <option value="CustomerID">Customer Id</option>
                             <option value="CustomerTaxID">Customer Tax Id</option>
                             <option value="CompanyName">Company Name</option>
                         </select>

@@ -90,7 +90,7 @@ INSERT INTO role (id, name) VALUES
 
 INSERT INTO tax (id, type, country_region, description, percentage) VALUES
 (1, 'IVA', 'PT', 'Taxa Normal (23%)', 23),
-(2, 'VAT', 'UK', 'Standard Tax (20%)', 20);
+(2, 'IVA', 'GB', 'Standard Tax (20%)', 20);
 
 INSERT INTO product (id, description, unit_price) VALUES
 (125, 'MSI nGTX560-ti OC edition GPU',     229),

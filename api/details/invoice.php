@@ -39,22 +39,17 @@ class InvoiceLine
 
     public function toArray()
     {
-        $tax = [
-            'TaxId'         => $this->_tax->getId(),
-            'TaxType'       => $this->_tax->getType(),
-            'TaxPercentage' => $this->_tax->getPercentage()
-        ];
-
         return [
             'LineNumber'    => $this->_number,
             'ProductCode'   => $this->_product->getCode(),
             'ProductDescription' => $this->_product->getDescription(),
             'Quantity'      => $this->_quantity,
             'UnitOfMeasure' => 'Euro',
-            'TaxPointDate'  => 'N/A',
             'UnitPrice'     => $this->_unitPrice,
+            'TaxPointDate'  => 'N/A', // set in toArray() of Invoice
+            'Description'   => $this->_quantity . 'x ' . $this->_product->getDescription(),
             'CreditAmount'  => $this->_creditAmount,
-            'Tax'           => $tax
+            'Tax'           => $this->_tax->toArray()
         ];
     }
 
@@ -170,7 +165,7 @@ class Invoice
             'SpecialRegimes' => $specialRegimes,
             'SourceID' => $this->_userID,
             'SystemEntryDate' => $this->_entryDate,
-            'CustomerId' => $this->_customerID,
+            'CustomerID' => $this->_customerID,
             'Line' => $lines,
             'DocumentTotals' => $documentTotals
         ];

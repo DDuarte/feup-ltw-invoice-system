@@ -20,8 +20,8 @@ function loadInvoice() {
             $('#InvoiceNo').attr('value', "FT SEQ/" + data.InvoiceNo);
             $('#InvoiceDate').attr('value', data.InvoiceDate);
 
-            $('#CustomerId').attr('value', data.Customer.CustomerId);
-            $('#CustomerIdLink').attr('href', "showCustomer.php?CustomerId=" + data.Customer.CustomerId);
+            $('#CustomerID').attr('value', data.Customer.CustomerID);
+            $('#CustomerIDLink').attr('href', "showCustomer.php?CustomerID=" + data.Customer.CustomerID);
 
             $('#CompanyName').attr('value', data.Customer.CompanyName);
             $('#TaxPayable').attr('value', data.DocumentTotals.TaxPayable + " €");
