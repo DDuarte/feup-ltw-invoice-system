@@ -88,7 +88,16 @@ function showBlankProductData(data) {
             },
             dataType: "JSON",
             success: function (jsonObj) {
-                alert(JSON.stringify(jsonObj));
+                $.ajax({
+                    url: "showProduct.php",
+                    type: "GET",
+                    data: {
+                        ProductId: jsonObj
+                    },
+                    dataType: "text",
+                    success: function (jsonObj) {
+                    }
+                });
             }
         });
     };
