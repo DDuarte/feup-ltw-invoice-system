@@ -15,7 +15,7 @@ redirect_if_not_logged_in();
         <title>Show Customer</title>
     </head>
     <body onload="loadCustomer()">
-        <div class="_form">
+        <form class="_form">
             <div class="_header">
                 Show Customer
             </div>
@@ -44,7 +44,7 @@ redirect_if_not_logged_in();
                     </div>
                     <div class="_row _postal_code _seventy">
                         <label for="PostalCode">Postal Code</label>
-                        <input type="text" id="PostalCode" value="N/A" readonly>
+                        <input type="text" id="PostalCode" value="N/A" readonly pattern="\d{4}-\d{3}">
                     </div>
                     <div class="_row _country _hundred">
                         <label for="Country">Country</label>
@@ -60,6 +60,6 @@ redirect_if_not_logged_in();
                 <label for="SelfBillingIndicator">Self Billing</label>
                 <input type="checkbox" id="SelfBillingIndicator" readonly>
             </div>
-        </div>
+        </form>
     </body>
 </html>
