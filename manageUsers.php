@@ -16,7 +16,7 @@ redirect_if_not_logged_in();
     <link rel="stylesheet"  href="css/index.css" type="text/css">
     <script type="text/javascript">
         $(document).ready( function() {
-            load('search');
+            load('userManagement');
             loadUsers();
         });
     </script>

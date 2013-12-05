@@ -152,7 +152,7 @@ function loadCustomer() {
     var action = urlVars['action'];
 
     if (action !== 'create') {
-        var id = getUrlVars()['CustomerID'];
+        var id = urlVars['CustomerID'];
         if (id == undefined) {
             alert('No customer id was detected');
             return;
@@ -171,6 +171,7 @@ function loadCustomer() {
             onSuccess = showBlankCustomerData;
             break;
         }
+        case 'show':
         case undefined:
         {
             onSuccess = showCustomerData;

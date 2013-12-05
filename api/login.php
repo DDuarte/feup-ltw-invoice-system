@@ -16,7 +16,7 @@
     if ($username != "" && $password != "")
     {
         $db = new PDO('sqlite:../sql/OIS.db');
-        $stmt = $db->prepare('SELECT username, password, role.name AS role FROM user JOIN role on user.role_id = role.id WHERE username = :username');
+        $stmt = $db->prepare('SELECT id, username, password FROM user WHERE username = :username');
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetch();
@@ -29,6 +29,7 @@
             {
                 session_start();
                 $_SESSION['username'] = $result['username'];
+                $_SESSION['user_id'] = $result['id'];
             }
         }
     }

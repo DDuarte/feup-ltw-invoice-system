@@ -27,6 +27,13 @@ redirect_if_not_logged_in();
                         <span>Search</span>
                     </a>
                 </li>
+                <?php if (is_admin()) { ?>
+                <li class="_menu_item" id="userManagement">
+                    <a href="manageUsers.php">
+                        <span>Manage</span>
+                    </a>
+                </li>
+                <?php } ?>
                 <li class="_menu_item" id="about">
                     <a href="about.php">
                         <span>About</span>

@@ -17,7 +17,7 @@ $user = json_decode($json, true);
 if (json_last_error() !== JSON_ERROR_NONE)
     exit($error400);
 
-if (!isset($user['username']) || !isset($user['password']) || !isset($user['role_id']))
+if (!isset($user['username']) || !isset($user['password']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
@@ -25,12 +25,12 @@ $db = new PDO('sqlite:../sql/OIS.db');
 if (empty($user['id']))
 {
     $invoiceStmt = "INSERT INTO user(username, password, role_id) VALUES (:username, :password, :role_id);";
-    $hasInvoiceNo = false;
+    $hasId = false;
 }
 else
 {
     $invoiceStmt = "UPDATE OR FAIL user SET username = :username, password = :password, role_id = :role_id WHERE user.id = :userId;";
-    $hasInvoiceNo = true;
+    $hasId = true;
 }
 $stmt = $db->prepare($invoiceStmt);
 
@@ -40,9 +40,10 @@ if (!$stmt)
 $stmt->bindParam(':username', $user['username'], PDO::PARAM_STR);
 $hashedPassword = encrypt_credentials($user['username'], $user['password']);
 $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
-$stmt->bindParam(':role_id', $user['role_id'], PDO::PARAM_INT);
+$role_id = !isset($user['role_id']) ? 1 : $user['role_id'];
+$stmt->bindParam(':role_id', $role_id, PDO::PARAM_INT);
 
-if ($hasInvoiceNo)
+if ($hasId)
     $stmt->bindParam(':userId', $user['id'], PDO::PARAM_INT);
 
 $stmt->execute();

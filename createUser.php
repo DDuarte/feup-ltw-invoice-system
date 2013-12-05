@@ -16,17 +16,17 @@ redirect_if_not_logged_in();
 </head>
 
 <body>
-<form class="_form">
+<form class="_form" method="post" action="api/updateUser.php">
     <div class="_header">
         Create User
     </div>
     <div class="_row _username _hundred">
         <label for="CustomerID">Username</label>
-        <input type="text" id="UsernameId">
+        <input type="text" id="UsernameId" name="user">
     </div>
     <div class="_row _password _hundred">
         <label for="CustomerTaxId">Password</label>
-        <input type="password" id="PasswordId">
+        <input type="password" id="PasswordId" name="password">
     </div>
     <input type="submit" value="Create" id="search_button">
 </form>

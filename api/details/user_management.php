@@ -2,7 +2,8 @@
 
 function is_logged_in()
 {
-    session_start();
+    if (session_status() !== PHP_SESSION_ACTIVE)
+        session_start();
     return array_key_exists("username", $_SESSION);
 }
 
@@ -30,7 +31,7 @@ function get_role()
 
     $username = $_SESSION['username'];
 
-    $db = new PDO('sqlite:../sql/OIS.db');
+    $db = new PDO('sqlite:'. dirname(__FILE__) ."/../../sql/OIS.db");
     $query = "SELECT role.name AS name FROM user JOIN role on user.role_id = role.id WHERE user.username = :username";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
