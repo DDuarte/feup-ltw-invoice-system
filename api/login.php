@@ -1,5 +1,5 @@
 <?php
-    require 'details/user_management.php';
+    require_once 'details/user_management.php';
 
     if (!array_key_exists("username", $_POST))
         redirect();

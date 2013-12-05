@@ -1,13 +1,13 @@
 <?php
 header("Content-type:application/json");
 
-require 'details/user_management.php';
+require_once 'details/user_management.php';
 
 if (!is_logged_in())
     exit('{"error":{"code":403,"reason":"Not authenticated"}}');
 
-require 'details/product.php';
-require 'details/utils.php';
+require_once 'details/product.php';
+require_once 'details/utils.php';
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
 

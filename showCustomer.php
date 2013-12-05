@@ -1,6 +1,6 @@
 <?php
 
-require 'api/details/user_management.php';
+require_once 'api/details/user_management.php';
 redirect_if_not_logged_in();
 
 ?>

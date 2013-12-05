@@ -1,6 +1,6 @@
 <?php
 
-require 'api/details/user_management.php';
+require_once 'api/details/user_management.php';
 
 if (is_logged_in())
 {

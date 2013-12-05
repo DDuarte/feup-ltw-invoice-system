@@ -1,6 +1,6 @@
 <?php
 
-require 'api/details/user_management.php';
+require_once 'api/details/user_management.php';
 redirect_if_not_logged_in();
 
 ?>
@@ -15,7 +15,7 @@ redirect_if_not_logged_in();
         <title>Show Invoice</title>
     </head>
     <body onload="loadInvoice()">
-        <div class="_form">
+        <form class="_form">
             <div class="_header">
                 Show Invoice
             </div>
@@ -51,6 +51,6 @@ redirect_if_not_logged_in();
                 <label for="GrossTotal">Gross Total</label>
                 <input type="text" id="GrossTotal" value="N/A" readonly>
             </div>
-        </div>
+        </form>
     </body>
 </html>
