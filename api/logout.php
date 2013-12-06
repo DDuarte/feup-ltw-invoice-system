@@ -1,7 +1,8 @@
 <?php
     require_once 'details\user_management.php';
 
-    session_start();
+    if (!isset($_SESSION))
+        session_start();
     session_destroy();
 
     redirect();

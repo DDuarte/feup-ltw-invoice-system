@@ -27,7 +27,8 @@
         {
             if ($result['password'] == $hashedPassword)
             {
-                session_start();
+                if (!isset($_SESSION))
+                    session_start();
                 $_SESSION['username'] = $result['username'];
             }
         }

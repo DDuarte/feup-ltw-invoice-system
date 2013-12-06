@@ -1,9 +1,13 @@
 <?php
 
+header("Content-type:application/json");
 require_once 'details/user_management.php';
 
 if (!is_logged_in())
     exit('{"error":{"code":403,"reason":"Not authenticated"}}');
+
+if (!is_editor())
+    exit('{"error":{"code":403,"reason":"No permission"}}');
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
 

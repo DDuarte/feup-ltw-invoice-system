@@ -2,7 +2,8 @@
 
 function is_logged_in()
 {
-    session_start();
+    if (!isset($_SESSION))
+        session_start();
     return array_key_exists("username", $_SESSION);
 }
 
