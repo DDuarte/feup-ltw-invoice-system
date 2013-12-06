@@ -12,7 +12,7 @@ redirect_if_not_logged_in();
         <title>Online Invoicing System</title>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/index.js"></script>
-        <link rel="stylesheet"  href="css/index.css" type="text/css">
+        <link rel="stylesheet"  href="css/search.css" type="text/css">
         <script type="text/javascript">
             $(document).ready( function() {
                 load('search');
