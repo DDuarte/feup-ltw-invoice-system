@@ -34,7 +34,9 @@ $stmt->bindParam(':type',       $tax['TaxType'], PDO::PARAM_STR);
 $stmt->bindParam(':percentage', $tax['TaxPercentage'], PDO::PARAM_STR);
 $stmt->execute();
 
-if ($stmt->rowCount() == 0) // insert
+$results = $stmt->fetchAll();
+
+if (count($results) == 0) // insert
     $stmtStr = "INSERT INTO tax(type, country_region, description, percentage) VALUES (:type, :country_region, :description, :percentage)";
 else // update
     $stmtStr = "UPDATE tax SET country_region = :country_region, description = :description WHERE type = :type AND percentage = :percentage";
