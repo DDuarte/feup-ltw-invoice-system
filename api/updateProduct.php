@@ -19,7 +19,7 @@ $product =  json_decode($_POST['product'], true);
 if (json_last_error() !== JSON_ERROR_NONE)
     exit($error400);
 
-if (!isset($product['ProductDescription']) || !isset($product['unit_price']) || !isset($product['ProductNumberCode']))
+if (!isset($product['ProductDescription']) || !isset($product['ProductNumberCode']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
@@ -41,7 +41,14 @@ if (!$stmt)
     exit('Sorry, I dont know how to write sql statements');
 
 $stmt->bindParam(':_description', $product['ProductDescription'], PDO::PARAM_STR);
-$stmt->bindParam(':_unitPrice', $product['unit_price'], PDO::PARAM_INT);
+
+if (isset($product['unit_price']))
+    $stmt->bindParam(':_unitPrice', $product['unit_price'], PDO::PARAM_INT);
+else
+{
+    $null = "NULL";
+    $stmt->bindParam(':_unitPrice', $null, PDO::PARAM_INT);
+}
 
 if ($hasProductCode)
     $stmt->bindParam(':_productId', $product['ProductNumberCode'], PDO::PARAM_INT);
