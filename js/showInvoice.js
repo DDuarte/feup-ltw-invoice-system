@@ -295,30 +295,41 @@ function submissionCallback(event) {
         event.returnValue = false;
 
     var jsonObject = new Object();
-    jsonObject.invoiceNo = $('#InvoiceNo').val().replace( /^\D+/g, '');;
-    jsonObject.customer_id = $('#CustomerID').val();
-    jsonObject.billing_date = $('#InvoiceDate').val();
-    jsonObject.lines = [];
+    jsonObject.InvoiceNo = $('#InvoiceNo').val().replace( /^\D+/g, '');;
+    jsonObject.CustomerID = $('#CustomerID').val();
+    jsonObject.InvoiceDate = $('#InvoiceDate').val();
+    jsonObject.DocumentStatus  = {
+        AccountID: 1
+    };
+
+    jsonObject.Line = [];
 
     //alert($('._line_title').children('._line_number').length);
 
     //var children = $('._line_title').children('');
     $('._line_title').children('._invoice_line').each(function() {
         var line =  {
-            number : $(this).find('.LineNumber').val(),
-            productID : $(this).find('.ProductDescription').find(':selected').val(),
-            quantity : $(this).find('.Quantity').val(),
-            unitPrice : $(this).find('.UnitPrice').val()
+            LineNumber : $(this).find('.LineNumber').val(),
+            ProductCode : $(this).find('.ProductDescription').find(':selected').val(),
+            Quantity : $(this).find('.Quantity').val(),
+            UnitPrice : $(this).find('.UnitPrice').val(),
+            Tax: {
+                TaxType : $(this).find('.TaxType').find(':selected').text(),
+                TaxCountryRegion : "",
+                TaxCode : "",
+                TaxPercentage : $(this).find('.TaxType').find(':selected').attr('percentage')
+            }
+//            TaxID : $(this).find('.TaxType').find(':selected').val()
         };
 
-        jsonObject.lines.push(line);
+        jsonObject.Line.push(line);
     });
 
     var requestStr = JSON.stringify(jsonObject);
 
     alert(requestStr);
 
-   /* $.ajax({
+   $.ajax({
         url: "api/updateInvoice.php",
         type: "POST",
         data: {
@@ -331,7 +342,7 @@ function submissionCallback(event) {
         error: function(jsonObj) {
 
         }
-    });*/
+    });
 }
 
 function loadInvoice() {
