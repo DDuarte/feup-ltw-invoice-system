@@ -16,9 +16,9 @@ $customer =  json_decode($_POST['customer'], true);
 if (json_last_error() !== JSON_ERROR_NONE)
     exit($error400);
 
-if (!isset($customer['CustomerID']) || !isset($customer['CustomerTaxID']) || !isset($customer['AddressDetail']) || !isset($customer['CompanyName'])
-    || !isset($customer['Email']) || !isset($customer['City']) || !isset($customer['PostalCode'])
-    || !isset($customer['Country']))
+if (!isset($customer['CustomerID']) || !isset($customer['CustomerTaxID']) || !isset($customer['BillingAddress']['AddressDetail']) || !isset($customer['CompanyName'])
+    || !isset($customer['Email']) || !isset($customer['BillingAddress']['City']) || !isset($customer['BillingAddress']['PostalCode'])
+    || !isset($customer['BillingAddress']['Country']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
@@ -44,10 +44,10 @@ if (!$stmt)
 $stmt->bindParam(':_tax_id', $customer['CustomerTaxID'], PDO::PARAM_INT);
 $stmt->bindParam(':_company_name', $customer['CompanyName'], PDO::PARAM_STR);
 $stmt->bindParam(':_email', $customer['Email'], PDO::PARAM_STR);
-$stmt->bindParam(':_detail', $customer['AddressDetail'], PDO::PARAM_STR);
-$stmt->bindParam(':_city_id', $customer['City'], PDO::PARAM_STR);
-$stmt->bindParam(':_postal_code', $customer['PostalCode'], PDO::PARAM_STR);
-$stmt->bindParam(':_country_code', $customer['Country'], PDO::PARAM_STR);
+$stmt->bindParam(':_detail', $customer['BillingAddress']['AddressDetail'], PDO::PARAM_STR);
+$stmt->bindParam(':_city_id', $customer['BillingAddress']['City'], PDO::PARAM_STR);
+$stmt->bindParam(':_postal_code', $customer['BillingAddress']['PostalCode'], PDO::PARAM_STR);
+$stmt->bindParam(':_country_code', $customer['BillingAddress']['Country'], PDO::PARAM_STR);
 
 if ($hasCustomerID)
     $stmt->bindParam(':_customerID', $customer['CustomerID'], PDO::PARAM_INT);

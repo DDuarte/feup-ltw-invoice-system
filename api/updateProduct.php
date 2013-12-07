@@ -19,41 +19,40 @@ $product =  json_decode($_POST['product'], true);
 if (json_last_error() !== JSON_ERROR_NONE)
     exit($error400);
 
-if (!isset($product['ProductDescription']) || !isset($product['ProductNumberCode']))
+if (!isset($product['ProductDescription']) || !isset($product['ProductCode']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
 
-if (empty($product['ProductNumberCode']))
+if (empty($product['ProductCode']))
 {
-    $productStmt = "INSERT INTO product(description, unit_price) VALUES (:_description, :_unitPrice);";
+    $productStmt = "INSERT INTO product(description, unit_price) VALUES (:_description, :_unitPrice)";
     $hasProductCode = false;
 }
 else
 {
-    $productStmt = "UPDATE OR FAIL product SET description = :_description, unit_price = :_unitPrice WHERE product.id = :_productId;";
+    $productStmt = "UPDATE OR FAIL product SET description = :_description, unit_price = :_unitPrice WHERE id = :_productId";
     $hasProductCode = true;
 }
 
 $stmt = $db->prepare($productStmt);
 
-if (!$stmt)
-    exit('Sorry, I dont know how to write sql statements');
-
 $stmt->bindParam(':_description', $product['ProductDescription'], PDO::PARAM_STR);
 
-if (isset($product['unit_price']))
-    $stmt->bindParam(':_unitPrice', $product['unit_price'], PDO::PARAM_INT);
+if (isset($product['UnitPrice']))
+    $stmt->bindParam(':_unitPrice', $product['UnitPrice'], PDO::PARAM_INT);
 else
 {
-    $null = "NULL";
+    $null = "NULL"; // bind needs ref
     $stmt->bindParam(':_unitPrice', $null, PDO::PARAM_INT);
 }
 
 if ($hasProductCode)
-    $stmt->bindParam(':_productId', $product['ProductNumberCode'], PDO::PARAM_INT);
+    $stmt->bindParam(':_productId', $product['ProductCode'], PDO::PARAM_INT);
 
 $stmt->execute();
 
-echo json_encode($db->lastInsertId());
-
+if ($hasProductCode)
+    echo $product['ProductCode'];
+else
+    echo $db->lastInsertId();

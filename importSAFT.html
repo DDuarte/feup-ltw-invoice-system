@@ -20,9 +20,22 @@
             type: 'POST',
             url: url,
             data: data
-        }).done(function(msg) {
-            // alert(JSON.stringify(msg));
         });
+    }
+
+    function send_post_sync(url, name, array) {
+        var data = {};
+        data[name] = JSON.stringify(array);
+        var ret = null;
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            async: false
+        }).done(function(msg) {
+            ret = msg;
+        });
+        return ret;
     }
 
     function handleFileSelect(evt) {
@@ -33,21 +46,39 @@
                 var xmlStr = reader.result.toString();
                 var json = $.xml2json(xmlStr);
 
-                json['MasterFiles']['TaxTable']['TaxTableEntry'].forEach(function(entry) {
-                    send_post('api/updateTax.php', 'tax', entry);
-                })
+                var taxes = json['MasterFiles']['TaxTable']['TaxTableEntry'];
+                var customers = json['MasterFiles']['Customer'];
+                var invoices = json['SourceDocuments']['SalesInvoices']['Invoice'];
+                var products = json['MasterFiles']['Product'];
 
-                json['MasterFiles']['Customer'].forEach(function(entry) {
-                    send_post('api/updateCustomer.php', 'customer', entry);
-                })
+                for (var i = 0; i < invoices.length; ++i) {
+                    if (!$.isArray(invoices[i]['Line'])) {
+                        invoices[i]['Line'] = [invoices[i]['Line']];
+                    }
+                }
 
-                json['MasterFiles']['Product'].forEach(function(entry) {
-                    send_post('api/updateProduct.php', 'product', entry);
-                })
+                for (var i = 0; i < taxes.length; ++i)
+                    send_post('api/updateTax.php', 'tax', taxes[i]);
+
+                for (var i = 0; i < customers.length; ++i) {
+                    customers[i]['CustomerID'] = '';
+                    send_post('api/updateCustomer.php', 'customer', customers[i]);
+                }
+
+                for (var i = 0; i < products.length; ++i) {
+                    products[i]['ProductCode'] = '';
+                    var newCode = send_post_sync('api/updateProduct.php', 'product', products[i]);
+                    for (var j = 0; j < invoices.length; ++j) {
+                        for (var k = 0; k < invoices[j]['Line'].length; ++k) {
+                            if (invoices[j]['Line'][k]['ProductCode'] === products[i]['ProductNumberCode'])
+                                invoices[j]['Line'][k]['ProductCode'] = newCode;
+                        }
+                    }
+                }
 
                 json['SourceDocuments']['SalesInvoices']['Invoice'].forEach(function(entry) {
                     send_post('api/updateInvoice.php', 'invoice', entry);
-                })
+                });
             });
             reader.readAsText(files[0]);
         }
