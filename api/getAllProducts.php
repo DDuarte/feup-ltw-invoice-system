@@ -2,7 +2,7 @@
 
 $db = new PDO('sqlite:../sql/OIS.db');
 
-$query = "SELECT id, description FROM product;";
+$query = "SELECT * FROM product;";
 
 $stmt = $db->prepare($query);
 

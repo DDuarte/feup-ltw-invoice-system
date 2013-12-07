@@ -40,15 +40,15 @@ redirect_if_not_logged_in();
             <div class="_row _line_title">
                 <label>Lines</label>
             </div>
-            <div class="_row">
+            <div class="_row totals">
                 <label for="TaxPayable">Tax Payable</label>
                 <input type="text" id="TaxPayable" value="N/A" readonly>
             </div>
-            <div class="_row">
+            <div class="_row totals">
                 <label for="NetTotal">Net Total</label>
                 <input type="text" id="NetTotal" value="N/A" readonly>
             </div>
-            <div class="_row">
+            <div class="_row totals">
                 <label for="GrossTotal">Gross Total</label>
                 <input type="text" id="GrossTotal" value="N/A" readonly>
             </div>
