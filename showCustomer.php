@@ -9,7 +9,8 @@ redirect_if_not_logged_in();
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet"  href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/common.css" type="text/css">
+        <link rel="stylesheet" href="css/showDocuments.css" type="text/css">
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/showCustomer.js"></script>
         <title>Show Customer</title>

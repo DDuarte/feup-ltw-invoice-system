@@ -30,9 +30,9 @@ function showEditableProductData(data) {
 
         var jsonObj = {
             ProductCode: $('#ProductCode').val(),
-            description: $("#ProductDescription").val(),
-            unit_price: $("#UnitPrice").val()
-        }
+            ProductDescription: $("#ProductDescription").val(),
+            UnitPrice: $("#UnitPrice").val()
+        };
 
         var requestStr = JSON.stringify(jsonObj);
 
@@ -74,9 +74,9 @@ function showBlankProductData(data) {
 
         var jsonObj = {
             ProductCode: "",
-            description: $("#ProductDescription").val(),
-            unit_price: $("#UnitPrice").val()
-        }
+            ProductDescription: $("#ProductDescription").val(),
+            UnitPrice: $("#UnitPrice").val()
+        };
 
         var requestStr = JSON.stringify(jsonObj);
 

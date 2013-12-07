@@ -3,7 +3,9 @@
 function is_logged_in()
 {
     if (session_status() !== PHP_SESSION_ACTIVE)
+        session_save_path(realpath($_SERVER['DOCUMENT_ROOT']) . '/sessions');
         session_start();
+    }
     return array_key_exists("username", $_SESSION);
 }
 

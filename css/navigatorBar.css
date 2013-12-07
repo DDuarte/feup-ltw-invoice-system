@@ -1,0 +1,48 @@
+._menu_navigator_bar {
+    display: table;
+    width: 708px;
+    height: 60px;
+    border-bottom: 1px solid #DDD;
+    margin: 0 auto;
+}
+
+._menu_bar {
+    display: table;
+    margin: 0 auto;
+}
+
+._menu_item {
+    display: inline-block;
+    width: 118px;
+    height: 59px;
+}
+
+._menu_item > a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    position: static;
+    background-color: transparent;
+    color: #a7a7a7;
+}
+
+._menu_item > a span {
+    display: block;
+    position: relative;
+    top: 35%;
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+}
+
+._menu_item > a:hover {
+    color: red;
+}
+
+.selected > a {
+    position: relative;
+    padding-bottom: 3px;
+    background: url("../images/_menu_item_selected.png") no-repeat bottom center;
+    color: #404040 ;
+}

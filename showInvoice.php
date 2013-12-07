@@ -9,7 +9,8 @@ redirect_if_not_logged_in();
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/common.css" type="text/css">
+        <link rel="stylesheet" href="css/showDocuments.css" type="text/css">
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/showInvoice.js"></script>
         <title>Show Invoice</title>
@@ -37,17 +38,16 @@ redirect_if_not_logged_in();
                 <input type="text" id="CompanyName" value="N/A" readonly>
             </div>
             <div class="_row _line_title">
-                <label>Lines</label>
             </div>
-            <div class="_row">
+            <div class="_row totals">
                 <label for="TaxPayable">Tax Payable</label>
                 <input type="text" id="TaxPayable" value="N/A" readonly>
             </div>
-            <div class="_row">
+            <div class="_row totals">
                 <label for="NetTotal">Net Total</label>
                 <input type="text" id="NetTotal" value="N/A" readonly>
             </div>
-            <div class="_row">
+            <div class="_row totals">
                 <label for="GrossTotal">Gross Total</label>
                 <input type="text" id="GrossTotal" value="N/A" readonly>
             </div>

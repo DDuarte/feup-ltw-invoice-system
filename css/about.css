@@ -1,0 +1,25 @@
+._sub_title {
+    padding: 10px 30px;
+}
+
+div._text_block{
+    margin-top: 0px;
+    margin-left: 50px;
+}
+
+._names_list {
+    padding: 10px 70px;
+}
+
+._names_list > li {
+    display: table;
+}
+
+._usability_list {
+    margin-top: 20px;
+    margin-left: 60px;
+}
+
+._no_margin {
+    margin: 0 !important;
+}

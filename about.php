@@ -12,7 +12,7 @@ redirect_if_not_logged_in();
         <title>Online Invoicing System</title>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/index.js"></script>
-        <link rel="stylesheet"  href="css/index.css" type="text/css">
+        <link rel="stylesheet"  href="css/about.css" type="text/css">
     </head>
     <body onload="load('about')">
             <div id="pageHeader"></div>
@@ -51,12 +51,14 @@ redirect_if_not_logged_in();
 
                 <h2 class="_sub_title">Usability</h2>
                 <div class="_text_block">
-                    At this stage of development, a user can:
-                    <ol class="_usability_list">
+                    <p>
+                        At this stage of development, a user can:
+                    </p>
+                    <ul class="_usability_list">
                         <li> Search for summarized documents, mainly invoices, costumers and products;</li>
                         <li> Access detailed information about each document as a search result;</li>
                         <li> Print a given invoice.</li>
-                    </ol>
+                    </ul>
                 </div>
                 <h2 class="_sub_title">Notes</h2>
                 <div class="_text_block">

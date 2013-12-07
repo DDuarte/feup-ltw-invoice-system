@@ -1,0 +1,46 @@
+._login_box{
+    position: relative;
+    margin: 0 auto;
+    top: 300px;
+    height: 60%
+}
+
+._login_form{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height:210px
+}
+
+._form_title{
+    margin: 0 auto;
+    width: 90%;
+    height:60px
+}
+
+._form_title > h1{
+    font-size: 35px;
+    margin-bottom: 20px
+}
+
+form[action='api/login.php']{
+    margin: 0 auto;
+    width: 90%;
+}
+
+form[action='api/login.php'] > div{
+    margin-bottom: 10px
+}
+
+form[action='api/login.php'] div input{
+    width: 250px
+}
+
+div._help{
+    width: 90%;
+    margin: 4px auto
+}
+
+a:link ,a:visited ,a:hover ,a:active{
+    color: #0033CC;
+}

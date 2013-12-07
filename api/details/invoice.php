@@ -44,7 +44,7 @@ class InvoiceLine
             'ProductCode'   => $this->_product->getCode(),
             'ProductDescription' => $this->_product->getDescription(),
             'Quantity'      => $this->_quantity,
-            'UnitOfMeasure' => 'Euro',
+            'UnitOfMeasure' => 'Unit',
             'UnitPrice'     => $this->_unitPrice,
             'TaxPointDate'  => 'N/A', // set in toArray() of Invoice
             'Description'   => $this->_quantity . 'x ' . $this->_product->getDescription(),

@@ -4,3 +4,4 @@
 *.jar
 
 sql/sqlite3.exe
+sessions/*

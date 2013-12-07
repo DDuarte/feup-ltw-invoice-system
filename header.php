@@ -12,7 +12,8 @@ redirect_if_not_logged_in();
         <title>Online Invoicing System</title>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/index.js"></script>
-        <link rel="stylesheet"  href="css/index.css" type="text/css">
+        <link rel="stylesheet"  href="css/common.css" type="text/css">
+        <link rel="stylesheet"  href="css/navigatorBar.css" type="text/css">
     </head>
     <body>
         <nav class="_menu_navigator_bar">

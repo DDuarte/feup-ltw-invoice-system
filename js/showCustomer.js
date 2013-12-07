@@ -45,13 +45,13 @@ function editSubmissionCallback(event) {
 
     var jsonObj = {
         CustomerID: $('#CustomerID').val(),
-        tax_id: $("#CustomerTaxId").val(),
-        detail: $("#AddressDetail").val(),
-        company_name: $('#CompanyName').val(),
-        email: $('#Email').val(),
-        city_id: $('#City').val(),
-        postal_code: $('#PostalCode').val(),
-        country_code: $('#Country').val()
+        CustomerTaxID: $("#CustomerTaxId").val(),
+        AddressDetail: $("#AddressDetail").val(),
+        CompanyName: $('#CompanyName').val(),
+        Email: $('#Email').val(),
+        City: $('#City').val(),
+        PostalCode: $('#PostalCode').val(),
+        Country: $('#Country').val()
     };
 
     var requestStr = JSON.stringify(jsonObj);
@@ -81,13 +81,13 @@ function createSubmissionCallback(event) {
 
     var jsonObj = {
         CustomerID: '',
-        tax_id: $("#CustomerTaxId").val(),
-        detail: $("#AddressDetail").val(),
-        company_name: $('#CompanyName').val(),
-        email: $('#Email').val(),
-        city_id: $('#City').val(),
-        postal_code: $('#PostalCode').val(),
-        country_code: $('#Country').val()
+        CustomerTaxID: $("#CustomerTaxId").val(),
+        AddressDetail: $("#AddressDetail").val(),
+        CompanyName: $('#CompanyName').val(),
+        Email: $('#Email').val(),
+        City: $('#City').val(),
+        PostalCode: $('#PostalCode').val(),
+        Country: $('#Country').val()
     };
 
     var requestStr = JSON.stringify(jsonObj);

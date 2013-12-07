@@ -16,9 +16,9 @@ $customer =  json_decode($_POST['customer'], true);
 if (json_last_error() !== JSON_ERROR_NONE)
     exit($error400);
 
-if (!isset($customer['CustomerID']) || !isset($customer['tax_id']) || !isset($customer['detail']) || !isset($customer['company_name'])
-    || !isset($customer['email']) || !isset($customer['city_id']) || !isset($customer['postal_code'])
-    || !isset($customer['country_code']))
+if (!isset($customer['CustomerID']) || !isset($customer['CustomerTaxID']) || !isset($customer['BillingAddress']['AddressDetail']) || !isset($customer['CompanyName'])
+    || !isset($customer['Email']) || !isset($customer['BillingAddress']['City']) || !isset($customer['BillingAddress']['PostalCode'])
+    || !isset($customer['BillingAddress']['Country']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
@@ -41,13 +41,13 @@ $stmt = $db->prepare($customerStmt);
 if (!$stmt)
     exit('Error: database insertion/update');
 
-$stmt->bindParam(':_tax_id', $customer['tax_id'], PDO::PARAM_INT);
-$stmt->bindParam(':_company_name', $customer['company_name'], PDO::PARAM_STR);
-$stmt->bindParam(':_email', $customer['email'], PDO::PARAM_STR);
-$stmt->bindParam(':_detail', $customer['detail'], PDO::PARAM_STR);
-$stmt->bindParam(':_city_id', $customer['city_id'], PDO::PARAM_STR);
-$stmt->bindParam(':_postal_code', $customer['postal_code'], PDO::PARAM_STR);
-$stmt->bindParam(':_country_code', $customer['country_code'], PDO::PARAM_STR);
+$stmt->bindParam(':_tax_id', $customer['CustomerTaxID'], PDO::PARAM_INT);
+$stmt->bindParam(':_company_name', $customer['CompanyName'], PDO::PARAM_STR);
+$stmt->bindParam(':_email', $customer['Email'], PDO::PARAM_STR);
+$stmt->bindParam(':_detail', $customer['BillingAddress']['AddressDetail'], PDO::PARAM_STR);
+$stmt->bindParam(':_city_id', $customer['BillingAddress']['City'], PDO::PARAM_STR);
+$stmt->bindParam(':_postal_code', $customer['BillingAddress']['PostalCode'], PDO::PARAM_STR);
+$stmt->bindParam(':_country_code', $customer['BillingAddress']['Country'], PDO::PARAM_STR);
 
 if ($hasCustomerID)
     $stmt->bindParam(':_customerID', $customer['CustomerID'], PDO::PARAM_INT);
