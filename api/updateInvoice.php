@@ -67,7 +67,6 @@ $lines = $invoice['Line'];
 if (!isset($lines) || !is_array($lines))
     exit($error400);
 
-
 // insert each line of the invoice
 foreach($lines as $line)
 {
@@ -83,7 +82,27 @@ foreach($lines as $line)
     $stmt->bindParam(':_line_number', $line['LineNumber'], PDO::PARAM_INT);
     $stmt->bindParam(':_invoice_id', $invoice['InvoiceNo'], PDO::PARAM_INT);
     $stmt->bindParam(':_quantity', $line['Quantity'], PDO::PARAM_INT);
-    $stmt->bindParam(':_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
+
+    if (!empty($line['UnitPrice']))
+    {
+        $stmt->bindParam(':_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
+
+        $productStmt = "UPDATE product SET unit_price = :_product_unit_price WHERE id = :_product_code";
+        $productUpdate = $db->prepare($productStmt);
+
+        if (!$productUpdate)
+            exit($error400);
+
+        $productUpdate->bindParam(':_product_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
+        $productUpdate->bindParam(':_product_code', $line['ProductCode'], PDO::PARAM_INT);
+
+        $productUpdate->execute();
+    }
+    else
+    {
+        $null = "NULL";
+        $stmt->bindParam(':_unit_price', $null, PDO::PARAM_STR);
+    }
 
     $taxStmt = "SELECT id FROM tax WHERE type = :_type AND percentage = :_percentage;";
     $newTaxStmt = $db->prepare($taxStmt);
