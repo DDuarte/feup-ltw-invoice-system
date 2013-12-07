@@ -29,9 +29,9 @@ function showEditableProductData(data) {
             event.returnValue = false;
 
         var jsonObj = {
-            ProductNumberCode: $('#ProductCode').val(),
+            ProductCode: $('#ProductCode').val(),
             ProductDescription: $("#ProductDescription").val(),
-            unit_price: $("#UnitPrice").val()
+            UnitPrice: $("#UnitPrice").val()
         };
 
         var requestStr = JSON.stringify(jsonObj);
@@ -73,9 +73,9 @@ function showBlankProductData(data) {
             event.returnValue = false;
 
         var jsonObj = {
-            ProductNumberCode: "",
+            ProductCode: "",
             ProductDescription: $("#ProductDescription").val(),
-            unit_price: $("#UnitPrice").val()
+            UnitPrice: $("#UnitPrice").val()
         };
 
         var requestStr = JSON.stringify(jsonObj);
