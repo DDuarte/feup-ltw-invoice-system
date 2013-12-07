@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery.xml2json.js"></script>
+</head>
+<body>
+<input type="file" id="files" name="files[]" accept="text/xml" />
+<output id="list"></output>
+<script>
+    if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+
+    function send_post(url, name, array) {
+        var data = {};
+        data[name] = JSON.stringify(array);
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data
+        }).done(function(msg) {
+            // alert(JSON.stringify(msg));
+        });
+    }
+
+    function handleFileSelect(evt) {
+        var files = evt.target.files;
+        if (files.length == 1) {
+            var reader = new FileReader();
+            reader.onload = (function(file) {
+                var xmlStr = reader.result.toString();
+                var json = $.xml2json(xmlStr);
+
+                json['MasterFiles']['TaxTable']['TaxTableEntry'].forEach(function(entry) {
+                    send_post('api/updateTax.php', 'tax', entry);
+                })
+
+                json['MasterFiles']['Customer'].forEach(function(entry) {
+                    send_post('api/updateCustomer.php', 'customer', entry);
+                })
+
+                json['MasterFiles']['Product'].forEach(function(entry) {
+                    send_post('api/updateProduct.php', 'product', entry);
+                })
+
+                json['SourceDocuments']['SalesInvoices']['Invoice'].forEach(function(entry) {
+                    send_post('api/updateInvoice.php', 'invoice', entry);
+                })
+            });
+            reader.readAsText(files[0]);
+        }
+    }
+
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+</body>
+</html>
