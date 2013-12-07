@@ -19,7 +19,7 @@ if (json_last_error() !== JSON_ERROR_NONE)
 
 // InvoiceDate
 
-if (!isset($invoice['InvoiceDate']) || !isset($invoice['CustomerID']) || !isset($invoice['InvoiceNo']) || !isset($invoice['DocumentStatus']['AccountID']))
+if (!isset($invoice['InvoiceDate']) || !isset($invoice['CustomerID']) || !isset($invoice['InvoiceNo']) || !isset($invoice['DocumentStatus']['SourceID']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
@@ -27,7 +27,11 @@ $db = new PDO('sqlite:../sql/OIS.db');
 // update or insert new invoice information
 if (!empty($invoice['invoiceNo']))
 {
-    $invoiceStmt = "INSERT OR FAIL INTO invoice(billing_date, customer_id, user_id) VALUES (:_billingDate, :_customerId, :_user_id);";
+    if (!isset($invoice['SystemEntryDate']))
+        $invoiceStmt = "INSERT OR FAIL INTO invoice(billing_date, customer_id, user_id) VALUES (:_billingDate, :_customerId, :_user_id);";
+    else
+        $invoiceStmt = "INSERT OR FAIL INTO invoice(billing_date, customer_id, user_id, entry_date) VALUES (:_billingDate, :_customerId, :_user_id, :_entry_date);";
+
     $stmt = $db->prepare($invoiceStmt);
 
     if (!$stmt)
@@ -35,7 +39,10 @@ if (!empty($invoice['invoiceNo']))
 
     $stmt->bindParam(':_billingDate', $invoice['InvoiceDate'], PDO::PARAM_STR);
     $stmt->bindParam(':_customerId', $invoice['CustomerID'], PDO::PARAM_INT);
-    $stmt->bindParam(':_user_id', $invoice['DocumentStatus']['AccountID'], PDO::PARAM_INT);
+    $stmt->bindParam(':_user_id', $invoice['DocumentStatus']['SourceID'], PDO::PARAM_INT);
+
+    if (isset($invoice['SystemEntryDate']))
+        $stmt->bindParam(':_entry_date', $invoice['SystemEntryDate'], PDO::PARAM_STR);
 }
 else
 {
