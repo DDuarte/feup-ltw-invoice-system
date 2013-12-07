@@ -76,9 +76,10 @@
                     }
                 }
 
-                json['SourceDocuments']['SalesInvoices']['Invoice'].forEach(function(entry) {
-                    send_post('api/updateInvoice.php', 'invoice', entry);
-                });
+                for (var i = 0; i < invoices.length; ++i) {
+                    invoices[i]['InvoiceNo'] = '';
+                    send_post('api/updateInvoice.php', 'invoice', invoices[i]);
+                }
             });
             reader.readAsText(files[0]);
         }
