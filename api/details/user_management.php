@@ -3,7 +3,7 @@
 function is_logged_in()
 {
     if (!isset($_SESSION)) {
-        session_save_path(dirname($_SERVER['SCRIPT_FILENAME']) . '/sessions');
+        session_save_path(realpath($_SERVER['DOCUMENT_ROOT']) . '/sessions');
         session_start();
     }
     return array_key_exists("username", $_SESSION);
