@@ -2,8 +2,10 @@
 
 function is_logged_in()
 {
-    if (!isset($_SESSION))
+    if (!isset($_SESSION)) {
+        session_save_path(dirname($_SERVER['SCRIPT_FILENAME']) . '/sessions');
         session_start();
+    }
     return array_key_exists("username", $_SESSION);
 }
 

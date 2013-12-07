@@ -27,8 +27,10 @@
         {
             if ($result['password'] == $hashedPassword)
             {
-                if (!isset($_SESSION))
+                if (!isset($_SESSION)) {
+                    session_save_path(dirname($_SERVER['SCRIPT_FILENAME']) . '/../sessions');
                     session_start();
+                }
                 $_SESSION['username'] = $result['username'];
             }
         }
