@@ -61,16 +61,22 @@
                     send_post('api/updateTax.php', 'tax', taxes[i]);
 
                 for (var i = 0; i < customers.length; ++i) {
+                    var oldId = customers[i]['CustomerID'];
                     customers[i]['CustomerID'] = '';
-                    send_post('api/updateCustomer.php', 'customer', customers[i]);
+                    var newId = send_post_sync('api/updateCustomer.php', 'customer', customers[i]);
+                    for (var j = 0; j < invoices.length; ++j) {
+                        if (invoices[j]['CustomerID'] === oldId)
+                            invoices[j]['CustomerID'] = newId;
+                    }
                 }
 
                 for (var i = 0; i < products.length; ++i) {
+                    var oldCode = products[i]['ProductCode'];
                     products[i]['ProductCode'] = '';
                     var newCode = send_post_sync('api/updateProduct.php', 'product', products[i]);
                     for (var j = 0; j < invoices.length; ++j) {
                         for (var k = 0; k < invoices[j]['Line'].length; ++k) {
-                            if (invoices[j]['Line'][k]['ProductCode'] === products[i]['ProductNumberCode'])
+                            if (invoices[j]['Line'][k]['ProductCode'] === oldCode)
                                 invoices[j]['Line'][k]['ProductCode'] = newCode;
                         }
                     }
