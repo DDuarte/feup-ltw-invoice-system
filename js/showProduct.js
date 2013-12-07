@@ -29,10 +29,10 @@ function showEditableProductData(data) {
             event.returnValue = false;
 
         var jsonObj = {
-            ProductCode: $('#ProductCode').val(),
-            description: $("#ProductDescription").val(),
+            ProductNumberCode: $('#ProductCode').val(),
+            ProductDescription: $("#ProductDescription").val(),
             unit_price: $("#UnitPrice").val()
-        }
+        };
 
         var requestStr = JSON.stringify(jsonObj);
 
@@ -73,10 +73,10 @@ function showBlankProductData(data) {
             event.returnValue = false;
 
         var jsonObj = {
-            ProductCode: "",
-            description: $("#ProductDescription").val(),
+            ProductNumberCode: "",
+            ProductDescription: $("#ProductDescription").val(),
             unit_price: $("#UnitPrice").val()
-        }
+        };
 
         var requestStr = JSON.stringify(jsonObj);
 
