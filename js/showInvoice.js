@@ -295,11 +295,12 @@ function submissionCallback(event) {
         event.returnValue = false;
 
     var jsonObject = new Object();
-    jsonObject.InvoiceNo = $('#InvoiceNo').val().replace( /^\D+/g, '');;
+    jsonObject.InvoiceNo = $('#InvoiceNo').val().replace( /^\D+/g, '');
+    alert(jsonObject.InvoiceNo);
     jsonObject.CustomerID = $('#CustomerID').val();
     jsonObject.InvoiceDate = $('#InvoiceDate').val();
     jsonObject.DocumentStatus  = {
-        AccountID: 1
+        SourceID: 1
     };
 
     jsonObject.Line = [];
