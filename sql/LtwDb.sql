@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS line (
     quantity INTEGER CHECK (quantity > 0),
     unit_price REAL CHECK (unit_price >= 0),
     tax_id INTEGER,
-    PRIMARY KEY(product_id, line_number, invoice_id),
+    PRIMARY KEY(line_number, invoice_id),
     FOREIGN KEY(product_id) REFERENCES product(id),
     FOREIGN KEY(invoice_id) REFERENCES invoice(id),
     FOREIGN KEY(tax_id) REFERENCES tax(id)
