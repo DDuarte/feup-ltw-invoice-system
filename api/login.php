@@ -27,7 +27,7 @@
         {
             if ($result['password'] == $hashedPassword)
             {
-                if (!isset($_SESSION)) {
+                if (session_status() !== PHP_SESSION_ACTIVE) {
                     session_save_path(realpath($_SERVER['DOCUMENT_ROOT']) . '/sessions');
                     session_start();
                 }
