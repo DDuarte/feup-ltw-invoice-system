@@ -15,34 +15,97 @@ else
 $invoice =  json_decode($json, true);
 
 if (json_last_error() !== JSON_ERROR_NONE)
-    exit($error400);
+    exit('BAD DECODE');
 
-if (!isset($invoice['billing_date']) || !isset($invoice['customer_id']) || !isset($invoice['invoiceNo']))
+// InvoiceDate
+
+if (!isset($invoice['InvoiceDate']) || !isset($invoice['CustomerID']) || !isset($invoice['InvoiceNo']) || !isset($invoice['DocumentStatus']['AccountID']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
 
-if (empty($invoice['invoiceNo']))
+// update or insert new invoice information
+if (!empty($invoice['invoiceNo']))
 {
-    $invoiceStmt = "INSERT INTO invoice(billing_date, customer_id) VALUES (:billingDate, :customerId);";
-    $hasInvoiceNo = false;
+    $invoiceStmt = "INSERT OR FAIL INTO invoice(billing_date, customer_id, user_id) VALUES (:_billingDate, :_customerId, :_user_id);";
+    $stmt = $db->prepare($invoiceStmt);
+
+    if (!$stmt)
+        exit($error400);
+
+    $stmt->bindParam(':_billingDate', $invoice['InvoiceDate'], PDO::PARAM_STR);
+    $stmt->bindParam(':_customerId', $invoice['CustomerID'], PDO::PARAM_INT);
+    $stmt->bindParam(':_user_id', $invoice['DocumentStatus']['AccountID'], PDO::PARAM_INT);
 }
 else
 {
-    $invoiceStmt = "UPDATE OR FAIL invoice SET billing_date = :date, customer_id = :customerId WHERE invoice.id = :invoiceId;";
-    $hasInvoiceNo = true;
+    $invoiceStmt = "UPDATE OR FAIL invoice SET billing_date = :_billingDate WHERE invoice.id = :_invoiceId;";
+    $stmt = $db->prepare($invoiceStmt);
+
+    if (!$stmt)
+        exit($error400);
+
+    $stmt->bindParam(':_billingDate', $invoice['InvoiceDate'], PDO::PARAM_STR);
+    $stmt->bindParam(':_invoiceId', $invoice['InvoiceNo'], PDO::PARAM_INT);
 }
-$stmt = $db->prepare($invoiceStmt);
-
-if (!$stmt)
-    exit('Sorry, I dont know how to write sql statements');
-
-$stmt->bindParam(':customerId', $invoice['billing_date'], PDO::PARAM_STR);
-$stmt->bindParam(':customerId', $invoice['customer_id'], PDO::PARAM_INT);
-
-if ($hasInvoiceNo)
-    $stmt->bindParam(':customerId', $invoice['invoiceNo'], PDO::PARAM_INT);
 
 $stmt->execute();
 
-echo($invoice);
+$lines = $invoice['Line'];
+
+if (!isset($lines) || !is_array($lines))
+    exit($error400);
+
+
+// insert each line of the invoice
+foreach($lines as $line)
+{
+    $lineStmt = "INSERT OR REPLACE INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax_id) VALUES
+    (:_product_id, :_line_number, :_invoice_id, :_quantity, :_unit_price, :_tax_id);";
+
+    $stmt = $db->prepare($lineStmt);
+
+    if(!$stmt)
+        exit($error400);
+
+    $stmt->bindParam(':_product_id', $line['ProductCode'], PDO::PARAM_INT);
+    $stmt->bindParam(':_line_number', $line['LineNumber'], PDO::PARAM_INT);
+    $stmt->bindParam(':_invoice_id', $invoice['InvoiceNo'], PDO::PARAM_INT);
+    $stmt->bindParam(':_quantity', $line['Quantity'], PDO::PARAM_INT);
+    $stmt->bindParam(':_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
+
+    $taxStmt = "SELECT id FROM tax WHERE type = :_type AND percentage = :_percentage;";
+    $newTaxStmt = $db->prepare($taxStmt);
+
+    $newTaxStmt->bindParam(':_type', $line['Tax']['TaxType'], PDO::PARAM_STR);
+    $newTaxStmt->bindParam(':_percentage', $line['Tax']['TaxPercentage'], PDO::PARAM_INT);
+
+    $newTaxStmt->execute();
+    $taxResults = $newTaxStmt->fetchAll();
+
+
+    $stmt->bindParam(':_tax_id', $taxResults[0]['id'], PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+$maxLineNumber = end($lines)['LineNumber'];
+reset($lines);
+
+// delete remaining lines that may have been stored in the database
+
+$remainingLinesStmt = "DELETE FROM line WHERE line.invoice_id = :_invoice_id AND line.line_number > :_line_number";
+
+$stmt = $db->prepare($remainingLinesStmt);
+
+if (!$stmt)
+    exit($error400);
+
+$stmt->bindParam(':_line_number', $maxLineNumber, PDO::PARAM_INT);
+$stmt->bindParam(':_invoice_id', $invoice['InvoiceNo'], PDO::PARAM_INT);
+
+$stmt->execute();
+
+if (!$stmt)
+    exit($error400);
+
+echo(json_encode($invoice));
