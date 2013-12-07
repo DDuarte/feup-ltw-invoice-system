@@ -25,7 +25,7 @@ if (!isset($invoice['InvoiceDate']) || !isset($invoice['CustomerID']) || !isset(
 $db = new PDO('sqlite:../sql/OIS.db');
 
 // update or insert new invoice information
-if (!empty($invoice['invoiceNo']))
+if (empty($invoice['InvoiceNo']))
 {
     if (!isset($invoice['SystemEntryDate']))
         $invoiceStmt = "INSERT OR FAIL INTO invoice(billing_date, customer_id, user_id) VALUES (:_billingDate, :_customerId, :_user_id);";
@@ -43,6 +43,10 @@ if (!empty($invoice['invoiceNo']))
 
     if (isset($invoice['SystemEntryDate']))
         $stmt->bindParam(':_entry_date', $invoice['SystemEntryDate'], PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    $invoice['InvoiceNo'] = $db->lastInsertId();
 }
 else
 {
@@ -54,9 +58,9 @@ else
 
     $stmt->bindParam(':_billingDate', $invoice['InvoiceDate'], PDO::PARAM_STR);
     $stmt->bindParam(':_invoiceId', $invoice['InvoiceNo'], PDO::PARAM_INT);
-}
 
-$stmt->execute();
+    $stmt->execute();
+}
 
 $lines = $invoice['Line'];
 
