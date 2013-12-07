@@ -38,7 +38,6 @@ redirect_if_not_logged_in();
                 <input type="text" id="CompanyName" value="N/A" readonly>
             </div>
             <div class="_row _line_title">
-                <label>Lines</label>
             </div>
             <div class="_row totals">
                 <label for="TaxPayable">Tax Payable</label>
