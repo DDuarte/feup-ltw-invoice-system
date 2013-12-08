@@ -57,6 +57,7 @@ function showAdministratorEditableUserData(data) {
 }
 
 function showEditableUserData(data) {
+
     $('._header').text('Edit User');
     $('#Username').attr('value', data.Username);
     loadRoles($('#role'), data.Role);
@@ -81,7 +82,13 @@ function showEditableUserData(data) {
         else
             event.returnValue = false;
 
-        // ajax request
+        var jsonRequest = {
+            id : data.Id,
+            username : $('#Username').val(),
+            password : $('#PasswordField').val(),
+            role_id : $('#role').find(':selected').val()
+        };
+
     });
 }
 
@@ -102,22 +109,30 @@ function showBlankUserData(data) {
         else
             event.returnValue = false;
 
-        var jsonObj = {
+        var jsonRequest = {
+            id : '',
             username : $('#Username').val(),
-            password : $('#passwordField').val(),
+            password : $('#PasswordField').val(),
             role_id : $('#role').find(':selected').val()
         };
+
+        var requestStr = JSON.stringify(jsonRequest);
+
+        alert(requestStr);
 
         $.ajax({
             url: "api/updateUser.php",
             type: "POST",
             data: {
-                user: JSON.stringify(jsonObj)
+                user: requestStr
             },
             dataType: "JSON",
             success: function (jsonObj) {
-                alert('success');
-
+                alert(JSON.stringify(jsonObj));
+                window.location.replace('showUser.php?UserId=' + jsonObj + '&action=show');
+            },
+            error: function(jsonObj) {
+                alert('Error: ' + JSON.stringify(jsonObj));
             }
         });
     });

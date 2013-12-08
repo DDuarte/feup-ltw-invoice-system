@@ -68,7 +68,7 @@ redirect_if_not_logged_in();
             </ul>
         </nav>
         <div id="_current_user">
-            <a id="userEdit" href=<?php echo "\"showUser.php?UserId=".$_SESSION['user_id'].'"'; ?>><span id="username"> <?php echo $_SESSION['username']; ?></span></a>
+            <a id="userEdit" href=<?php echo "\"showUser.php?UserId=".$_SESSION['user_id'].'&action=edit"'; ?>><span id="username"> <?php echo $_SESSION['username']; ?></span></a>
             -
             <span id="role"> <?php require_once 'api/details/user_management.php'; echo get_role(); ?></span>
         </div>
