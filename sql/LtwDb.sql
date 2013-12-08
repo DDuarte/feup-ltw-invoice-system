@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS customer (
     city CHAR(30),
     postal_code CHAR(8) NOT NULL,
     country_code CHAR(2) NOT NULL,
+    CHECK (tax_id >= 100000000 AND tax_id <= 999999999),
     FOREIGN KEY(country_code) REFERENCES country(code)
 );
 
@@ -54,6 +55,7 @@ CREATE TABLE IF NOT EXISTS invoice (
     customer_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     entry_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK (abs(julianday(billing_date) - julianday(entry_date)) <= 6),
     FOREIGN KEY(customer_id) REFERENCES customer(id),
     FOREIGN KEY(user_id) REFERENCES user(id)
 );
@@ -218,22 +220,22 @@ INSERT INTO line (product_id, line_number, invoice_id, quantity, unit_price, tax
 (128, 1, 5, 500, 150, 1),
 (127, 1, 8, 134, 69, 1);
 
-INSERT INTO invoice (id, billing_date, customer_id, user_id) VALUES
-(1, '2013-09-27', 555560, 1),
-(2, '2013-09-27', 555560, 1),
-(3, '2013-09-30', 555568, 1),
-(4, '2013-10-24', 555565, 1),
-(5, '2013-10-21', 555566, 1),
-(6, '2013-11-10', 555567, 1),
-(8, '2013-07-22', 555568, 1);
+INSERT INTO invoice (id, billing_date, customer_id, user_id, entry_date) VALUES
+(1, '2013-09-27', 555560, 1, '2013-09-27'),
+(2, '2013-09-27', 555560, 1, '2013-09-27'),
+(3, '2013-09-30', 555568, 1, '2013-09-30'),
+(4, '2013-10-24', 555565, 1, '2013-10-24'),
+(5, '2013-10-21', 555566, 1, '2013-10-21'),
+(6, '2013-11-10', 555567, 1, '2013-11-10'),
+(8, '2013-07-22', 555568, 1, '2013-07-22');
 
 INSERT INTO customer (id, tax_id, company_name, email, detail, city, postal_code, country_code) VALUES
-(555560, 123, 'FEUP', 'feup@feup.com', 'Rua Dr. Roberto Frias, s/n', 'Porto', '4200-465', 'PT'),
-(555561, 124, 'UP', 'up@up.com', 'Praça Gomes Teixeira', 'Porto', '4099-002', 'PT'),
-(555565, 125, 'WSI', 'comercial@wsi-bg.pt', 'Rua Faria Guimarães, 765', 'Porto', '4200-291', 'PT'),
-(555566, 126, 'Alientech', 'comercial@alientech.pt', 'Rua da Torrinha, 194', 'Porto', '4050-610', 'PT'),
-(555567, 127, 'FNAC', 'comercial@fnac.pt', 'Rua Professor Carlos Alberto Mota Pinto, nr 9 - 6 B', 'Lisbon', '1070-374', 'PT'),
-(555568, 128, 'Memory', 'comercial@memory.co', 'London', 'London', '1000-155', 'GB');
+(555560, 123456780, 'FEUP', 'feup@feup.com', 'Rua Dr. Roberto Frias, s/n', 'Porto', '4200-465', 'PT'),
+(555561, 123456781, 'UP', 'up@up.com', 'Praça Gomes Teixeira', 'Porto', '4099-002', 'PT'),
+(555565, 123456782, 'WSI', 'comercial@wsi-bg.pt', 'Rua Faria Guimarães, 765', 'Porto', '4200-291', 'PT'),
+(555566, 123456783, 'Alientech', 'comercial@alientech.pt', 'Rua da Torrinha, 194', 'Porto', '4050-610', 'PT'),
+(555567, 123456784, 'FNAC', 'comercial@fnac.pt', 'Rua Professor Carlos Alberto Mota Pinto, nr 9 - 6 B', 'Lisbon', '1070-374', 'PT'),
+(555568, 123456785, 'Memory', 'comercial@memory.co', 'London', 'London', '1000-155', 'GB');
 
 
 INSERT INTO country (code, name) VALUES
