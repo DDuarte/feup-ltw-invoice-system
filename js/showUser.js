@@ -33,10 +33,10 @@ function showAdministratorEditableUserData(data) {
     $('#Username').attr('value', data.Username);
     loadRoles($('#role'), data.Role);
 
-    var passwordField = '<div id="Password" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
+    var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
     $('form').append(passwordField);
 
-    var checkBox = '<input type="checkbox" id="ChangePassword"> Change password </input>'
+    var checkBox = '<input type="checkbox" id="ChangePassword"><span>Change password<span></input>'
     $('form').append(checkBox);
     $('#ChangePassword').click(function() {
         if ($(this).is(':checked'))
@@ -62,7 +62,7 @@ function showEditableUserData(data) {
     loadRoles($('#role'), data.Role);
     $('#role').attr('disabled', true);
 
-    var passwordField = '<div id="Password" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
+    var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
     $('form').append(passwordField);
 
     var checkBox = '<input type="checkbox" id="ChangePassword"> Change password </input>'

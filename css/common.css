@@ -83,7 +83,7 @@ input{
     display: inline-block;
     position: relative;
     background: #eaeaea;
-    width: 135px;
+    width: 138px;
     color: #434343;
     font-size: 12px;
     padding: 5px;
@@ -96,6 +96,9 @@ input{
 }
 
 input[type='submit']{
+    display:block;
+    margin: 10px;
+
     border-top: 1px solid #dddddd;
     border-right: 1px solid #c5c5c5;
     border-bottom: 2px solid #c5c5c5;

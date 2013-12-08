@@ -28,7 +28,6 @@ label {
 }
 
 ._row {
-    display: block;
     position: relative;
     padding: 4px;
     width: 100%;
@@ -175,4 +174,17 @@ input.removeLineButtons{
 
 #UnitPrice {
     text-align: right;
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    margin: 10px 6px;
+}
+
+span{
+    display: inline-block;
+    position: relative;
+    padding-left: 4px;
+    bottom: 2px;
+    font-size: 14px;
 }

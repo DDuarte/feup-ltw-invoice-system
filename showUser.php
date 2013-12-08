@@ -20,11 +20,11 @@ redirect_if_not_logged_in();
     <div class="_header">
         Show User
     </div>
-    <div class="_row _user_username _hundred">
+    <div class="_row _user_username">
         <label for="Username">Username</label>
         <input type="text" id="Username" value="N/A" readonly>
     </div>
-    <div class="_row _user_role _five_hundred">
+    <div class="_row _user_role">
         <label for="Role">Role</label>
 
         <div class="_my_select">
