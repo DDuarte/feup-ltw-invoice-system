@@ -5,113 +5,123 @@ function getUrlVars() {
     });
     return vars;
 }
+
 function showUserData(data) {
+    $('._header').text('Show User');
+    $('#Username').attr('value', data.Username);
+    loadRoles($('#role'), data.Role);
+    $('#role').attr('disabled', true);
+}
 
-    alert("showUserData"); return;
+function loadRoles(target, toBeSelected) {
+    $.getJSON("api/getAllRoles.php", {
+    }).done(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var option = document.createElement("option");
+                option.value = data[i].id;
+                option.text = data[i].name;
+                target.append(option);
 
-    $(document).attr('title', 'Show Product #' + data.ProductCode);
+                if (option.text == toBeSelected)
+                    option.selected = true;
+            }
+        });
+}
 
-    $('#ProductCode').attr('value', data.ProductCode);
-    $('#ProductDescription').attr('value', data.ProductDescription);
-    $('#UnitPrice').attr('value', data.UnitPrice);
+function showAdministratorEditableUserData(data) {
+    $('._header').text('Edit User : Administrator');
+    $('#Username').attr('value', data.Username);
+    loadRoles($('#role'), data.Role);
+
+    var passwordField = '<div id="Password" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
+    $('form').append(passwordField);
+
+    var checkBox = '<input type="checkbox" id="ChangePassword"> Change password </input>'
+    $('form').append(checkBox);
+    $('#ChangePassword').click(function() {
+        if ($(this).is(':checked'))
+            $('#Password').show().attr('disabled', false);
+        else
+            $('#Password').hide().attr('disabled', true);
+    });
+
+    var submitButton = '<input type="submit" id="submit" value="Submit"></input>';
+    $('form').append(submitButton).submit(function(event) {
+        if (event.preventDefault)
+            event.preventDefault();
+        else
+            event.returnValue = false;
+
+        // ajax request
+    });
 }
 
 function showEditableUserData(data) {
+    $('._header').text('Edit User');
+    $('#Username').attr('value', data.Username);
+    loadRoles($('#role'), data.Role);
+    $('#role').attr('disabled', true);
 
-    alert("showEditableUserData"); return;
+    var passwordField = '<div id="Password" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
+    $('form').append(passwordField);
 
-    $('input').filter(function (index) {
-        return $(this).attr('id') !== 'ProductCode';
-    }).removeAttr('readonly').attr('method', 'post').prop('required', true);
+    var checkBox = '<input type="checkbox" id="ChangePassword"> Change password </input>'
+    $('form').append(checkBox);
+    $('#ChangePassword').click(function() {
+        if ($(this).is(':checked'))
+            $('#Password').show().attr('disabled', false);
+        else
+            $('#Password').hide().disable();
+    });
 
-    $('div._header').text('Edit product');
-
-    var submissionCallback = function (event) {
+    var submitButton = '<input type="submit" id="submit" value="Submit"></input>';
+    $('form').append(submitButton).submit(function(event) {
         if (event.preventDefault)
             event.preventDefault();
         else
             event.returnValue = false;
 
-        var jsonObj = {
-            ProductCode: $('#ProductCode').val(),
-            description: $("#ProductDescription").val(),
-            unit_price: $("#UnitPrice").val()
-        }
-
-        var requestStr = JSON.stringify(jsonObj);
-
-        $.ajax({
-            url: "api/updateProduct.php",
-            type: "POST",
-            data: {
-                product: requestStr
-            },
-            dataType: "JSON",
-            success: function (jsonStr) {
-                alert(JSON.stringify(jsonStr));
-            }
-        });
-    };
-
-    showProductData(data);
-
-    $('form').attr('method', 'post').attr('action', 'api/updateProduct.php')
-        .append('<input type="submit" id="submit" value="Submit">').submit(submissionCallback);
-
-    $('#ProductDescription').focus();
+        // ajax request
+    });
 }
 
 function showBlankUserData(data) {
+    $('._header').text('Create User');
+    $('#Username').attr('required', true).attr('value', '').attr('readonly', false);
 
-    alert("showBlankUserData"); return;
+    loadRoles($('#role'), '');
 
-    $('div._product_code').remove();
+    var passwordField = '<div id="Password"><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
+    //$('form').append(passwordField);
+    $('form ._user_role').before(passwordField);
 
-    $('input').removeAttr('readonly').prop('required', true).val('');
-
-    $('#ProductDescription').focus();
-
-    var submissionCallback = function (event) {
-        // prevent the default form behaviour
+    var submitButton = '<input type="submit" id="submit" value="Submit"></input>';
+    $('form').append(submitButton).submit(function(event) {
         if (event.preventDefault)
             event.preventDefault();
         else
             event.returnValue = false;
 
         var jsonObj = {
-            ProductCode: "",
-            description: $("#ProductDescription").val(),
-            unit_price: $("#UnitPrice").val()
-        }
-
-        var requestStr = JSON.stringify(jsonObj);
+            username : $('#Username').val(),
+            password : $('#passwordField').val(),
+            role_id : $('#role').find(':selected').val()
+        };
 
         $.ajax({
-            url: "api/updateProduct.php",
+            url: "api/updateUser.php",
             type: "POST",
             data: {
-                product: requestStr
+                user: JSON.stringify(jsonObj)
             },
             dataType: "JSON",
             success: function (jsonObj) {
-                $.ajax({
-                    url: "showProduct.php",
-                    type: "GET",
-                    data: {
-                        ProductId: jsonObj
-                    },
-                    dataType: "text",
-                    success: function (jsonObj) {
-                    }
-                });
+                alert('success');
+
             }
         });
-    };
+    });
 
-    $('form')
-        .append('<input id="submit" type="submit" value="Submit">').submit(submissionCallback);
-
-    $('div._header').text('Create new product');
 }
 
 function loadUser() {
@@ -168,7 +178,7 @@ function loadUser() {
                 var onSuccess = null;
                 switch(action) {
                     case 'edit': {
-                        onSuccess = is_admin ? showEditableUserData : null;
+                        onSuccess = is_admin ? showAdministratorEditableUserData : null;
                         break;
                     }
                     case 'create': {
