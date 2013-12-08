@@ -26,7 +26,7 @@ redirect_if_not_logged_in();
             </div>
             <div class="_row _customer_tax_id _hundred">
                 <label for="CustomerTaxId">Customer Tax Id</label>
-                <input type="number" id="CustomerTaxId" value="N/A" readonly>
+                <input type="text" id="CustomerTaxId" pattern="[1-9]{1}[0-9]{8}" value="N/A" readonly>
             </div>
             <div class="_row _company_name _five_hundred">
                 <label for="CompanyName">Company Name</label>
@@ -56,10 +56,6 @@ redirect_if_not_logged_in();
             <div class="_row _email _five_hundred">
                 <label for="Email">Email</label>
                 <input type="email" id="Email" value="N/A" readonly>
-            </div>
-            <div class="_row _self_billing_indicator">
-                <label for="SelfBillingIndicator">Self Billing</label>
-                <input type="checkbox" id="SelfBillingIndicator" readonly>
             </div>
         </form>
     </body>
