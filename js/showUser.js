@@ -9,7 +9,7 @@ function getUrlVars() {
 function showUserData(data) {
     $('._header').text('Show User');
     $('#Username').attr('value', data.Username);
-    loadRoles($('#role'), data.Role);
+    loadRoles($('select#role'), data.Role);
     $('#role').attr('disabled', true);
 }
 
@@ -31,7 +31,7 @@ function loadRoles(target, toBeSelected) {
 function showAdministratorEditableUserData(data) {
     $('._header').text('Edit User : Administrator');
     $('#Username').attr('value', data.Username);
-    loadRoles($('#role'), data.Role);
+    loadRoles($('select#role'), data.Role);
 
     var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField"></input></div>'
     $('form').append(passwordField);
@@ -91,7 +91,7 @@ function showAdministratorEditableUserData(data) {
 function showEditableUserData(data) {
     $('._header').text('Edit User');
     $('#Username').attr('value', data.Username);
-    loadRoles($('#role'), data.Role);
+    loadRoles($('select#role'), data.Role);
     $('#role').attr('disabled', true);
 
     var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField"></input></div>'
