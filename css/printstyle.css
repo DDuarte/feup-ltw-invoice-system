@@ -52,8 +52,8 @@ body {
 }
 
 ._header:last-child {
-    border-right: 1px solid #FF4D4D;
     border-top-right-radius: 6px;
+
 }
 
 ._header {
