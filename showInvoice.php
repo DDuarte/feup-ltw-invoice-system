@@ -31,7 +31,7 @@ redirect_if_not_logged_in();
             <div class="_row">
                 <label>Customer Id</label>
                 <input type="number" id="CustomerID" value="N/A" readonly>
-                <a id="CustomerIDLink" target="_blank"><img title="Customer Info" src="images/icon_arrow.gif"></a>
+                <a id="CustomerIDLink" target="_blank"><img title="Customer Info" src="images/glyphicons_217_circle_arrow_right.png"></a>
             </div>
             <div class="_row">
                 <label for="CompanyName">Company Name</label>

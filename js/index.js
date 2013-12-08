@@ -146,10 +146,10 @@ function search() {
                     }
                 }
 
-                $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/icon_details.gif" title="more info" width="20" height="20"></a></td>');
+                $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/glyphicons_195_circle_info.png" title="more info" width="20" height="20"></a></td>');
 
                 if (arr[doc].printHtml) {
-                    $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].printHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/icon_print.gif" title="print" width="20" height="20"></a></td>');
+                    $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].printHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/glyphicons_015_print.png" title="print" width="20" height="20"></a></td>');
                 }
 
                 $('#search_results_table').append('</tr>');

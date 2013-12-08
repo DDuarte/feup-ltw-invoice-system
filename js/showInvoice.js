@@ -65,7 +65,7 @@ function addBlankLine() {
                     <div class="_row _product_code" style="display: none;"> \
                         <label>Product Code</label> \
                         <input type="number" class="ProductCode" value=""> \
-                        <a class="ProductCodeLink" target="_blank"><img title="Product Info" src="../images/icon_arrow.gif"></a> \
+                        <a class="ProductCodeLink" target="_blank"><img title="Product Info" src="../images/glyphicons_217_circle_arrow_right.png"></a> \
                     </div> \
                     <div class="_row _product_description _five_hundred"> \
                         <label>Product Description</label> \
@@ -159,7 +159,7 @@ function addLines(data, edit) {
                     <div class="_row _product_code"> \
                         <label>Product Code</label> \
                         <input type="number" class="ProductCode" value="N/A" readonly> \
-                        <a class="ProductCodeLink" target="_blank"><img title="Product Info" src="../images/icon_arrow.gif"></a> \
+                        <a class="ProductCodeLink" target="_blank"><img title="Product Info" src="../images/glyphicons_217_circle_arrow_right.png"></a> \
                     </div> \
                     <div class="_row _product_description _five_hundred"> \
                         <label>Product Description</label> \
