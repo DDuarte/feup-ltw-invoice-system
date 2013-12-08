@@ -3,6 +3,10 @@
 require 'api/details/user_management.php';
 redirect_if_not_logged_in();
 
+$error550 = '{"error":{"code":550,"reason":"Permission denied"}}';
+
+if (!is_admin())
+    exit($error550);
 ?>
 
 <!DOCTYPE html>
