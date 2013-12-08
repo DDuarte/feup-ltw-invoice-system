@@ -176,6 +176,10 @@ input.removeLineButtons{
     text-align: right;
 }
 
+input[type='submit']{
+    margin: 10px;
+}
+
 input[type="checkbox"]{
     width: 20px;
     margin: 10px 6px;
