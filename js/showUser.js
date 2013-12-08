@@ -57,7 +57,6 @@ function showAdministratorEditableUserData(data) {
 }
 
 function showEditableUserData(data) {
-
     $('._header').text('Edit User');
     $('#Username').attr('value', data.Username);
     loadRoles($('#role'), data.Role);
@@ -85,8 +84,7 @@ function showEditableUserData(data) {
         var jsonRequest = {
             id : data.Id,
             username : $('#Username').val(),
-            password : $('#PasswordField').val(),
-            role_id : $('#role').find(':selected').val()
+            password : $('#PasswordField').val()
         };
 
     });
@@ -98,7 +96,7 @@ function showBlankUserData(data) {
 
     loadRoles($('#role'), '');
 
-    var passwordField = '<div id="Password"><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
+    var passwordField = '<div id="Password" class="_row"><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
     //$('form').append(passwordField);
     $('form ._user_role').before(passwordField);
 
@@ -144,7 +142,7 @@ function loadUser() {
     var action = urlVars['action'];
 
     if (action !== 'create') {
-        var id = urlVars['UserId'];
+        var id = parseInt(urlVars['UserId']);
         if (id == undefined) {
             alert('No user id was detected');
             return;
@@ -168,7 +166,6 @@ function loadUser() {
                         logged_id = JSON.parse(logged_id);
 
                         var onSuccess = null;
-
                         if (id === logged_id) {
                             switch(action) {
                                 case 'edit': {
@@ -181,8 +178,10 @@ function loadUser() {
                             }
                         }
 
-                        if (onSuccess == null)
+                        if (onSuccess == null) {
+                            alert('Error: permission denied');
                             return;
+                        }
 
                         $.getJSON("api/getUser.php", {
                             UserId: decodeURI(id)
@@ -206,8 +205,10 @@ function loadUser() {
                     }
                 }
 
-                if (onSuccess == null)
+                if (onSuccess == null) {
+                    alert('Error: permission denied');
                     return;
+                }
 
                 $.getJSON("api/getUser.php", {
                     UserId: decodeURI(id)
