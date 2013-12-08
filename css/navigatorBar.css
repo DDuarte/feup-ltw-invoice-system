@@ -98,6 +98,8 @@ a[href="api/logout.php"]{
 
     text-align: right;
     bottom: 25px;
+
+    margin-left: 5px;
 }
 
 div.session{
@@ -108,12 +110,12 @@ div.session{
 
 ul.create_documents li._menu_item{
     position: relative;
-    width: 140px;
+    width: 150px;
 
     right: 15px
 }
 ul.create_documents li._menu_item > a span{
-    width: 140px
+    width: 150px
 }
 
 a#userEdit:link, a#userEdit:visited{
