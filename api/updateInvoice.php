@@ -22,6 +22,11 @@ if (json_last_error() !== JSON_ERROR_NONE)
 if (!isset($invoice['InvoiceDate']) || !isset($invoice['CustomerID']) || !isset($invoice['InvoiceNo']) || !isset($invoice['DocumentStatus']['SourceID']))
     exit($error400);
 
+if (!isset($invoice['notUpdatePrice']))
+    $updatePrice = true;
+else
+    $updatePrice = false;
+
 $db = new PDO('sqlite:../sql/OIS.db');
 
 // update or insert new invoice information
@@ -83,26 +88,27 @@ foreach($lines as $line)
     $stmt->bindParam(':_invoice_id', $invoice['InvoiceNo'], PDO::PARAM_INT);
     $stmt->bindParam(':_quantity', $line['Quantity'], PDO::PARAM_INT);
 
-    if (!empty($line['UnitPrice']))
-    {
+    if ($updatePrice) {
+        if (!empty($line['UnitPrice'])) {
+            $stmt->bindParam(':_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
+
+            $productStmt = "UPDATE product SET unit_price = :_product_unit_price WHERE id = :_product_code";
+            $productUpdate = $db->prepare($productStmt);
+
+            if (!$productUpdate)
+                exit($error400);
+
+            $productUpdate->bindParam(':_product_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
+            $productUpdate->bindParam(':_product_code', $line['ProductCode'], PDO::PARAM_INT);
+
+            $productUpdate->execute();
+        } else {
+            $null = "NULL";
+            $stmt->bindParam(':_unit_price', $null, PDO::PARAM_STR);
+        }
+
+    } else
         $stmt->bindParam(':_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
-
-        $productStmt = "UPDATE product SET unit_price = :_product_unit_price WHERE id = :_product_code";
-        $productUpdate = $db->prepare($productStmt);
-
-        if (!$productUpdate)
-            exit($error400);
-
-        $productUpdate->bindParam(':_product_unit_price', $line['UnitPrice'], PDO::PARAM_STR);
-        $productUpdate->bindParam(':_product_code', $line['ProductCode'], PDO::PARAM_INT);
-
-        $productUpdate->execute();
-    }
-    else
-    {
-        $null = "NULL";
-        $stmt->bindParam(':_unit_price', $null, PDO::PARAM_STR);
-    }
 
     $taxStmt = "SELECT id FROM tax WHERE type = :_type AND percentage = :_percentage;";
     $newTaxStmt = $db->prepare($taxStmt);
