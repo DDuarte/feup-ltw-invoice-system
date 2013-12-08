@@ -21,8 +21,8 @@ function loadUsers(){
                 $('#header').append('<th>' + arr['user'].tableHeader[i] + '</th>');
             }
 
-            $('#header').append('<th>Edit User</th>');
-            $('#header').append('<th>Delete User</th>');
+            $('#header').append('<th>Edit User</th>');//.append('<th>Delete User</th>');
+            //$('#header').append('<th>Delete User</th
 
             for (var i = 0; i < data.length; ++i) {
                 $('#search_results_table').append('<tr>');
@@ -36,8 +36,10 @@ function loadUsers(){
                     }
                 }
 
-                $('#search_results_table tbody').append('<td style="text-align: center"><a target="_blank" href=""><img src="images/glyphicons_150_edit.png" title="edit" width="20" height="20"></a></td>');
-                $('#search_results_table tbody').append('<td style="text-align: center"><a target="_blank" href=""><img src="images/glyphicons_256_delete.png" title="delete" width="20" height="12"></a></td>');
+                var tableEditElement = '<td style="text-align: center"><a target="_blank" href=""><img src="images/glyphicons_150_edit.png" title="edit" width="20" height="20"></a></td>';
+                $('#search_results_table tbody').append(tableEditElement);
+                $('td:last').children('a').attr('href', 'showUser.php?UserId=' + data[i].Id + '&action=edit');
+                //$('#search_results_table tbody').append('<td style="text-align: center"><a target="_blank" href=""><img src="images/glyphicons_256_delete.png" title="delete" width="20" height="12"></a></td>');
 
                 $('#search_results_table').append('</tr>');
             }

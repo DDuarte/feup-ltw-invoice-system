@@ -24,6 +24,7 @@ class User
             return 404;
         }
 
+        $this->_id = $userId;
         $this->_username = $userResult['username'];
         $this->_role = $userResult['name'];
 
@@ -33,6 +34,7 @@ class User
     public function toArray()
     {
         return [
+            'Id' => $this->_id,
             'Username'  => $this->_username,
             'Role'      => $this->_role
         ];
@@ -51,6 +53,7 @@ class User
             return json_encode($array);
     }
 
+    private $_id;
     private $_username;
     private $_role;
 }
