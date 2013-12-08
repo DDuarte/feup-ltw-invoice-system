@@ -29,9 +29,6 @@ redirect_if_not_logged_in();
 
         <div class="_my_select">
             <select id="role" required>
-                <!--<option id="Administrator" value="admin">Administrator</option>
-                <option id="Reader" value="read"> Reader</option>
-                <option id="Editor" value="edit"> Editor</option>-->
             </select>
         </div>
     </div>
