@@ -15,7 +15,7 @@ function loadCountryCodes(target, toBeSelected) {
                 option.text = data[i].name;
                 $(target).append(option);
 
-                if (option.text == toBeSelected)
+                if (option.value == toBeSelected)
                     option.selected = true;
             }
 
@@ -33,7 +33,6 @@ function showCustomerData(data) {
     $('#PostalCode').attr('value', data.BillingAddress.PostalCode);
     $('#Country').attr('value', data.BillingAddress.Country);
     $('#Email').attr('value', data.Email);
-    $('#SelfBillingIndicator').prop('checked', data.SelfBillingIndicator);
 }
 
 function editSubmissionCallback(event) {
@@ -46,12 +45,14 @@ function editSubmissionCallback(event) {
     var jsonObj = {
         CustomerID: $('#CustomerID').val(),
         CustomerTaxID: $("#CustomerTaxId").val(),
-        AddressDetail: $("#AddressDetail").val(),
         CompanyName: $('#CompanyName').val(),
         Email: $('#Email').val(),
-        City: $('#City').val(),
-        PostalCode: $('#PostalCode').val(),
-        Country: $('#Country').val()
+        BillingAddress : {
+            AddressDetail: $("#AddressDetail").val(),
+            City: $('#City').val(),
+            PostalCode: $('#PostalCode').val(),
+            Country: $('#Country').val()
+        }
     };
 
     var requestStr = JSON.stringify(jsonObj);
@@ -82,12 +83,14 @@ function createSubmissionCallback(event) {
     var jsonObj = {
         CustomerID: '',
         CustomerTaxID: $("#CustomerTaxId").val(),
-        AddressDetail: $("#AddressDetail").val(),
         CompanyName: $('#CompanyName').val(),
         Email: $('#Email').val(),
+        BillingAddress : {
+        AddressDetail: $("#AddressDetail").val(),
         City: $('#City').val(),
         PostalCode: $('#PostalCode').val(),
         Country: $('#Country').val()
+        }
     };
 
     var requestStr = JSON.stringify(jsonObj);
@@ -111,7 +114,6 @@ function createSubmissionCallback(event) {
 
 function showEditableCustomerData(data) {
     $(document).attr('title', 'Edit Customer #' + data.CustomerID);
-
     $('._header').text("Edit Customer");
 
     $('input').filter(function (index) {
@@ -125,7 +127,6 @@ function showEditableCustomerData(data) {
     $('#City').attr('value', data.BillingAddress.City);
     $('#PostalCode').attr('value', data.BillingAddress.PostalCode);
     $('#Email').attr('value', data.Email);
-    $('#SelfBillingIndicator').prop('checked', data.SelfBillingIndicator);
 
     $('input#Country').replaceWith('<select id="Country"></select>').prop('required', true);
     loadCountryCodes('#Country', data.BillingAddress.Country);
@@ -135,6 +136,7 @@ function showEditableCustomerData(data) {
 
 function showBlankCustomerData(data) {
     $(document).attr('title', 'Create Customer');
+    $('._header').text("Create Customer");
 
     $('input').filter(function (index) {
         return $(this).attr('id') !== 'CustomerID';
@@ -161,29 +163,49 @@ function loadCustomer() {
         }
     }
 
-    var onSuccess;
-    switch (action) {
-        case 'edit':
-        {
-            onSuccess = showEditableCustomerData;
-            break;
-        }
-        case 'create':
-        {
-            onSuccess = showBlankCustomerData;
-            break;
-        }
-        case 'show':
-        case undefined:
-        {
-            onSuccess = showCustomerData;
-            break;
-        }
-        default:
-            return;
-    }
+    $.ajax({
+        url: "api/user_is_editor.php",
+        success: function (is_editor) {
+            is_editor = JSON.parse(is_editor);
+            var onSuccess = null;
+            if(is_editor) {
+                switch (action) {
+                    case 'edit':
+                    {
+                        onSuccess = showEditableCustomerData;
+                        break;
+                    }
+                    case 'create':
+                    {
+                        onSuccess = showBlankCustomerData;
+                        break;
+                    }
+                    case 'show':
+                    case undefined:
+                    {
+                        onSuccess = showCustomerData;
+                        break;
+                    }
+                    default:
+                        return;
+                }
+            }
+            else {
+                if (action != 'show' && action !== undefined) {
+                    alert('Error: permission denied');
+                    window.location.replace('index.php');
+                }
+                else
+                    onSuccess = showCustomerData;
+            }
 
-    $.getJSON("api/getCustomer.php", {
-        CustomerID: decodeURI(id)
-    }).done(onSuccess);
+            if (onSuccess === null)
+                return;
+
+            $.getJSON("api/getCustomer.php", {
+                CustomerID: decodeURI(id)
+            }).done(onSuccess);
+
+        }
+    });
 }
