@@ -112,6 +112,8 @@ function createSubmissionCallback(event) {
 function showEditableCustomerData(data) {
     $(document).attr('title', 'Edit Customer #' + data.CustomerID);
 
+    $('._header').text("Edit Customer");
+
     $('input').filter(function (index) {
         return $(this).attr('id') !== 'CustomerID';
     }).removeAttr('readonly').prop('required', true);

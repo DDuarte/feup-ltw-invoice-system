@@ -16,6 +16,8 @@ function showProductData(data) {
 
 function showEditableProductData(data) {
 
+    $('._header').text("Edit Product");
+
     $('input').filter(function (index) {
         return $(this).attr('id') !== 'ProductCode';
     }).removeAttr('readonly').attr('method', 'post').prop('required', true);

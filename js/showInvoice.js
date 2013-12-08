@@ -256,6 +256,8 @@ function showInvoice(data) {
 function showEditableInvoice(data) {
     $(document).children('title').text('Edit invoice');
 
+    $('._header').text("Edit Invoice");
+
     $('#InvoiceNo').attr('value', "FT SEQ/" + data.InvoiceNo);
     $('#InvoiceDate').attr('value', data.InvoiceDate);
 
