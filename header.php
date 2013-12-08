@@ -11,6 +11,7 @@ redirect_if_not_logged_in();
         <meta charset="UTF-8" />
         <title>Online Invoicing System</title>
         <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery.xml2json.js"></script>
         <script src="js/index.js"></script>
         <link rel="stylesheet"  href="css/common.css" type="text/css">
         <link rel="stylesheet"  href="css/navigatorBar.css" type="text/css">
@@ -31,9 +32,16 @@ redirect_if_not_logged_in();
                 <?php if (is_admin()) { ?>
                 <li class="_menu_item" id="userManagement">
                     <a href="manageUsers.php">
-                        <span>Manage</span>
+                        <span>Manage Users</span>
                     </a>
                 </li>
+                <?php } ?>
+                <?php if (is_editor()) { ?>
+                    <li class="_menu_item" id="import_export">
+                        <a href="import_export.php">
+                            <span>Import/Export</span>
+                        </a>
+                    </li>
                 <?php } ?>
                 <li class="_menu_item" id="about">
                     <a href="about.php">
@@ -45,7 +53,6 @@ redirect_if_not_logged_in();
                         <span>Logout</span>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </body>
