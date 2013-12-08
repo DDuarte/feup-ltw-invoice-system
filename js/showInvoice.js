@@ -26,6 +26,29 @@ function loadProducts(target, toBeSelected) {
         });
 }
 
+function loadCustomers(target, toBeSelected) {
+    $.getJSON("api/getAllCustomers.php", {
+    }).done(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var option = document.createElement("option");
+                option.value = data[i].id;
+                option.text = data[i].company_name;
+                target.append(option);
+
+                if (option.value == toBeSelected)
+                    option.selected = true;
+            }
+
+            $('#CustomerIDLink').attr('href', "showCustomer.php?CustomerID=" + target.find(':selected').val());
+            $('#CustomerID').attr('value', target.find(':selected').val());
+            target.change(function() {
+                $('#CustomerIDLink').attr('href', "showCustomer.php?CustomerID=" + $(this).find(':selected').val());
+                $('#CustomerID').attr('value', $(this).find(':selected').val());
+            });
+
+        });
+}
+
 function loadTaxes(targetListBox, targetInput, toBeSelected)
 {
     $.getJSON("api/getAllTax.php", {
@@ -283,9 +306,20 @@ function showEditableInvoice(data) {
 
 function showBlankInvoice(data) {
     $(document).attr('title', 'Create Invoice');
+    $('._header').text("Create Invoice");
+    $('._invoice_number').remove();
 
-    $('#InvoiceNo').remove();
-    //$('#InvoiceDate').replaceWith();
+    $('input').removeAttr('readonly').prop('required', true);
+
+    $('.totals').remove();
+    $('#CompanyName').replaceWith('<select id="CompanyName"> </select>');
+    $('#CustomerID').prop('readonly', true);
+    loadCustomers($('#CompanyName'), '');
+
+    $('<input id="addLineButton" type="button" onclick="addBlankLine()" value="Add line"> </input>').
+        insertAfter($("#CompanyName"));
+
+    $('form').append('<input type="submit" id="submit">').submit(createSubmissionCallback);
 }
 
 function submissionCallback(event) {
@@ -298,18 +332,14 @@ function submissionCallback(event) {
 
     var jsonObject = new Object();
     jsonObject.InvoiceNo = $('#InvoiceNo').val().replace( /^\D+/g, '');
-    alert(jsonObject.InvoiceNo);
     jsonObject.CustomerID = $('#CustomerID').val();
     jsonObject.InvoiceDate = $('#InvoiceDate').val();
     jsonObject.DocumentStatus  = {
         SourceID: 1
     };
+    jsonObject.notUpdatePrice = false;
 
     jsonObject.Line = [];
-
-    //alert($('._line_title').children('._line_number').length);
-
-    //var children = $('._line_title').children('');
     $('._line_title').children('._invoice_line').each(function() {
         var line =  {
             LineNumber : $(this).find('.LineNumber').val(),
@@ -330,8 +360,6 @@ function submissionCallback(event) {
 
     var requestStr = JSON.stringify(jsonObject);
 
-    alert(requestStr);
-
    $.ajax({
         url: "api/updateInvoice.php",
         type: "POST",
@@ -340,10 +368,64 @@ function submissionCallback(event) {
         },
         dataType: "JSON",
         success: function (jsonObj) {
-
+            var invoiceId = parseInt(jsonObj.InvoiceNo);
+            window.location.replace('showInvoice.php?InvoiceNo=' + invoiceId +'&action=show');
         },
         error: function(jsonObj) {
 
+        }
+    });
+}
+
+function createSubmissionCallback(event) {
+    // prevent form default behaviour
+    if (event.preventDefault)
+        event.preventDefault();
+    else
+        event.returnValue = false;
+
+    var jsonObject = new Object();
+    jsonObject.InvoiceNo = '';
+    jsonObject.CustomerID = $('#CustomerID').val();
+    jsonObject.InvoiceDate = $('#InvoiceDate').val();
+    jsonObject.DocumentStatus  = {
+        SourceID: 1
+    };
+    jsonObject.notUpdatePrice = false;
+
+    jsonObject.Line = [];
+    $('._line_title').children('._invoice_line').each(function() {
+        var line =  {
+            LineNumber : $(this).find('.LineNumber').val(),
+            ProductCode : $(this).find('.ProductDescription').find(':selected').val(),
+            Quantity : $(this).find('.Quantity').val(),
+            UnitPrice : $(this).find('.UnitPrice').val(),
+            Tax: {
+                TaxType : $(this).find('.TaxType').find(':selected').text(),
+                TaxCountryRegion : "",
+                TaxCode : "",
+                TaxPercentage : $(this).find('.TaxType').find(':selected').attr('percentage')
+            }
+        };
+
+        jsonObject.Line.push(line);
+    });
+
+    var requestStr = JSON.stringify(jsonObject);
+
+    $.ajax({
+        url: "api/updateInvoice.php",
+        type: "POST",
+        data: {
+            invoice: requestStr
+        },
+        dataType: "JSON",
+        success: function (jsonObj) {
+                var invoiceId = parseInt(jsonObj.InvoiceNo);
+                window.location.replace('showInvoice.php?InvoiceNo=' + invoiceId +'&action=show');
+        },
+        error: function(jsonObj) {
+            alert('Error:' + Json.stringify(jsonObj));
         }
     });
 }
@@ -372,6 +454,7 @@ function loadInvoice() {
             onSuccess = showBlankInvoice;
             break;
         }
+        case 'show':
         case undefined:
         {
             onSuccess = showInvoice;
