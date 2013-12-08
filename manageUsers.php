@@ -28,7 +28,7 @@ if (!is_admin())
 <body>
 <div id="pageHeader"></div>
 
-<div class="search_results">
+<div class="search_results" style="position: relative; top:100px">
     <table id="search_results_table">
         <tr id="header">
         </tr>
