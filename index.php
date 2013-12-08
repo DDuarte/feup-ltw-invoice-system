@@ -12,6 +12,7 @@ redirect_if_not_logged_in();
         <title>Online Invoicing System</title>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/index.js"></script>
+        <link rel="stylesheet" href="css/common.css" type="text/css">
     </head>
     <body onload="load('index')">
         <div id="pageHeader"></div>
