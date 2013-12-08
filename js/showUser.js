@@ -33,45 +33,20 @@ function showAdministratorEditableUserData(data) {
     $('#Username').attr('value', data.Username);
     loadRoles($('#role'), data.Role);
 
-    var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
+    var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField"></input></div>'
     $('form').append(passwordField);
 
     var checkBox = '<input type="checkbox" id="ChangePassword"><span>Change password<span></input>'
     $('form').append(checkBox);
     $('#ChangePassword').click(function() {
-        if ($(this).is(':checked'))
+        if ($(this).is(':checked')) {
             $('#Password').show().attr('disabled', false);
-        else
+            $('#PasswordField').prop('required', true);
+        }
+        else {
             $('#Password').hide().attr('disabled', true);
-    });
-
-    var submitButton = '<input type="submit" id="submit" value="Submit"></input>';
-    $('form').append(submitButton).submit(function(event) {
-        if (event.preventDefault)
-            event.preventDefault();
-        else
-            event.returnValue = false;
-
-        // ajax request
-    });
-}
-
-function showEditableUserData(data) {
-    $('._header').text('Edit User');
-    $('#Username').attr('value', data.Username);
-    loadRoles($('#role'), data.Role);
-    $('#role').attr('disabled', true);
-
-    var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
-    $('form').append(passwordField);
-
-    var checkBox = '<input type="checkbox" id="ChangePassword"> Change password </input>'
-    $('form').append(checkBox);
-    $('#ChangePassword').click(function() {
-        if ($(this).is(':checked'))
-            $('#Password').show().attr('disabled', false);
-        else
-            $('#Password').hide().disable();
+            $('#PasswordField').prop('required', false);
+        }
     });
 
     var submitButton = '<input type="submit" id="submit" value="Submit"></input>';
@@ -84,8 +59,92 @@ function showEditableUserData(data) {
         var jsonRequest = {
             id : data.Id,
             username : $('#Username').val(),
-            password : $('#PasswordField').val()
+            password : '',
+            role_id : $('#role').find(':selected').val()
         };
+
+        if ($('#ChangePassword').prop('checked'))
+            jsonRequest.password = $('#PasswordField').val();
+
+        var requestStr = JSON.stringify(jsonRequest);
+        //alert(requestStr);
+
+        $.ajax({
+            url: "api/updateUser.php",
+            type: "POST",
+            data: {
+                user: requestStr
+            },
+            dataType: "JSON",
+            success: function (jsonObj) {
+                //alert(JSON.stringify(jsonObj));
+                window.location.replace('showUser.php?UserId=' + jsonObj + '&action=show');
+            },
+            error: function(jsonObj) {
+                alert('Error: ' + JSON.stringify(jsonObj));
+            }
+        });
+
+    });
+}
+
+function showEditableUserData(data) {
+    $('._header').text('Edit User');
+    $('#Username').attr('value', data.Username);
+    loadRoles($('#role'), data.Role);
+    $('#role').attr('disabled', true);
+
+    var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField"></input></div>'
+    $('form').append(passwordField);
+
+    var checkBox = '<input type="checkbox" id="ChangePassword"> Change password </input>'
+    $('form').append(checkBox);
+    $('#ChangePassword').click(function() {
+        if ($(this).is(':checked')) {
+            $('#Password').show().attr('disabled', false);
+            $('#PasswordField').prop('required', true);
+        }
+        else {
+            $('#Password').hide().attr('disabled', true);
+            $('#PasswordField').prop('required', false);
+        }
+    });
+
+    var submitButton = '<input type="submit" id="submit" value="Submit"></input>';
+    $('form').append(submitButton).submit(function(event) {
+        if (event.preventDefault)
+            event.preventDefault();
+        else
+            event.returnValue = false;
+
+        var jsonRequest = {
+            id : data.Id,
+            username : $('#Username').val(),
+            password : '',
+            role_id : ''
+        };
+
+        if ($('#ChangePassword').prop('checked'))
+            jsonRequest.password = $('#PasswordField').val();
+
+        var requestStr = JSON.stringify(jsonRequest);
+        //alert(requestStr);
+
+        $.ajax({
+            url: "api/updateUser.php",
+            type: "POST",
+            data: {
+                user: requestStr
+            },
+            dataType: "JSON",
+            success: function (jsonObj) {
+                //alert(JSON.stringify(jsonObj));
+                window.location.replace('showUser.php?UserId=' + jsonObj + '&action=show');
+            },
+            error: function(jsonObj) {
+                alert('Error: ' + JSON.stringify(jsonObj));
+            }
+        });
 
     });
 }
@@ -116,7 +175,7 @@ function showBlankUserData(data) {
 
         var requestStr = JSON.stringify(jsonRequest);
 
-        alert(requestStr);
+        //alert(requestStr);
 
         $.ajax({
             url: "api/updateUser.php",
@@ -126,7 +185,7 @@ function showBlankUserData(data) {
             },
             dataType: "JSON",
             success: function (jsonObj) {
-                alert(JSON.stringify(jsonObj));
+                //alert(JSON.stringify(jsonObj));
                 window.location.replace('showUser.php?UserId=' + jsonObj + '&action=show');
             },
             error: function(jsonObj) {
