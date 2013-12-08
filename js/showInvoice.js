@@ -442,28 +442,51 @@ function loadInvoice() {
         }
     }
 
-    var onSuccess;
-    switch (action) {
-        case 'edit':
-        {
-            onSuccess = showEditableInvoice;
-            break;
+    $.ajax({
+        url: "api/user_is_editor.php",
+        success: function (is_editor) {
+
+            is_editor = JSON.parse(is_editor);
+
+            var onSuccess = null;
+            if (is_editor)
+            {
+                switch (action) {
+                    case 'edit':
+                    {
+                        onSuccess = showEditableInvoice;
+                        break;
+                    }
+                    case 'create':
+                    {
+                        onSuccess = showBlankInvoice;
+                        break;
+                    }
+                    case 'show':
+                    case undefined:
+                    {
+                        onSuccess = showInvoice;
+                        break;
+                    }
+                    default:
+                        return;
+                }
+            }
+            else {
+                if (action != 'show' && action !== undefined) {
+                    alert('Error: permission denied');
+                    window.location.replace('index.php');
+                }
+                else
+                    onSuccess = showInvoice;
+            }
+            if (onSuccess == null)
+                return;
+
+            $.getJSON("api/getFullInvoice.php", {
+                InvoiceNo: decodeURI(id)
+            }).done(onSuccess);
         }
-        case 'create':
-        {
-            onSuccess = showBlankInvoice;
-            break;
-        }
-        case 'show':
-        case undefined:
-        {
-            onSuccess = showInvoice;
-            break;
-        }
-        default:
-            return;
-    }
-    $.getJSON("api/getFullInvoice.php", {
-        InvoiceNo: decodeURI(id)
-    }).done(onSuccess);
+
+    });
 }
