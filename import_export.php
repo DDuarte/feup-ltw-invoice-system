@@ -152,7 +152,35 @@ redirect_if_not_logged_in();
         <img src="images/glyphicons_364_cloud_download.png" title="import from url" width="20" height="20">
         <input type="url" placeholder="url..." id="url_field" required>
         <input type="submit" value="Import" id="input_button">
-    </form>
+    </form><br/><br/>
+    <h3>Delete Data</h3>
+    <a href="api/deleteAll.php" id="deleteAll"><img src="images/glyphicons_143_database_ban.png" title="delete" width="20" height="20"></a>
+    <script>
+        $(function(){
+            $("#deleteAll").click(function(){
+                var r = confirm("Are you sure you want to wipe EVERYTHING?");
+                if (r === false)
+                    return false;
+
+                $.ajax({
+                    url: 'api/deleteAll.php',
+                    success: function (resp) {
+                        //var resp = JSON.parse(response);
+                        alert('Successfully deleted '
+                            + resp.CustomersDeleted + ' customers, '
+                            + resp.InvoicesDeleted + ' invoices, '
+                            + resp.LinesDeleted + ' invoices\' lines, '
+                            + resp.TaxesDeleted + ' taxes and '
+                            + resp.ProductsDeleted + ' products.');
+                    },
+                    error: function () {
+                        alert('Failed to delete.');
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
 </div>
 </body>
 </html>
