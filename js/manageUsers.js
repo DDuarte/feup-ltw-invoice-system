@@ -36,8 +36,8 @@ function loadUsers(){
                     }
                 }
 
-                $('#search_results_table tbody').append('<td><a target="_blank" href=""><img src="images/glyphicons_150_edit.png" title="edit" width="20" height="20"></a></td>');
-                $('#search_results_table tbody').append('<td><a target="_blank" href=""><img src="images/glyphicons_256_delete.png" title="delete" width="20" height="12"></a></td>');
+                $('#search_results_table tbody').append('<td style="text-align: center"><a target="_blank" href=""><img src="images/glyphicons_150_edit.png" title="edit" width="20" height="20"></a></td>');
+                $('#search_results_table tbody').append('<td style="text-align: center"><a target="_blank" href=""><img src="images/glyphicons_256_delete.png" title="delete" width="20" height="12"></a></td>');
 
                 $('#search_results_table').append('</tr>');
             }
