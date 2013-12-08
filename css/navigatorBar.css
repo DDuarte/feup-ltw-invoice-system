@@ -67,7 +67,8 @@ nav ul li ul li._menu_item{
 }
 
 div#_current_user{
-    position: relative;
+    display: inline-block;
+    position: fixed;
 
     float: right;
     text-align: right;
@@ -90,6 +91,29 @@ span#role{
     color: red;
 
     bottom: 2px;
+}
+
+a[href="api/logout.php"]{
+    position: fixed;
+
+    text-align: right;
+    bottom: 25px;
+}
+
+div.session{
+    display: inline-block;
+    position: fixed;
+    margin: 0 10px;
+}
+
+ul.create_documents li._menu_item{
+    position: relative;
+    width: 140px;
+
+    right: 15px
+}
+ul.create_documents li._menu_item > a span{
+    width: 140px
 }
 
 a#userEdit:link, a#userEdit:visited{

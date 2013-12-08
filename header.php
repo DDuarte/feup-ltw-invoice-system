@@ -24,18 +24,38 @@ redirect_if_not_logged_in();
                         <span>Home</span>
                     </a>
                 </li>
+                <li class="_menu_item" id="about">
+                    <a href="about.php">
+                        <span>About</span>
+                    </a>
+                </li>
                 <li class="_menu_item" id="search">
                     <a href="search.php">
                         <span>Search</span>
                     </a>
                 </li>
-                <?php if (is_editor()) { ?>
-                    <li class="_menu_item" id="import_export">
-                        <a href="import_export.php">
-                            <span>Import/Export</span>
-                        </a>
-                    </li>
-                <?php } ?>
+                <li class="_menu_item" id="logout">
+                    <a>
+                        <span>Documents</span>
+                    </a>
+                    <ul class="create_documents">
+                        <li class="_menu_item">
+                            <a href="">
+                                <span>Create Customer</span>
+                            </a>
+                        </li>
+                        <li class="_menu_item">
+                            <a href="">
+                                <span>Create Invoice</span>
+                            </a>
+                        </li>
+                        <li class="_menu_item">
+                            <a href="">
+                                <span>Create Product</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <?php if (is_admin()) { ?>
                 <li class="_menu_item" id="userManagement">
                     <a>
@@ -55,22 +75,25 @@ redirect_if_not_logged_in();
                     </ul>
                 </li>
                 <?php } ?>
-                <li class="_menu_item" id="about">
-                    <a href="about.php">
-                        <span>About</span>
-                    </a>
-                </li>
-                <li class="_menu_item" id="logout">
-                    <a href="api/logout.php">
-                        <span>Logout</span>
-                    </a>
-                </li>
+                <?php if (is_editor()) { ?>
+                    <li class="_menu_item" id="import_export">
+                        <a href="import_export.php">
+                            <span>Import/Export</span>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
         </nav>
-        <div id="_current_user">
-            <a id="userEdit" href=<?php echo "\"showUser.php?UserId=".$_SESSION['user_id'].'&action=edit"'; ?>><span id="username"> <?php echo $_SESSION['username']; ?></span></a>
-            -
-            <span id="role"> <?php require_once 'api/details/user_management.php'; echo get_role(); ?></span>
+        <div class="session">
+            <div id="_current_user">
+                <a id="userEdit" href=<?php echo "\"showUser.php?UserId=".$_SESSION['user_id'].'&action=edit"'; ?>><span id="username"> <?php echo $_SESSION['username']; ?></span></a>
+                -
+                <span id="role"> <?php require_once 'api/details/user_management.php'; echo get_role(); ?></span>
+
+            </div>
+            <a href="api/logout.php">
+                <span>Logout</span>
+            </a>
         </div>
     </body>
 </html>
