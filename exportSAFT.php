@@ -15,7 +15,6 @@ try
     if (!array_key_exists('startDate', $_GET) && !array_key_exists('endDate', $_GET)) {
         $startDate = new DateTime('01/01/2000');
         $endDate = new DateTime();
-        $endDate->add(new DateInterval('P7D'));
     }
     else
     {
