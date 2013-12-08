@@ -19,6 +19,17 @@ redirect_if_not_logged_in();
         $(document).ready( function() {
             load('import_export');
             loadExt();
+            $('#startDate').val(new Date('01/01/2000').toJSON().slice(0,10));
+            $('#endDate').val(new Date().toJSON().slice(0,10));
+
+            var maxDate = new Date();
+            maxDate.setDate(maxDate.getDate() + 7);
+            maxDate = maxDate.toJSON().slice(0,10);
+
+            $('#startDate').attr('max', maxDate);
+            $('#endDate').attr('max', maxDate);
+
+
         });
     </script>
 </head>
@@ -118,8 +129,8 @@ redirect_if_not_logged_in();
     </script><br/><br/>
     <?php } ?>
     <h3>Export SAFT-PT</h3>
-    <label for="startDate">Start date (optional): </label><input type="date" id="startDate" name="startDate"><br/>
-    <label for="endDate">End date (optional): </label><input type="date" id="endDate" name="endDate"><br/>
+    <label for="startDate">Start date (optional): </label><input type="date" id="startDate" name="startDate" min="2000-01-02"><br/>
+    <label for="endDate">End date (optional): </label><input type="date" id="endDate" name="endDate" min="2000-01-02"><br/>
     <a href="exportSAFT.php" id="exportSAFT" target="_blank"><img src="images/glyphicons_359_file_export.png" title="export" width="20" height="20"></a>
     <script>
         $(function(){
