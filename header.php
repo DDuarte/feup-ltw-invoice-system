@@ -29,18 +29,18 @@ redirect_if_not_logged_in();
                         <span>Search</span>
                     </a>
                 </li>
-                <?php if (is_admin()) { ?>
-                <li class="_menu_item" id="userManagement">
-                    <a>
-                        <span>Manage Users</span>
-                    </a>
-                </li>
-                <?php } ?>
                 <?php if (is_editor()) { ?>
                     <li class="_menu_item" id="import_export">
                         <a href="import_export.php">
                             <span>Import/Export</span>
                         </a>
+                    </li>
+                <?php } ?>
+                <?php if (is_admin()) { ?>
+                <li class="_menu_item" id="userManagement">
+                    <a>
+                        <span>Manage Users</span>
+                    </a>
                     <ul>
                         <li class="_menu_item">
                             <a>
@@ -53,7 +53,7 @@ redirect_if_not_logged_in();
                             </a>
                         </li>
                     </ul>
-                    </li>
+                </li>
                 <?php } ?>
                 <li class="_menu_item" id="about">
                     <a href="about.php">
