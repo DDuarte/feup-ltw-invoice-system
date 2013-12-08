@@ -31,7 +31,7 @@ redirect_if_not_logged_in();
                 </li>
                 <?php if (is_admin()) { ?>
                 <li class="_menu_item" id="userManagement">
-                    <a href="manageUsers.php">
+                    <a>
                         <span>Manage Users</span>
                     </a>
                 </li>
@@ -41,6 +41,18 @@ redirect_if_not_logged_in();
                         <a href="import_export.php">
                             <span>Import/Export</span>
                         </a>
+                    <ul>
+                        <li class="_menu_item">
+                            <a>
+                                <span>Create User</span>
+                            </a>
+                        </li>
+                        <li class="_menu_item">
+                            <a href="manageUsers.php">
+                                <span>List Users</span>
+                            </a>
+                        </li>
+                    </ul>
                     </li>
                 <?php } ?>
                 <li class="_menu_item" id="about">
@@ -55,5 +67,10 @@ redirect_if_not_logged_in();
                 </li>
             </ul>
         </nav>
+        <div id="_current_user">
+            <a id="userEdit" href="http://google.pt"><span id="username"></span></a>
+            -
+            <span id="role"></span>
+        </div>
     </body>
 </html>
