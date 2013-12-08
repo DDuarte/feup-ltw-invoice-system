@@ -25,6 +25,7 @@ redirect_if_not_logged_in();
 <body>
 <div id="pageHeader"></div>
 <div class="search_results">
+    <?php if (is_editor()) { ?>
     <h3>Import SAFT-PT</h3>
     <img src="images/glyphicons_358_file_import.png" title="import" width="20" height="20">
     <input type="file" id="files" name="files[]" accept="text/xml" />
@@ -115,6 +116,7 @@ redirect_if_not_logged_in();
 
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
     </script><br/><br/>
+    <?php } ?>
     <h3>Export SAFT-PT</h3>
     <label for="startDate">Start date (optional): </label><input type="date" id="startDate" name="startDate"><br/>
     <label for="endDate">End date (optional): </label><input type="date" id="endDate" name="endDate"><br/>
@@ -146,6 +148,7 @@ redirect_if_not_logged_in();
             });
         });
     </script>
+    <?php if (is_editor()) { ?>
     <br/><br/>
     <h3>Import External Website</h3>
     <form id="import_url_form">
@@ -153,6 +156,8 @@ redirect_if_not_logged_in();
         <input type="url" placeholder="url..." id="url_field" required>
         <input type="submit" value="Import" id="input_button">
     </form><br/><br/>
+    <?php } ?>
+    <?php if (is_editor()) { ?>
     <h3>Delete Data</h3>
     <a href="api/deleteAll.php" id="deleteAll"><img src="images/glyphicons_143_database_ban.png" title="delete" width="20" height="20"></a>
     <script>
@@ -181,6 +186,7 @@ redirect_if_not_logged_in();
             });
         });
     </script>
+    <?php } ?>
 </div>
 </body>
 </html>

@@ -34,28 +34,30 @@ redirect_if_not_logged_in();
                         <span>Search</span>
                     </a>
                 </li>
-                <li class="_menu_item" id="logout">
+                <?php if (is_editor()) { ?>
+                <li class="_menu_item" id="documents">
                     <a>
                         <span>Documents</span>
                     </a>
                     <ul class="create_documents">
                         <li class="_menu_item">
-                            <a href="">
+                            <a href="showCustomer.php?action=create">
                                 <span>Create Customer</span>
                             </a>
                         </li>
                         <li class="_menu_item">
-                            <a href="">
+                            <a href="showInvoice.php?action=create">
                                 <span>Create Invoice</span>
                             </a>
                         </li>
                         <li class="_menu_item">
-                            <a href="">
+                            <a href="showProduct.php?action=create">
                                 <span>Create Product</span>
                             </a>
                         </li>
                     </ul>
                 </li>
+                <?php } ?>
                 <?php if (is_admin()) { ?>
                 <li class="_menu_item" id="userManagement">
                     <a>
@@ -75,13 +77,11 @@ redirect_if_not_logged_in();
                     </ul>
                 </li>
                 <?php } ?>
-                <?php if (is_editor()) { ?>
-                    <li class="_menu_item" id="import_export">
-                        <a href="import_export.php">
-                            <span>Import/Export</span>
-                        </a>
-                    </li>
-                <?php } ?>
+                <li class="_menu_item" id="import_export">
+                    <a href="import_export.php">
+                        <span>Import/Export</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <div class="session">

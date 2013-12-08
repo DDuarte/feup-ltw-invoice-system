@@ -128,26 +128,36 @@ function loadProduct() {
             is_editor = JSON.parse(is_editor);
 
             var onSuccess = null;
-            switch(action)
+            if (is_editor)
             {
-                case 'edit':
+                switch(action)
                 {
-                    onSuccess = is_editor ? showEditableProductData : null;
-                    break;
-                }
-                case 'create':
-                {
-                    onSuccess = is_editor ? showBlankProductData : null;
-                    break;
-                }
-                case 'show':
-                case undefined:
-                {
-                    onSuccess = showProductData;
-                    break;
+                    case 'edit':
+                    {
+                        onSuccess = showEditableProductData;
+                        break;
+                    }
+                    case 'create':
+                    {
+                        onSuccess = showBlankProductData;
+                        break;
+                    }
+                    case 'show':
+                    case undefined:
+                    {
+                        onSuccess = showProductData;
+                        break;
+                    }
                 }
             }
-
+            else {
+                if (action != 'show' && action !== undefined) {
+                    alert('Error: permission denied');
+                    window.location.replace('index.php');
+                }
+                else
+                    onSuccess = showCustomerData;
+            }
             if (onSuccess == null)
                 return;
 

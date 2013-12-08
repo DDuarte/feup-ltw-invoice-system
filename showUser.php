@@ -12,10 +12,15 @@ redirect_if_not_logged_in();
     <link rel="stylesheet" href="css/showDocuments.css" type="text/css">
     <link rel="stylesheet" href="css/common.css" type="text/css">
     <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/showUser.js"></script>
     <title>User management</title>
+    <script type="text/javascript">
+        $(document).ready( function() { load('userManagement'); });
+    </script>
 </head>
 <body onload="loadUser()">
+<div id="pageHeader"></div>
 <form class="_form">
     <div class="_header">
         Show User
