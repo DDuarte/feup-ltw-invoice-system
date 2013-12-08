@@ -13,6 +13,10 @@ body {
     background: url("../images/background.jpg") repeat-y center center;
 }
 
+a:link ,a:visited ,a:hover ,a:active{
+    color: #0033CC;
+    text-decoration: none;
+}
 body, input {
     color: #777;
     font-family: 'Verdana', 'Calibri', 'Arial',serif;
