@@ -156,6 +156,10 @@ input.removeLineButtons{
    right: 30px;
 }
 
+._my_select.ProductDescription{
+    width: 500px;
+}
+
 ._invoice_line {
     position: relative;
     height: 310px;
