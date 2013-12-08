@@ -47,8 +47,7 @@ function submissionCallback(event) {
     else
         event.returnValue = false;
 
-
-    var paramStr = $('#field2').val();
+    var paramStr = $('#url_field').val();
 
     var addressStr = paramStr.split('?')[0];
     var paramStr = paramStr.split('?')[1];
@@ -87,6 +86,6 @@ function submissionCallback(event) {
     });
 }
 
-function load() {
-    $('form').submit(submissionCallback);
+function loadExt() {
+    $('#import_url_form').submit(submissionCallback);
 }

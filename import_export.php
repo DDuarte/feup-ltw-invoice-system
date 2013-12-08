@@ -18,6 +18,7 @@ redirect_if_not_logged_in();
     <script type="text/javascript">
         $(document).ready( function() {
             load('import_export');
+            loadExt();
         });
     </script>
 </head>
@@ -115,15 +116,42 @@ redirect_if_not_logged_in();
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
     </script><br/><br/>
     <h3>Export SAFT-PT</h3>
-    <a href="exportSAFT.php" target="_blank"><img src="images/glyphicons_359_file_export.png" title="export" width="20" height="20"></a>
+    <label for="startDate">Start date (optional): </label><input type="date" id="startDate" name="startDate"><br/>
+    <label for="endDate">End date (optional): </label><input type="date" id="endDate" name="endDate"><br/>
+    <a href="exportSAFT.php" id="exportSAFT" target="_blank"><img src="images/glyphicons_359_file_export.png" title="export" width="20" height="20"></a>
+    <script>
+        $(function(){
+            $("#exportSAFT").click(function(){
+                var original_url = this.href,
+                    url      = "exportSAFT.php";
+
+                var data = {};
+                if ($('#startDate').val())
+                    data['startDate'] = $('#startDate').val();
+                if ($('#endDate').val())
+                    data['endDate'] = $('#endDate').val();
+
+                $.ajax({
+                    url     : url,
+                    type    : 'get',
+                    data    : data,
+                    success : function (serverResponse) {
+                        window.location = original_url + '?' + $.param(data);
+                    },
+                    error   : function () {
+                        window.location = original_url;
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
     <br/><br/>
     <h3>Import External Website</h3>
-    <form id="search_form">
+    <form id="import_url_form">
         <img src="images/glyphicons_364_cloud_download.png" title="import from url" width="20" height="20">
-        <div class="_field_search" id="field2_search_list">
-            <input type="url" id="field2" required>
-        </div>
-        <input type="submit" value="Import" id="search_button">
+        <input type="url" placeholder="url..." id="url_field" required>
+        <input type="submit" value="Import" id="input_button">
     </form>
 </div>
 </body>
