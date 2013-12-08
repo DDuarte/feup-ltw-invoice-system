@@ -10,17 +10,28 @@ header("Content-type:application/xml");
 
 try
 {
-    if (array_key_exists('startDate', $_GET))
-        $startDate = new DateTime($_GET['startDate']);
-    else
-        $startDate = new DateTime();
+    date_default_timezone_set('GMT');
 
-    if (array_key_exists('endDate', $_GET))
-        $endDate = new DateTime($_GET['endDate']);
+    if (!array_key_exists('startDate', $_GET) && !array_key_exists('endDate', $_GET)) {
+        $startDate = new DateTime('01/01/2000');
+        $endDate = new DateTime();
+        $endDate->add(new DateInterval('P7D'));
+    }
     else
     {
-        $endDate = clone $startDate;
-        $endDate->add(new DateInterval('P1M')); // 1 month from start date
+        if (array_key_exists('endDate', $_GET))
+            $endDate = new DateTime($_GET['endDate']);
+        else
+            $endDate = new DateTime();
+
+        if (array_key_exists('startDate', $_GET))
+            $startDate = new DateTime($_GET['startDate']);
+        else
+        {
+            $startDate = clone $endDate;
+            $startDate->sub(new DateInterval('P1M')); //
+        }
+
     }
 } catch (Exception $e)
 {
