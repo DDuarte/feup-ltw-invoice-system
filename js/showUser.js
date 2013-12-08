@@ -274,5 +274,5 @@ function loadUser() {
                 }).done(onSuccess);
             }
         }
-    })
+    });
 }
