@@ -12,7 +12,7 @@
 
     $field = 'UserId';
     $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
-    $error404 = '{"error":{"code":404,"reason":"Invoice not found"}}';
+    $error404 = '{"error":{"code":404,"reason":"User not found"}}';
 
     if (!array_key_exists($field, $_GET))
     {
