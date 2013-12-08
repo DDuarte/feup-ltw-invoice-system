@@ -21,7 +21,7 @@ $user = json_decode($json, true);
 if (json_last_error() !== JSON_ERROR_NONE)
     exit($error400);
 
-if (!isset($user['username']) || !isset($user['password']) || !isset($user['id']))
+if (!isset($user['username']) || !isset($user['password']) || !isset($user['id']) || !isset($user['role_id']))
     exit($error400);
 
 $db = new PDO('sqlite:../sql/OIS.db');
@@ -33,25 +33,28 @@ if (empty($user['id'])) {
     $hasRole = true;
 } else {
     if (!empty($user['password'])) {
-        if (!empty($user['role_id']))
+        if (!empty($user['role_id'])) {
             $invoiceStmt = "UPDATE OR FAIL user SET username = :username, password = :password, role_id = :role_id WHERE user.id = :userId;";
+            $hasRole = true;
+        }
         else {
             $invoiceStmt = "UPDATE OR FAIL user SET username = :username, password = :password WHERE user.id = :userId;";
             $hasRole = false;
         }
         $hasPassword = true;
-        $hasRole = true;
     } else {
-        if (!empty($user['role_id']))
+        if (!empty($user['role_id'])) {
             $invoiceStmt = "UPDATE OR FAIL user SET username = :username, role_id = :role_id WHERE user.id = :userId;";
+            $hasRole = true;
+        }
         else {
             $invoiceStmt = "UPDATE OR FAIL user SET username = :username WHERE user.id = :userId;";
             $hasRole = false;
         }
 
         $hasPassword = false;
-        $hasRole = true;
     }
+
     $hasId = true;
 }
 $stmt = $db->prepare($invoiceStmt);
