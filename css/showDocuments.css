@@ -9,6 +9,7 @@ body {
     width: 740px;
     height: 282px;
     margin: 0 auto;
+    margin-top: 100px;
 }
 
 ._form >._header {
