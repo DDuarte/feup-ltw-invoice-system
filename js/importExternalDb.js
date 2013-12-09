@@ -117,25 +117,38 @@ function submissionCallback() {
     var invoiceRequestStr = paramStr + '/api/searchInvoicesByField.php?doc=invoice&op=min&field=InvoiceNo&value[]=1';
     var productRequestStr = paramStr + '/api/searchProductsByField.php?doc=product&op=min&field=ProductCode&value[]=1';
 
-    alert(paramStr);
-
     var baseRequest = paramStr;
+
+    alert('All the external database entries will be added');
+
+    $('#url_field').css('color', 'red').val('Importing,please wait...').prop('disabled', true);
 
     $.ajax({
         url: productRequestStr,
         type: "GET",
         dataType: "JSON",
         success: function (productArray) {
+
+            if (productArray.error != undefined)
+                return;
+
             $.ajax({
                 url: customerRequestStr,
                 type: "GET",
                 dataType: "JSON",
                 success: function (costumerArray) {
+
+                    if (costumerArray.error != undefined)
+                        return;
+
                     $.ajax({
                         url: invoiceRequestStr,
                         type: "GET",
                         dataType: "JSON",
                         success: function (invoiceArray) {
+
+                            if (invoiceArray.error != undefined)
+                                return;
 
                             for (var i = 0; i < productArray.length; i++) {
 
@@ -208,7 +221,7 @@ function submissionCallback() {
                                 });
                             }
 
-
+                            $('#url_field').css('color', 'black').val('Done!').prop('disabled', false);
 
                         }
                     });
@@ -224,6 +237,7 @@ function submissionCallback() {
 
 function loadExt() {
     $('#import_url_form #input_button').click(function () {
+        //$('#url_field').css('color', 'red').val('Importing,please wait...').prop('disabled', true);
         submissionCallback();
     });
 }
