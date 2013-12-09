@@ -7,6 +7,7 @@ if (!is_logged_in())
     exit('{"error":{"code":403,"reason":"Not authenticated"}}');
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
+$jsonError = '{"error":{"code":400,"reason":"Json decode Error"}}';
 
 if (!isset($_POST['customer']))
     exit($error400);
@@ -14,7 +15,7 @@ if (!isset($_POST['customer']))
 $customer =  json_decode($_POST['customer'], true);
 
 if (json_last_error() !== JSON_ERROR_NONE)
-    exit($error400);
+    exit($jsonError);
 
 if (!isset($customer['CustomerID']) || !isset($customer['CustomerTaxID']) || !isset($customer['BillingAddress']['AddressDetail']) || !isset($customer['CompanyName'])
     || !isset($customer['Email']) || !isset($customer['BillingAddress']['City']) || !isset($customer['BillingAddress']['PostalCode'])

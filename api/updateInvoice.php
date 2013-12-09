@@ -6,6 +6,7 @@ if (!is_logged_in())
     exit('{"error":{"code":403,"reason":"Not authenticated"}}');
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
+$jsonError = '{"error":{"code":400,"reason":"Json decode Error"}}';
 
 if (!isset($_POST['invoice']))
     exit($error400);
@@ -15,7 +16,7 @@ else
 $invoice =  json_decode($json, true);
 
 if (json_last_error() !== JSON_ERROR_NONE)
-    exit('BAD DECODE');
+    exit($jsonError);
 
 // InvoiceDate
 

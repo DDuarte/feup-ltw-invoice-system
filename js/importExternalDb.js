@@ -104,11 +104,12 @@ function loadInvoices(baseRequest, requestStr) {
 }
 
 function submissionCallback() {
-    alert('Im here');
     /* (event.preventDefault)
         event.preventDefault();
     else
         event.returnValue = false;*/
+
+    console.log('Here');
 
     var paramStr = $('#url_field').val();
 
@@ -118,13 +119,110 @@ function submissionCallback() {
 
     alert(paramStr);
 
-    loadProducts(paramStr, productRequestStr);
-    loadCustomers(paramStr, customerRequestStr);
-    loadInvoices(paramStr, invoiceRequestStr);
+    var baseRequest = paramStr;
+
+    $.ajax({
+        url: productRequestStr,
+        type: "GET",
+        dataType: "JSON",
+        success: function (productArray) {
+            $.ajax({
+                url: customerRequestStr,
+                type: "GET",
+                dataType: "JSON",
+                success: function (costumerArray) {
+                    $.ajax({
+                        url: invoiceRequestStr,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function (invoiceArray) {
+
+                            for (var i = 0; i < productArray.length; i++) {
+
+                                var jsonObj = productArray[i];
+
+                                jsonObj.ProductCode = '';
+
+                                $.ajax({
+                                    url: baseRequest + '/api/' + 'updateProduct.php',
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        product: JSON.stringify(jsonObj)
+                                    },
+                                    async : false,
+                                    success: function(retVal) {
+                                        console.error(JSON.stringify(retVal));
+                                    },
+                                    error: function(retVal) {
+                                        console.error('Error: ' + JSON.stringify(retVal));
+                                        return;
+                                    }
+                                });
+                            }
+
+                            for (var i = 0; i < costumerArray.length; i++) {
+
+                                var jsonObj = costumerArray[i];
+
+                                jsonObj.CustomerID = '';
+
+                                $.ajax({
+                                    url: baseRequest + '/api/' + 'updateCustomer.php',
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        customer: JSON.stringify(jsonObj)
+                                    },
+                                    async : false,
+                                    success: function(retVal) {
+                                        console.error(JSON.stringify(retVal));
+                                    },
+                                    error: function(retVal) {
+                                        console.error('Error: ' + JSON.stringify(retVal));
+                                        return;
+                                    }
+                                });
+                            }
+
+                            for (var i = 0; i < invoiceArray.length; i++) {
+
+                                var jsonObj = invoiceArray[i];
+
+                                jsonObj.InvoiceNo = '';
+
+                                $.ajax({
+                                    url: baseRequest + '/api/' + 'updateInvoice.php',
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    data: {
+                                        invoice: JSON.stringify(jsonObj)
+                                    },
+                                    success: function(retVal) {
+                                        console.error(JSON.stringify(retVal));
+                                    },
+                                    error: function(retVal) {
+                                        console.error('Error: ' + JSON.stringify(retVal));
+                                        return;
+                                    }
+                                });
+                            }
+
+
+
+                        }
+                    });
+                }
+            });
+        }
+        });
+
+    // loadProducts(paramStr, productRequestStr);
+    // loadCustomers(paramStr, customerRequestStr);
+    // loadInvoices(paramStr, invoiceRequestStr);
 }
 
 function loadExt() {
-    alert('loadExt');
     $('#import_url_form #input_button').click(function () {
         submissionCallback();
     });

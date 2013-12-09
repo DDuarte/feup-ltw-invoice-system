@@ -28,11 +28,6 @@ redirect_if_not_logged_in();
 
             $('#startDate').attr('max', maxDate);
             $('#endDate').attr('max', maxDate);
-
-            $('#import_url_form #input_button').click(function () {
-                submissionCallback();
-            });
-
         });
     </script>
 </head>

@@ -10,6 +10,7 @@ if (!is_editor())
     exit('{"error":{"code":403,"reason":"No permission"}}');
 
 $error400 = '{"error":{"code":400,"reason":"Bad request"}}';
+$jsonError = '{"error":{"code":400,"reason":"Json decode Error"}}';
 
 if (!isset($_POST['product']))
     exit($error400);
@@ -17,7 +18,7 @@ if (!isset($_POST['product']))
 $product =  json_decode($_POST['product'], true);
 
 if (json_last_error() !== JSON_ERROR_NONE)
-    exit($error400);
+    exit($jsonError);
 
 if (!isset($product['ProductDescription']) || !isset($product['ProductCode']))
     exit($error400);
