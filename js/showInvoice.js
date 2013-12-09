@@ -273,6 +273,8 @@ function showInvoice(data) {
     $('#TaxPayable').attr('value', data.DocumentTotals.TaxPayable + " €").prop('readonly', true);
     $('#NetTotal').attr('value', data.DocumentTotals.NetTotal + " €").prop('readonly', true);
     $('#GrossTotal').attr('value', data.DocumentTotals.GrossTotal + " €").prop('readonly', true);
+    $('#OwnerDiv').prop('hidden', false);
+    $('#OwnerName').prop('hidden', false).attr('value', data.Source.Username);
 
     addLines(data, false);
     $.ajax({
