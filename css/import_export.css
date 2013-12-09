@@ -1,0 +1,57 @@
+div._central_box{
+    position: relative;
+
+    width: 720px;
+    height: inherit;
+
+    margin: 0 auto;
+    margin-top: 120px;
+
+}
+h3._title{
+    padding: 8px;
+    padding-left: 0;
+}
+
+div._field{
+    display: inline-block;
+    padding: 10px 15px;
+}
+
+div._field > img{
+    padding: 10px;
+}
+div._field  a{
+    padding: 10px;
+}
+
+input{
+    padding: 4px;
+    margin: 5px 0;
+}
+div._field > input{
+    bottom: 14px;
+}
+
+div._field > input[type="file"]{
+    width: 500px;
+}
+
+input[type="date"]{
+    margin-right: 20px;
+}
+
+input[type="date"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+input[type="date"]::-moz-inner-spin-button{
+    -moz-appearance: none;
+}
+input[type="date"]::-o-inner-spin-button{
+    -o-appearance: none;
+}
+
+div._field label{
+    display: inline-block;
+    width: 150px;
+}

@@ -14,7 +14,7 @@ redirect_if_not_logged_in();
     <script src="js/jquery.xml2json.js"></script>
     <script src="js/index.js"></script>
     <script src="js/importExternalDb.js"></script>
-    <link rel="stylesheet"  href="css/search.css" type="text/css">
+    <link rel="stylesheet"  href="css/import_export.css" type="text/css">
     <script type="text/javascript">
         $(document).ready( function() {
             load('import_export');
@@ -35,11 +35,13 @@ redirect_if_not_logged_in();
 </head>
 <body>
 <div id="pageHeader"></div>
-<div class="search_results">
+<div class="_central_box">
     <?php if (is_editor()) { ?>
-    <h3>Import SAFT-PT</h3>
-    <img src="images/glyphicons_358_file_import.png" title="import" width="20" height="20">
-    <input type="file" id="files" name="files[]" accept="text/xml" />
+    <h3 class="_title">Import SAFT-PT</h3>
+    <div class="_field">
+        <img src="images/glyphicons_358_file_import.png" title="import" width="20" height="20">
+        <input type="file" id="files" name="files[]" accept="text/xml" />
+    </div>
     <script>
         if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
             alert('The File APIs are not fully supported in this browser.');
@@ -128,10 +130,20 @@ redirect_if_not_logged_in();
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
     </script><br/><br/>
     <?php } ?>
-    <h3>Export SAFT-PT</h3>
-    <label for="startDate">Start date (optional): </label><input type="date" id="startDate" name="startDate" min="2000-01-02"><br/>
-    <label for="endDate">End date (optional): </label><input type="date" id="endDate" name="endDate" min="2000-01-02"><br/>
-    <a href="exportSAFT.php" id="exportSAFT" target="_blank"><img src="images/glyphicons_359_file_export.png" title="export" width="20" height="20"></a>
+    <h3 class="_title">Export SAFT-PT</h3>
+    <div class="_field">
+        <ul>
+            <li>
+                <label for="startDate">Start date (optional): </label>
+                <input type="date" id="startDate" name="startDate" min="2000-01-02">
+            </li>
+            <li>
+                <label for="endDate">End date (optional): </label>
+                <input type="date" id="endDate" name="endDate" min="2000-01-02">
+            </li>
+        </ul>
+        <a href="exportSAFT.php" id="exportSAFT" target="_blank"><img src="images/glyphicons_359_file_export.png" title="export" width="20" height="20"></a>
+    </div>
     <script>
         $(function(){
             $("#exportSAFT").click(function(){
@@ -161,16 +173,20 @@ redirect_if_not_logged_in();
     </script>
     <?php if (is_editor()) { ?>
     <br/><br/>
-    <h3>Import External Website</h3>
+    <h3 class="_title">Import External Website</h3>
     <form id="import_url_form">
-        <img src="images/glyphicons_364_cloud_download.png" title="import from url" width="20" height="20">
-        <input type="url" placeholder="url..." id="url_field" required>
-        <input type="submit" value="Import" id="input_button">
+        <div class="_field">
+            <img src="images/glyphicons_364_cloud_download.png" title="import from url" width="20" height="20">
+            <input type="url" placeholder="url..." id="url_field" required>
+            <input type="submit" value="Import" id="input_button">
+        </div>
     </form><br/><br/>
     <?php } ?>
     <?php if (is_editor()) { ?>
-    <h3>Delete Data</h3>
-    <a href="api/deleteAll.php" id="deleteAll"><img src="images/glyphicons_143_database_ban.png" title="delete" width="20" height="20"></a>
+    <h3 class="_title">Delete Data</h3>
+        <div class="_field">
+            <a href="api/deleteAll.php" id="deleteAll"><img src="images/glyphicons_143_database_ban.png" title="delete" width="20" height="20"></a>
+        </div>
     <script>
         $(function(){
             $("#deleteAll").click(function(){
