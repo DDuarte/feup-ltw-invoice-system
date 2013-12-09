@@ -41,7 +41,7 @@ $stmt = $db->prepare($productStmt);
 $stmt->bindParam(':_description', $product['ProductDescription'], PDO::PARAM_STR);
 
 if (isset($product['UnitPrice']))
-    $stmt->bindParam(':_unitPrice', $product['UnitPrice'], PDO::PARAM_INT);
+    $stmt->bindParam(':_unitPrice', $product['UnitPrice'], PDO::PARAM_STR);
 else
 {
     $null = "NULL"; // bind needs ref
