@@ -10,7 +10,7 @@ function showUserData(data) {
     $('._header').text('Show User');
     $('#Username').attr('value', data.Username);
     loadRoles($('select#role'), data.Role);
-    $('#role').attr('disabled', true);
+    $('#select#role').attr('disabled', true);
 }
 
 function loadRoles(target, toBeSelected) {
@@ -60,7 +60,7 @@ function showAdministratorEditableUserData(data) {
             id : data.Id,
             username : $('#Username').val(),
             password : '',
-            role_id : $('#role').find(':selected').val()
+            role_id : $('select#role').find(':selected').val()
         };
 
         if ($('#ChangePassword').prop('checked'))
@@ -92,7 +92,7 @@ function showEditableUserData(data) {
     $('._header').text('Edit User');
     $('#Username').attr('value', data.Username);
     loadRoles($('select#role'), data.Role);
-    $('#role').attr('disabled', true);
+    $('select#role').attr('disabled', true);
 
     var passwordField = '<div id="Password" class="_row" hidden><label>Password:</label><input type="password" id="PasswordField"></input></div>'
     $('form').append(passwordField);
@@ -153,7 +153,7 @@ function showBlankUserData(data) {
     $('._header').text('Create User');
     $('#Username').attr('required', true).attr('value', '').attr('readonly', false);
 
-    loadRoles($('#role'), '');
+    loadRoles($('select#role'), '');
 
     var passwordField = '<div id="Password" class="_row"><label>Password:</label><input type="password" id="PasswordField" required></input></div>'
     //$('form').append(passwordField);
@@ -170,7 +170,7 @@ function showBlankUserData(data) {
             id : '',
             username : $('#Username').val(),
             password : $('#PasswordField').val(),
-            role_id : $('#role').find(':selected').val()
+            role_id : $('select#role').find(':selected').val()
         };
 
         var requestStr = JSON.stringify(jsonRequest);
