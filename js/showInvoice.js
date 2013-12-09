@@ -156,7 +156,7 @@ function addBlankLine() {
 
 
         $(this).parent().parent().find('.CreditAmount').attr('value', unitPrice * quantity);
-    })
+    });
 
     $('.UnitPrice:last').change(function() {
         var unitPrice = parseFloat($(this).val());
@@ -248,7 +248,6 @@ function addLines(data, edit) {
         $('.Quantity:last').change(function() {
             var unitPrice = parseFloat($(this).parent().parent().find('.UnitPrice').val());
             var quantity = parseInt($(this).val());
-            alert(unitPrice);
             $(this).parent().parent().find('.CreditAmount').attr('value', unitPrice * quantity);
         })
 
@@ -410,44 +409,56 @@ function createSubmissionCallback(event) {
     jsonObject.InvoiceNo = '';
     jsonObject.CustomerID = $('#CustomerID').val();
     jsonObject.InvoiceDate = $('#InvoiceDate').val();
-    jsonObject.DocumentStatus  = {
-        SourceID: 1
-    };
-    jsonObject.notUpdatePrice = false;
-
-    jsonObject.Line = [];
-    $('._line_title').children('._invoice_line').each(function() {
-        var line =  {
-            LineNumber : $(this).find('.LineNumber').val(),
-            ProductCode : $(this).find('.ProductDescription').find(':selected').val(),
-            Quantity : $(this).find('.Quantity').val(),
-            UnitPrice : $(this).find('.UnitPrice').val(),
-            Tax: {
-                TaxType : $(this).find('.TaxType').find(':selected').text(),
-                TaxCountryRegion : "",
-                TaxCode : "",
-                TaxPercentage : $(this).find('.TaxType').find(':selected').attr('percentage')
-            }
-        };
-
-        jsonObject.Line.push(line);
-    });
-
-    var requestStr = JSON.stringify(jsonObject);
 
     $.ajax({
-        url: "api/updateInvoice.php",
-        type: "POST",
-        data: {
-            invoice: requestStr
-        },
-        dataType: "JSON",
-        success: function (jsonObj) {
-                var invoiceId = parseInt(jsonObj.InvoiceNo);
-                window.location.replace('showInvoice.php?InvoiceNo=' + invoiceId +'&action=show');
+        url: "api/get_logged_id.php",
+        success: function(logged_id) {
+            logged_id = JSON.parse(logged_id);
+            jsonObject.DocumentStatus  = {
+                SourceID: logged_id
+            };
+
+            jsonObject.notUpdatePrice = false;
+
+            jsonObject.Line = [];
+            $('._line_title').children('._invoice_line').each(function() {
+                var line =  {
+                    LineNumber : $(this).find('.LineNumber').val(),
+                    ProductCode : $(this).find('.ProductDescription').find(':selected').val(),
+                    Quantity : $(this).find('.Quantity').val(),
+                    UnitPrice : $(this).find('.UnitPrice').val(),
+                    Tax: {
+                        TaxType : $(this).find('.TaxType').find(':selected').text(),
+                        TaxCountryRegion : "",
+                        TaxCode : "",
+                        TaxPercentage : $(this).find('.TaxType').find(':selected').attr('percentage')
+                    }
+                };
+
+                jsonObject.Line.push(line);
+            });
+
+            var requestStr = JSON.stringify(jsonObject);
+
+            $.ajax({
+                url: "api/updateInvoice.php",
+                type: "POST",
+                data: {
+                    invoice: requestStr
+                },
+                dataType: "JSON",
+                success: function (jsonObj) {
+                    var invoiceId = parseInt(jsonObj.InvoiceNo);
+                    window.location.replace('showInvoice.php?InvoiceNo=' + invoiceId +'&action=show');
+                },
+                error: function(jsonObj) {
+                    alert('Error:' + JSON.stringify(jsonObj));
+                }
+            });
         },
         error: function(jsonObj) {
-            alert('Error:' + Json.stringify(jsonObj));
+            alert('Error: ' + JSON.stringify(jsonObj));
+            return;
         }
     });
 }
