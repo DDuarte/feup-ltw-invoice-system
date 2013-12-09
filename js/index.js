@@ -152,7 +152,7 @@ function search() {
                         }
 
                         $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/glyphicons_195_circle_info.png" title="more info" width="20" height="20"></a>' +
-                            (is_editor ? ' <a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '&action=edit"><img src="images/glyphicons_150_edit.png" title="more info" width="20" height="20"></a>' : '') +
+                            (is_editor ? ' <a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '&action=edit"><img src="images/glyphicons_150_edit.png" title="edit" width="20" height="20"></a>' : '') +
                             '</td>');
 
                         if (arr[doc].printHtml) {
