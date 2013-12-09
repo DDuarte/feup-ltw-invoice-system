@@ -104,11 +104,6 @@ function loadInvoices(baseRequest, requestStr) {
 }
 
 function submissionCallback() {
-    /* (event.preventDefault)
-        event.preventDefault();
-    else
-        event.returnValue = false;*/
-
     console.log('Here');
 
     var paramStr = $('#url_field').val();
@@ -229,15 +224,10 @@ function submissionCallback() {
             });
         }
         });
-
-    // loadProducts(paramStr, productRequestStr);
-    // loadCustomers(paramStr, customerRequestStr);
-    // loadInvoices(paramStr, invoiceRequestStr);
 }
 
 function loadExt() {
     $('#import_url_form #input_button').click(function () {
-        //$('#url_field').css('color', 'red').val('Importing,please wait...').prop('disabled', true);
         submissionCallback();
     });
 }
