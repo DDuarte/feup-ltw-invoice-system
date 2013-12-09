@@ -12,6 +12,15 @@ function showProductData(data) {
     $('#ProductCode').attr('value', data.ProductCode);
     $('#ProductDescription').attr('value', data.ProductDescription);
     $('#UnitPrice').attr('value', data.UnitPrice);
+
+    $.ajax({
+        url: "api/user_is_editor.php",
+        success: function (is_editor) {
+            if (JSON.parse(is_editor)) {
+                $('._header').append('<input type="button" id="editButton" value="Edit">');
+                $('#editButton').click(function () { location.href = "showProduct.php?ProductCode=" + data.ProductCode + "&action=edit" });
+            }
+        }});
 }
 
 function showEditableProductData(data) {
@@ -51,7 +60,9 @@ function showEditableProductData(data) {
         });
     };
 
-    showProductData(data);
+    $('#ProductCode').attr('value', data.ProductCode);
+    $('#ProductDescription').attr('value', data.ProductDescription);
+    $('#UnitPrice').attr('value', data.UnitPrice);
 
     $('form').attr('method', 'post').attr('action', 'api/updateProduct.php')
         .append('<input type="submit" id="submit" value="Submit">').submit(submissionCallback);
@@ -107,7 +118,7 @@ function showBlankProductData(data) {
     $('form')
         .append('<input id="submit" type="submit" value="Submit">').submit(submissionCallback);
 
-    $('div._header').text('Create new product');
+    $('div._header').text('Create Product');
 }
 
 function loadProduct() {

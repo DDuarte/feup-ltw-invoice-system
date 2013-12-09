@@ -33,6 +33,15 @@ function showCustomerData(data) {
     $('#PostalCode').attr('value', data.BillingAddress.PostalCode);
     $('#Country').attr('value', data.BillingAddress.Country);
     $('#Email').attr('value', data.Email);
+
+    $.ajax({
+        url: "api/user_is_editor.php",
+        success: function (is_editor) {
+            if (JSON.parse(is_editor)) {
+                $('._header').append('<input type="button" id="editButton" value="Edit">');
+                $('#editButton').click(function () { location.href = "showCustomer.php?CustomerID=" + data.CustomerID + "&action=edit" });
+            }
+        }});
 }
 
 function editSubmissionCallback(event) {

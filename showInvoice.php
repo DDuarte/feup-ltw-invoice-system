@@ -16,7 +16,9 @@ redirect_if_not_logged_in();
         <script src="js/showInvoice.js"></script>
         <title>Show Invoice</title>
         <script type="text/javascript">
-            $(document).ready(function() { load('documents'); } );
+            $(document).ready(function() {
+                load('documents');
+            } );
         </script>
     </head>
     <body onload="loadInvoice()">

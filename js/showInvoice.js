@@ -274,6 +274,15 @@ function showInvoice(data) {
     $('#GrossTotal').attr('value', data.DocumentTotals.GrossTotal + " €").prop('readonly', true);
 
     addLines(data, false);
+
+    $.ajax({
+        url: "api/user_is_editor.php",
+        success: function (is_editor) {
+            if (JSON.parse(is_editor)) {
+                $('._header').append('<input type="button" id="editButton" value="Edit">');
+                $('#editButton').click(function () { location.href = "showInvoice.php?InvoiceNo=" + data.InvoiceNo + "&action=edit" });
+            }
+        }});
 }
 
 function showEditableInvoice(data) {
@@ -320,6 +329,19 @@ function showBlankInvoice(data) {
         insertAfter($("#CompanyName"));
 
     $('form').append('<input type="submit" id="submit">').submit(createSubmissionCallback);
+
+    $('#InvoiceDate').val(new Date().toJSON().slice(0,10));
+
+    var maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 7);
+    maxDate = maxDate.toJSON().slice(0,10);
+
+    var minDate = new Date();
+    minDate.setDate(minDate.getDate() - 7);
+    minDate = minDate.toJSON().slice(0,10);
+
+    $('#InvoiceDate').attr('max', maxDate);
+    $('#InvoiceDate').attr('min', minDate);
 }
 
 function submissionCallback(event) {
