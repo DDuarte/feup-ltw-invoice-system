@@ -193,3 +193,12 @@ span{
     bottom: 2px;
     font-size: 14px;
 }
+
+img{
+    position: relative;
+    top: 7px;
+}
+
+#editLink > img{
+    float: right
+}
