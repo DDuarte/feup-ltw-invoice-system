@@ -44,9 +44,9 @@ redirect_if_not_logged_in();
                     </p>
 
                     <p>
-                    Since the project is at the first stage of development, a user can only search for documents in the database. No user permissions are taken into account.<br>
+                    A user can search, create and update all the documents types in the database<br>
 
-                    The search <strong>API</strong> was fully implemented, according to the project specification.
+                    The search <strong>API</strong> was fully implemented, according to the project specification. The user permissions are taken into account. User administration is also possible.
                     </p>
                 </div>
 
@@ -58,13 +58,19 @@ redirect_if_not_logged_in();
                     <ul class="_usability_list">
                         <li> Search for summarized documents, mainly invoices, costumers and products;</li>
                         <li> Access detailed information about each document as a search result;</li>
+                        <li> Edit existing invoices, costumers and products </li>
+                        <li> Create new invoices, costumers and products</li>
                         <li> Print a given invoice.</li>
+                        <li> Create user accounts</li>
+                        <li> List all the registered users in the database (Administrator privileges are required)</li>
+                        <li> Edit user information </li>
                     </ul>
                 </div>
                 <h2 class="_sub_title">Notes</h2>
                 <div class="_text_block">
                     <p>
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThe index html page is fully dynamic, using successive Ajax requests to the search API in order to generate the search results.
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThe index html page is fully dynamic, using successive Ajax requests to the search API in order to generate the search results. <br>
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAll the documents pages are fully dynamic as well.
                     </p>
                 </div>
             </div>
