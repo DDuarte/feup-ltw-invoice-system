@@ -123,37 +123,46 @@ function search() {
     $.getJSON('api/' + arr[doc].api, getRequest)
         .done(function (data) {
 
-            $('.search_results').empty();
-            $('.search_results').append('<table id="search_results_table"><tr id="header"></tr></table>');
+            $.ajax({
+                url: "api/user_is_editor.php",
+                success: function (is_editor) {
+                    is_editor = JSON.parse(is_editor);
 
-            for (var i = 0; i < arr[doc].tableHeader.length; ++i) {
-                $('#header').append('<th>' + arr[doc].tableHeader[i] + '</th>');
-            }
+                    $('.search_results').empty();
+                    $('.search_results').append('<table id="search_results_table"><tr id="header"></tr></table>');
 
-            $('#header').append('<th>Details</th>');
-            if (arr[doc].printHtml)
-                $('#header').append('<th>Print</th>');
-
-            for (var i = 0; i < data.length; ++i) {
-                $('#search_results_table').append('<tr>');
-                for (var j = 0; j < arr[doc].jsonFields.length; ++j) {
-                    if (typeof arr[doc].jsonFields[j] === 'object') {
-                        for (var key in arr[doc].jsonFields[j]) {
-                            $('#search_results_table tbody').append('<td>' + data[i][key][arr[doc].jsonFields[j][key]] + '</td>');
-                        }
-                    } else {
-                        $('#search_results_table tbody').append('<td>' + data[i][arr[doc].jsonFields[j]] + '</td>');
+                    for (var i = 0; i < arr[doc].tableHeader.length; ++i) {
+                        $('#header').append('<th>' + arr[doc].tableHeader[i] + '</th>');
                     }
-                }
 
-                $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/glyphicons_195_circle_info.png" title="more info" width="20" height="20"></a></td>');
+                    $('#header').append('<th>Details</th>');
+                    if (arr[doc].printHtml)
+                        $('#header').append('<th>Print</th>');
 
-                if (arr[doc].printHtml) {
-                    $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].printHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/glyphicons_015_print.png" title="print" width="20" height="20"></a></td>');
-                }
+                    for (var i = 0; i < data.length; ++i) {
+                        $('#search_results_table').append('<tr>');
+                        for (var j = 0; j < arr[doc].jsonFields.length; ++j) {
+                            if (typeof arr[doc].jsonFields[j] === 'object') {
+                                for (var key in arr[doc].jsonFields[j]) {
+                                    $('#search_results_table tbody').append('<td>' + data[i][key][arr[doc].jsonFields[j][key]] + '</td>');
+                                }
+                            } else {
+                                $('#search_results_table tbody').append('<td>' + data[i][arr[doc].jsonFields[j]] + '</td>');
+                            }
+                        }
 
-                $('#search_results_table').append('</tr>');
-            }
+                        $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/glyphicons_195_circle_info.png" title="more info" width="20" height="20"></a>' +
+                            (is_editor ? ' <a target="_blank" href="' + arr[doc].detailsHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '&action=edit"><img src="images/glyphicons_150_edit.png" title="more info" width="20" height="20"></a>' : '') +
+                            '</td>');
+
+                        if (arr[doc].printHtml) {
+                            $('#search_results_table tbody').append('<td><a target="_blank" href="' + arr[doc].printHtml + '?' + arr[doc].key + '=' + data[i][arr[doc].key] + '"><img src="images/glyphicons_015_print.png" title="print" width="20" height="20"></a></td>');
+                        }
+
+                        $('#search_results_table').append('</tr>');
+                    }
+
+                }});
         });
 }
 
