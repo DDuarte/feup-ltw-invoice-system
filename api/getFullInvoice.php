@@ -2,6 +2,7 @@
 header("Content-type:application/json");
 
 require_once 'details/user_management.php';
+require_once 'details/user.php';
 
 if (!is_logged_in())
     exit('{"error":{"code":403,"reason":"Not authenticated"}}');
@@ -32,6 +33,19 @@ if ($error)
 }
 
 $invoiceArray = $invoice->toArray();
+
+$userId = $invoiceArray['SourceID'];
+
+$user = new User;
+$error = $user->queryDbById($userId);
+if ($error)
+{
+    $error = "error" . $error;
+    exit($$error);
+}
+
+$invoiceArray['Source'] = $user->toArray();
+unset($invoiceArray['SourceID']);
 
 $customerId = $invoiceArray['CustomerID'];
 
