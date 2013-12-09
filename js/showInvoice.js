@@ -148,17 +148,18 @@ function addBlankLine() {
     loadTaxes($('.TaxType:last'), $('.TaxPercentage:last'), '');
 
     $('.Quantity:last').change(function() {
-        var unitPrice = parseInt($(this).parent().parent().find('.UnitPrice').val());
+        var unitPrice = parseFloat($(this).parent().parent().find('.UnitPrice').val());
         var quantity = parseInt($(this).val());
 
         if (isNaN(unitPrice) || isNaN(quantity))
             return;
 
+
         $(this).parent().parent().find('.CreditAmount').attr('value', unitPrice * quantity);
     })
 
     $('.UnitPrice:last').change(function() {
-        var unitPrice = parseInt($(this).val());
+        var unitPrice = parseFloat($(this).val());
         var quantity = parseInt($(this).parent().parent().find('.Quantity').val());
         $(this).attr('value', unitPrice);
 
@@ -245,13 +246,14 @@ function addLines(data, edit) {
         loadTaxes($('.TaxType:last'), $('.TaxPercentage:last'), '');
 
         $('.Quantity:last').change(function() {
-            var unitPrice = parseInt($(this).parent().parent().find('.UnitPrice').val());
+            var unitPrice = parseFloat($(this).parent().parent().find('.UnitPrice').val());
             var quantity = parseInt($(this).val());
+            alert(unitPrice);
             $(this).parent().parent().find('.CreditAmount').attr('value', unitPrice * quantity);
         })
 
         $('.UnitPrice:last').change(function() {
-            var unitPrice = parseInt($(this).val());
+            var unitPrice = parseFloat($(this).val());
             var quantity = parseInt($(this).parent().parent().find('.Quantity').val());
             $(this).attr('value', unitPrice);
             $(this).parent().parent().find('.CreditAmount').attr('value', unitPrice * quantity);
