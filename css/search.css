@@ -1,7 +1,8 @@
 ._search_box {
     display: block;
     font-size: 16px;
-    margin: 90px auto;
+    margin: 0 auto;
+    margin-top: 130px;
     left: 27%;
     border-radius: 4px;
     /*border-bottom: solid 2px;
