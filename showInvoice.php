@@ -44,6 +44,10 @@ redirect_if_not_logged_in();
                 <label for="CompanyName">Company Name</label>
                 <input type="text" id="CompanyName" value="N/A" readonly>
             </div>
+            <div class="_row" id="OwnerDiv" hidden>
+                <label for="AccountName">Owner</label>
+                <input type="text" id="OwnerName" value="N/A" readonly>
+            </div>
             <div class="_row _line_title">
             </div>
             <div class="_row totals">
