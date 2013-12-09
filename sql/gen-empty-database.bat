@@ -1,0 +1,1 @@
+sqlite3 -init LtwDbEmpty.sql OIS.db .q
