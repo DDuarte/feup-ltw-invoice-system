@@ -38,8 +38,7 @@ function showCustomerData(data) {
         url: "api/user_is_editor.php",
         success: function (is_editor) {
             if (JSON.parse(is_editor)) {
-                $('._header').append('<input type="button" id="editButton" value="Edit">');
-                $('#editButton').click(function () { location.href = "showCustomer.php?CustomerID=" + data.CustomerID + "&action=edit" });
+                $('._header').append('<a id="editLink" href="showCustomer.php?CustomerID=' + data.CustomerID + '&action=edit"><img src="images/glyphicons_150_edit.png" title="edit" width="20" height="20"></a>');
             }
         }});
 }
