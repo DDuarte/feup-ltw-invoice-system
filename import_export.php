@@ -29,6 +29,9 @@ redirect_if_not_logged_in();
             $('#startDate').attr('max', maxDate);
             $('#endDate').attr('max', maxDate);
 
+            $('#import_url_form #input_button').click(function () {
+                submissionCallback();
+            });
 
         });
     </script>
@@ -178,7 +181,7 @@ redirect_if_not_logged_in();
         <div class="_field">
             <img src="images/glyphicons_364_cloud_download.png" title="import from url" width="20" height="20">
             <input type="url" placeholder="url..." id="url_field" required>
-            <input type="submit" value="Import" id="input_button">
+            <input type="button" value="Import" id="input_button">
         </div>
     </form><br/><br/>
     <?php } ?>
