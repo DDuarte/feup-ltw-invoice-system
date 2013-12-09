@@ -54,8 +54,11 @@ function showEditableProductData(data) {
                 product: requestStr
             },
             dataType: "JSON",
-            success: function (jsonStr) {
-                alert(JSON.stringify(jsonStr));
+            success: function (jsonObj) {
+                window.location.replace('showProduct.php?ProductCode=' + parseInt(jsonObj) + '&action=show');
+            },
+            error: function (jsonObj) {
+                alert('Error: ' + JSON.stringify(jsonObj));
             }
         });
     };
@@ -101,16 +104,7 @@ function showBlankProductData(data) {
             },
             dataType: "JSON",
             success: function (jsonObj) {
-                $.ajax({
-                    url: "showProduct.php",
-                    type: "GET",
-                    data: {
-                        ProductId: jsonObj
-                    },
-                    dataType: "text",
-                    success: function (jsonObj) {
-                    }
-                });
+                window.location.replace('showProduct.php?ProductCode=' + parseInt(jsonObj) + '&action=show');
             }
         });
     };
