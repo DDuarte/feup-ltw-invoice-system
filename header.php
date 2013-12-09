@@ -24,11 +24,6 @@ redirect_if_not_logged_in();
                         <span>Home</span>
                     </a>
                 </li>
-                <li class="_menu_item" id="about">
-                    <a href="about.php">
-                        <span>About</span>
-                    </a>
-                </li>
                 <li class="_menu_item" id="search">
                     <a href="search.php">
                         <span>Search</span>
@@ -80,6 +75,11 @@ redirect_if_not_logged_in();
                 <li class="_menu_item" id="import_export">
                     <a href="import_export.php">
                         <span>Import/Export</span>
+                    </a>
+                </li>
+                <li class="_menu_item" id="about">
+                    <a href="about.php">
+                        <span>About</span>
                     </a>
                 </li>
             </ul>
