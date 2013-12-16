@@ -109,7 +109,7 @@ function addBlankLine() {
                     </div> \
                     <div class="_row _credit_amount"> \
                         <label>Credit Amount</label> \
-                        <input type="text" class="CreditAmount" value="" required> \
+                        <input type="text" class="CreditAmount" value="" readonly> \
                     </div> \
                     <div class="_row _tax_type"> \
                         <label>Tax Type</label> \
