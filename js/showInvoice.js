@@ -24,6 +24,7 @@ function loadProducts(target, toBeSelected) {
             target.change(function() {
                 $(this).parent().parent().find('.ProductCode').attr('value', $(this).find(':selected').val());
                 $(this).parent().parent().find('.UnitPrice').attr('value', $(this).find(':selected').attr('unitPrice'));
+                $(this).parent().parent().find('.UnitPrice').change();
             });
 
             target.change();
