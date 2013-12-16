@@ -13,15 +13,20 @@ function loadProducts(target, toBeSelected) {
                 var option = document.createElement("option");
                 option.value = data[i].id;
                 option.text = data[i].description;
+                $(option).attr('unitPrice', data[i].unit_price);
                 target.append(option);
 
-                if (option.value == toBeSelected)
+                if (option.value == toBeSelected) {
                     option.selected = true;
+                }
             }
 
             target.change(function() {
                 $(this).parent().parent().find('.ProductCode').attr('value', $(this).find(':selected').val());
+                $(this).parent().parent().find('.UnitPrice').attr('value', $(this).find(':selected').attr('unitPrice'));
             });
+
+            target.change();
 
         });
 }
